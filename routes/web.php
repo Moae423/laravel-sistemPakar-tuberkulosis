@@ -24,3 +24,4 @@ Route::get('/', function () {
 });
 
 Route::resource('/login', LoginController::class);
+Route::resource('/register', RegisterController::class);

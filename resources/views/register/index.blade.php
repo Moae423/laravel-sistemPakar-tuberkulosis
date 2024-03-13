@@ -29,7 +29,7 @@
 <div class="container">
     <div class="register-container">
         <h2 class="text-center mb-4">Register</h2>
-        <form action="/pasien" method="POST">
+        <form action="/register" method="POST">
             @csrf
             <div class="mb-3">
                 <label for="namapasien" class="form-label">Nama Pasien</label>

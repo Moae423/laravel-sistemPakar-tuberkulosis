@@ -25,6 +25,12 @@
 
 <div class="container ">
     <div class="login-container">
+        @if (session()->has('success'))
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+      @endif
         <h2 class="text-center mb-4">Sign In</h2>
         <form action="/login" method="POST">
             <div class="mb-3">
@@ -36,7 +42,7 @@
                 <input type="password" class="form-control" id="password" name="password" required>
             </div>
             <div class="mb-3">
-                <p class="fw-medium">New to Sistem Pakar? <a href="/pasien/create" class="text-decoration-none">Register now</a></p>
+                <p class="fw-medium">New to Sistem Pakar? <a href="/register" class="text-decoration-none">Register now</a></p>
             </div>
             <button type="submit" class="btn btn-primary btn-block w-100">Login</button>
         </form>
