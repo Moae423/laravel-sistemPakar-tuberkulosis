@@ -36,7 +36,7 @@
                 <input type="password" class="form-control" id="password" name="password" required>
             </div>
             <div class="mb-3">
-                <p class="fw-medium">New to Sistem Pakar? <a href="/register" class="text-decoration-none">Register now</a></p>
+                <p class="fw-medium">New to Sistem Pakar? <a href="/pasien/create" class="text-decoration-none">Register now</a></p>
             </div>
             <button type="submit" class="btn btn-primary btn-block w-100">Login</button>
         </form>
