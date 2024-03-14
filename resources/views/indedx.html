@@ -38,29 +38,15 @@
           </div>
       @endif
         <h2 class="text-center mb-4">Sign In</h2>
-        <form action="/login" method="POST">
+        <form action="{{route('login.store')}}" method="POST">
             @csrf
             <div class="mb-3">
                 <label for="email" class="form-label" >Email address</label>
-                <input type="email" class="form-control @error('email')
-                    is-invalid
-                @enderror" id="email" name="email" required autofocus>
-                <div class="invalid-feedback">
-                    @error('email')
-                        {{$message}}
-                    @enderror
-                </div>
+                <input type="email" class="form-control" id="email" name="email" required autofocus>
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control @error('email')
-                is-invalid
-            @enderror" id="password" name="password" required>
-                <div class="invalid-feedback">
-                    @error('email')
-                        {{$message}}
-                    @enderror
-                </div>
+                <input type="password" class="form-control" id="password" name="password" required>
             </div>
             <div class="mb-3">
                 <p class="fw-medium">New to Sistem Pakar? <a href="/register" class="text-decoration-none">Register now</a></p>

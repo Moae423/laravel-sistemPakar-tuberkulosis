@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Pasien;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -49,8 +50,14 @@ class RegisterController extends Controller
             'nohp' => ['required','max:12'],
         ]);
         $validatedData['password'] = Hash::make($validatedData['password']);
-        Pasien::create($validatedData);
+        User::create($validatedData);
         return redirect('/login')->with('success','Pendaftaran Berhasil!!');
+
+        if (Auth::attempt($validateData)) {
+            request()->session()->regenerate();
+        } else {
+            return back()->withErrors('registerFailed', 'ERROR BWANG');
+        }
 
         //
     }

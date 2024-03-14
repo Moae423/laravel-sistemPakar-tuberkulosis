@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MasukController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
@@ -23,5 +24,10 @@ Route::get('/', function () {
     ]);
 });
 
-Route::resource('/login', LoginController::class);
+// LOGIN
+Route::get('/login', [MasukController::class, 'index'])->middleware('guest');
+Route::post('/login', [MasukController::class, 'authenticate']);
+// LOG OUT
+Route::post('/logout', [MasukController::class, 'logout']);
+
 Route::resource('/register', RegisterController::class);

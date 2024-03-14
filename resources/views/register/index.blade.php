@@ -32,36 +32,85 @@
         <form action="/register" method="POST">
             @csrf
             <div class="mb-3">
-                <label for="namapasien" class="form-label">Nama Pasien</label>
-                <input type="text" class="form-control" id="namapasien" name="namaPasien" >
+                <label for="namapasien" class="form-label ">Nama Pasien</label>
+                <input type="text" class="form-control @error('namaPasien')
+                is-invalid
+            @enderror" id="namapasien" name="namaPasien" >
+                @error('namaPasien')
+                <div class="invalid-tooltip">
+                  {{ $message }}
+                </div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="email" name="email" >
+                <input type="email" class="form-control  @error('email')
+                is-invalid
+            @enderror" id="email" name="email" >
+                @error('email')
+                <div class="invalid-tooltip">
+                  {{ $message }}
+                </div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" name="password" >
+                <input type="password" class="form-control  @error('password')
+                is-invalid
+            @enderror" id="password" name="password" >
+                @error('password')
+                <div class="invalid-tooltip">
+                  {{ $message }}
+                </div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="umur" class="form-label">Umur</label>
-                <input type="number" class="form-control" id="umur" name="umur" >
+                <input type="number" class="form-control @error('password')
+                is-invalid
+            @enderror" id="umur" name="umur" >
+                @error('password')
+                <div class="invalid-tooltip">
+                  {{ $message }}
+                </div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="jenisKelamin" class="form-label">Jenis Kelamin</label>
-                <select class="form-select" id="jenisKelamin" name="jenisKelamin" >
+                <select class="form-select @error('jenisKelamin')
+                is-invalid
+            @enderror" id="jenisKelamin" name="jenisKelamin" >
                     <option value="" selected disabled>Choose...</option>
                     <option value="Laki-laki">Laki-laki</option>
                     <option value="Perempuan">Perempuan</option>
                 </select>
+                @error('jenisKelamin')
+                <div class="invalid-tooltip">
+                  {{ $message }}
+                </div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="alamat" class="form-label">Alamat</label>
-                <textarea class="form-control" id="alamat" name="alamat" rows="3" ></textarea>
+                <textarea class="form-control @error('alamat')
+                is-invalid
+            @enderror" id="alamat" name="alamat" rows="3" ></textarea>
+                @error('alamat')
+                <div class="invalid-tooltip">
+                  {{ $message }}
+                </div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="nohp" class="form-label">No. HP</label>
-                <input type="tel" class="form-control" id="nohp" name="nohp" >
+                <input type="tel" class="form-control @error('nohp')
+                is-invalid
+            @enderror" id="nohp" name="nohp" >
+                @error('nohp')
+                <div class="invalid-tooltip">
+                  {{ $message }}
+                </div>
+                @enderror
             </div>
             <div class="text-center">
             <button type="submit" class="tombol btn btn-primary btn-block w-100 p-3">Register</button>

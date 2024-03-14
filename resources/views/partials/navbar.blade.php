@@ -11,13 +11,21 @@
           </li>
           <li class="nav-item">
             <a class="nav-link text-white" href="#">Features</a>
+          @auth
+          <li class="nav-item ">
+            <form action="/logout" method="post">
+            @csrf
+            <button type="submit" class="nav-link  text-white ">Sign Out</button>
+            </form>
           </li>
+          @else
           <li class="nav-item">
-            <a class="nav-link text-white" href="#">Pricing</a>
+            <a href="/login" class="text-white nav-link">Sign In</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link disabled text-white" aria-disabled="true">Disabled</a>
+          <li class="nav-item ">
+              <button type="submit" class="nav-link disabled ">Sign Out</button>
           </li>
+          @endauth
         </ul>
       </div>
     </div>
