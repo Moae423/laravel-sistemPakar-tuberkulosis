@@ -43,11 +43,9 @@ class RegisterController extends Controller
         $validatedData = $request->validate([
             'namaPasien' => ['required', 'max:50'],
             'email' => ['required','email:rfc,dns'],
-            'password' => ['required'],
+            'password' => ['required', 'min:3','max:20'],
             'umur' => ['required'],
-            'jenisKelamin' => ['required'],
             'alamat' => ['required'],
-            'nohp' => ['required','max:12'],
         ]);
         $validatedData['password'] = Hash::make($validatedData['password']);
         User::create($validatedData);

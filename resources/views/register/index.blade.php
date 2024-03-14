@@ -29,6 +29,12 @@
 <div class="container">
     <div class="register-container">
         <h2 class="text-center mb-4">Register</h2>
+        @if (session()->has('registerFailed'))
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ session('LoginFailed') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+      @endif
         <form action="/register" method="POST">
             @csrf
             <div class="mb-3">
@@ -66,25 +72,10 @@
             </div>
             <div class="mb-3">
                 <label for="umur" class="form-label">Umur</label>
-                <input type="number" class="form-control @error('password')
+                <input type="number" class="form-control @error('umur')
                 is-invalid
             @enderror" id="umur" name="umur" >
-                @error('password')
-                <div class="invalid-tooltip">
-                  {{ $message }}
-                </div>
-                @enderror
-            </div>
-            <div class="mb-3">
-                <label for="jenisKelamin" class="form-label">Jenis Kelamin</label>
-                <select class="form-select @error('jenisKelamin')
-                is-invalid
-            @enderror" id="jenisKelamin" name="jenisKelamin" >
-                    <option value="" selected disabled>Choose...</option>
-                    <option value="Laki-laki">Laki-laki</option>
-                    <option value="Perempuan">Perempuan</option>
-                </select>
-                @error('jenisKelamin')
+                @error('umur')
                 <div class="invalid-tooltip">
                   {{ $message }}
                 </div>
@@ -96,17 +87,6 @@
                 is-invalid
             @enderror" id="alamat" name="alamat" rows="3" ></textarea>
                 @error('alamat')
-                <div class="invalid-tooltip">
-                  {{ $message }}
-                </div>
-                @enderror
-            </div>
-            <div class="mb-3">
-                <label for="nohp" class="form-label">No. HP</label>
-                <input type="tel" class="form-control @error('nohp')
-                is-invalid
-            @enderror" id="nohp" name="nohp" >
-                @error('nohp')
                 <div class="invalid-tooltip">
                   {{ $message }}
                 </div>

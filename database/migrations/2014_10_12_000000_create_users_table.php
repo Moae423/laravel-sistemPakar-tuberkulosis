@@ -19,9 +19,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('umur');
-            $table->string('jenisKelamin');
             $table->string('alamat', 255);
-            $table->string('nohp', 12);
         });
     }
 

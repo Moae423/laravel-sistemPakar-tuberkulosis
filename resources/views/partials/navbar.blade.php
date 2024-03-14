@@ -7,10 +7,19 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link active text-white" aria-current="page" href="#">Home</a>
+            <a class="nav-link  text-white {{ Request::is('/') ? 'active' : '' }}" aria-current="page" href="/">Beranda</a>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link text-white" href="#">Pakar</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white" href="#">Features</a>
+            <a class="nav-link text-white" href="#">Konsultasi</a>
+          </li>
+          <li class="nav-item">
+          <a class="nav-link text-white" href="#">Riwayat Konsultasi</a>
+        </li>
+          
           @auth
           <li class="nav-item ">
             <form action="/logout" method="post">
@@ -18,12 +27,10 @@
             <button type="submit" class="nav-link  text-white ">Sign Out</button>
             </form>
           </li>
+          
           @else
           <li class="nav-item">
             <a href="/login" class="text-white nav-link">Sign In</a>
-          </li>
-          <li class="nav-item ">
-              <button type="submit" class="nav-link disabled ">Sign Out</button>
           </li>
           @endauth
         </ul>

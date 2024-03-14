@@ -23,6 +23,12 @@ Route::get('/', function () {
         'title'=> 'Home',
     ]);
 });
+Route::get('/admin', function () {
+    return view('admin.layouts.main' ,[
+
+        'title'=> 'Home',
+    ]);
+});
 
 // LOGIN
 Route::get('/login', [MasukController::class, 'index'])->middleware('guest');
