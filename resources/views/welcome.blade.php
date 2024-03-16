@@ -14,7 +14,7 @@
         <h1 class="p-5 fw-medium  text-center">SELAMAT DATANG DI APLIKASI SISTEM PAKAR TUBERKULOSIS PUSKESMAS PADANG LUAR</h1>
         @endauth
         <div class="text-center"> <!-- Added a new div for centering the button -->
-            <a href="/login">
+            <a href="/konsultasi">
                 <button class="btn fw-normal btn-primary p-3">KONSULTASI</button>
             </a>
         </div>

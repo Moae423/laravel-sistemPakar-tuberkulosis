@@ -1,10 +1,11 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MasukController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\RegisterController;
-use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +29,7 @@ Route::get('/admin', function () {
 
         'title'=> 'Home',
     ]);
-});
+})->middleware('auth','admin');
 
 // LOGIN
 Route::get('/login', [MasukController::class, 'index'])->middleware('guest');
@@ -37,3 +38,6 @@ Route::post('/login', [MasukController::class, 'authenticate']);
 Route::post('/logout', [MasukController::class, 'logout']);
 
 Route::resource('/register', RegisterController::class);
+
+// home
+Route::get('/home', [HomeController::class, 'index'])->middleware('auth');
