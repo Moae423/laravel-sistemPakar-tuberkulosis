@@ -13,9 +13,12 @@
         @else
         <h1 class="p-5 fw-medium  text-center">SELAMAT DATANG DI APLIKASI SISTEM PAKAR TUBERKULOSIS PUSKESMAS PADANG LUAR</h1>
         @endauth
-        <div class="text-center"> <!-- Added a new div for centering the button -->
+        <div class="text-center d-flex gap-2"> <!-- Added a new div for centering the button -->
             <a href="/konsultasi">
-                <button class="btn fw-normal btn-primary p-3">KONSULTASI</button>
+                <button class="btn fw-normal btn-primary p-3">Konsultasi</button>
+            </a>
+            <a href="/konsultasi">
+                <button class="btn fw-normal btn-primary p-3">Info Penyakit</button>
             </a>
         </div>
     </div>

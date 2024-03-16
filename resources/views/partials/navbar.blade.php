@@ -13,14 +13,14 @@
           <li class="nav-item">
             <a class="nav-link text-white" href="#">Pakar</a>
           </li>
+          
+          @auth
           <li class="nav-item">
-            <a class="nav-link text-white" href="#">Konsultasi</a>
+            <a class="nav-link text-white" href="/konsultasi">Konsultasi</a>
           </li>
           <li class="nav-item">
           <a class="nav-link text-white" href="#">Riwayat Konsultasi</a>
         </li>
-          
-          @auth
           <li class="nav-item ">
             <form action="/logout" method="post">
             @csrf
