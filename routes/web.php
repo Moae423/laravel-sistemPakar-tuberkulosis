@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PenyakitController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
@@ -43,5 +44,8 @@ Route::resource('/register', RegisterController::class);
 // home
 Route::get('/home', [HomeController::class, 'index'])->middleware('auth');
 
+// penyakit
+Route::resource('/admin/penyakit', PenyakitController::class);
+
 // konsultasi
-Route::resource('/konsultasi', KonsultasiController::class)->middleware('auth');
+Route::resource('/konsultasi', KonsultasiController::class);

@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Models\Pasien;
+use App\Models\Penyakit;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
-class RegisterController extends Controller
+class PenyakitController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,10 +15,7 @@ class RegisterController extends Controller
      */
     public function index()
     {
-        return view('register.index',[
-            'title'=> 'Register',
-        ]);
-        //
+        
     }
 
     /**
@@ -29,7 +25,10 @@ class RegisterController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.penyakit.create', [
+            'title' => 'Input Data Penyakit'
+        ]);
+        // return ('test');
     }
 
     /**
@@ -38,26 +37,24 @@ class RegisterController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
+        //
         $validatedData = $request->validate([
-            'namaPasien' => ['required', 'max:50'],
-            'email' => ['required','email:rfc,dns'],
-            'password' => ['required', 'min:3','max:20'],
-            'umur' => ['required'],
-            'alamat' => ['required'],
+            'id_penyakit' => ['required', 'unique:penyakits', 'min:5'],
+            'nama_penyakit' => ['required', 'min:20', 'max:50'],
+            'detail_penyakit' => ['required', 'max:225'],
+            'solusi_penyakit' => ['required', 'max:255']
         ]);
-        $validatedData['password'] = Hash::make($validatedData['password']);
-        User::create($validatedData);
-        return redirect('/login')->with('success','Pendaftaran Berhasil!!');
 
-        if (Auth::attempt($validateData)) {
-            request()->session()->regenerate();
+        if (Penyakit::create($validatedData)) {
+            return redirect('/admin/penyakit/create')->with('success', 'Data Penyakit Sudah Ditambahkan');
         } else {
-            return back()->withErrors('registerFailed', 'ERROR BWANG');
+            return back()->withErrors('penyakitFailed', 'Data yang dimasukkan tidak sesuai');
         }
 
-        //
+        // Penyakit::create($validatedData);
+        // return redirect('/admin/penyakit/create')->with('success', 'Data Penyakit Sudah Ditambahkan');
     }
 
     /**
@@ -66,10 +63,15 @@ class RegisterController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Penyakit $id)
     {
-        // 
+        $penyakit = Penyakit::findOrFail($id); // Retrieve the Penyakit with the given ID or throw an error if not found
+        return view('admin.penyakit.show', [
+            'title' => 'Data Penyakit',
+            'penyakit' => Penyakit::all()
+        ]);
     }
+    
 
     /**
      * Show the form for editing the specified resource.
