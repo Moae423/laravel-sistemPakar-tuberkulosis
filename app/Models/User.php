@@ -22,9 +22,7 @@ class User extends Authenticatable
     //     'email',
     //     'password',
     // ];
-    public $timestamps = false;
-    protected $primarykey = 'id';
-    protected $fillable = ['namaPasien', 'email', 'password', 'umur', 'jenisKelamin', 'alamat', 'nohp'];
+    protected $guarded = ['id'];
 
     /**
      * The attributes that should be hidden for serialization.

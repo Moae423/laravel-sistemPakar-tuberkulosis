@@ -45,7 +45,7 @@ Route::resource('/register', RegisterController::class);
 Route::get('/home', [HomeController::class, 'index'])->middleware('auth');
 
 // penyakit
-Route::resource('/admin/penyakit', PenyakitController::class);
+Route::resource('/admin/penyakit', PenyakitController::class)->middleware('auth');
 
 // konsultasi
 Route::resource('/konsultasi', KonsultasiController::class);

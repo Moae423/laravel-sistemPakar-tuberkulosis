@@ -19,14 +19,15 @@
           <th colspan="2" scope="col">Aksi</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody class="text-center">
         @php
             $no=1;
         @endphp
         @foreach ($penyakit as $p)
+        <center>
         <tr>
           <th scope="row">{{ $no++ }}</th>
-          <td>{{ $p->id_penyakit }}</td>
+          <td>{{ $p->kode_penyakit }}</td>
           <td>{{ $p->nama_penyakit }}</td>
           <td>{{ $p->detail_penyakit }}</td>
           <td>{{ $p->solusi_penyakit }}</td>
@@ -42,6 +43,7 @@
           </td>
 
         </tr>
+      </center>
         @endforeach
       </tbody>
     </table>

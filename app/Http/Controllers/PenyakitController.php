@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePenyakitRequest;
 use App\Models\Penyakit;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -37,21 +38,41 @@ class PenyakitController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request) : RedirectResponse
     {
         //
-        $validatedData = $request->validate([
-            'id_penyakit' => ['required', 'unique:penyakits', 'min:5'],
-            'nama_penyakit' => ['required', 'min:20', 'max:50'],
-            'detail_penyakit' => ['required', 'max:225'],
-            'solusi_penyakit' => ['required', 'max:255']
-        ]);
+        $penyakit = Penyakit::latest()->first();
+        $kodePenyakits = "KP";
 
-        if (Penyakit::create($validatedData)) {
-            return redirect('/admin/penyakit/create')->with('success', 'Data Penyakit Sudah Ditambahkan');
+        if ($penyakit == null) {
+            // kode Pertama
+            $nomorUrut = "001";
+        } else {
+            $nomorUrut = substr($penyakit->kode_penyakit, 2, 3)+1;
+            $nomorUrut = str_pad($nomorUrut, 3, "0", STR_PAD_LEFT);
+        }
+        $kodePenyakit = $kodePenyakits . $nomorUrut;
+        $requestData = $request->validate([
+            'id_penyakit' => ['required'],
+            'nama_penyakit' => ['required'],
+            'detail_penyakit' => ['required'],
+            'solusi_penyakit' => ['required'],
+        ]);
+        $requestData['kode_penyakit'] = $kodePenyakit;
+        
+        if (Penyakit::create($requestData)) {
+            return redirect('/admin/penyakit/show')->with('success', 'Data Penyakit Sudah Ditambahkan');
         } else {
             return back()->withErrors('penyakitFailed', 'Data yang dimasukkan tidak sesuai');
         }
+
+        // $validatedData = $request->validate([
+        //     'id_penyakit' => ['required', 'unique:penyakits', 'min:5'],
+        //     'nama_penyakit' => ['required', 'min:20', 'max:50'],
+        //     'detail_penyakit' => ['required', 'max:225'],
+        //     'solusi_penyakit' => ['required', 'max:255']
+        // ]);
+
 
         // Penyakit::create($validatedData);
         // return redirect('/admin/penyakit/create')->with('success', 'Data Penyakit Sudah Ditambahkan');

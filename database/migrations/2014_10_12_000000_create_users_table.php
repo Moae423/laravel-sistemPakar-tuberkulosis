@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('umur');
             $table->string('alamat', 255);
+            $table->timestamps();
         });
     }
 

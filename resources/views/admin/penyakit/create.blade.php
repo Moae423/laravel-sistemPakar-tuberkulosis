@@ -30,7 +30,7 @@
               <label for="kode">ID Penyakit</label>
               <input type="text" class="form-control @error('id_penyakit')
                 is-invalid
-              @enderror" name="id_penyakit" id="penyakit" placeholder="Masukkan kode penyakit" >
+              @enderror" name="id_penyakit" id="penyakit" placeholder="Masukkan ID penyakit" >
               @error('id_penyakit')
               <div class="invalid-feedback">
                 {{ $message }}

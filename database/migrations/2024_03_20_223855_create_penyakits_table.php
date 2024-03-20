@@ -15,10 +15,11 @@ return new class extends Migration
     {
         Schema::create('penyakits', function (Blueprint $table) {
             $table->id();
-            $table->string('id_penyakit')->unique();
+            $table->string('id_penyakit');
             $table->string('nama_penyakit');
             $table->string('detail_penyakit');
             $table->string('solusi_penyakit');
+            $table->timestamps();
         });
     }
 
