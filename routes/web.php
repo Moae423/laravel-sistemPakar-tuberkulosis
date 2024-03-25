@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\PenyakitController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MasukController;
+use App\Http\Controllers\GejalaController;
 use App\Http\Controllers\PasienController;
+use App\Http\Controllers\PenyakitController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\KonsultasiController;
 
@@ -46,6 +47,9 @@ Route::get('/home', [HomeController::class, 'index'])->middleware('auth');
 
 // penyakit
 Route::resource('/admin/penyakit', PenyakitController::class)->middleware('auth');
+
+// gejala
+Route::resource('/admin/gejala', GejalaController::class)->middleware('auth');
 
 // konsultasi
 Route::resource('/konsultasi', KonsultasiController::class);

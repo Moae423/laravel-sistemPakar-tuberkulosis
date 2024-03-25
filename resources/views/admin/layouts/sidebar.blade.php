@@ -40,7 +40,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="" class="nav-link {{ Request::is('dashboard') ? 'active' : '' }}">
+                <a href="/admin/gejala/create" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Data Gejala</p>
                 </a>
@@ -69,9 +69,9 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/dashboard" class="nav-link">
+                <a href="/admin/gejala/show" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Advanced Elements</p>
+                  <p>Reports Data Gejala</p>
                 </a>
               </li>
               <li class="nav-item">

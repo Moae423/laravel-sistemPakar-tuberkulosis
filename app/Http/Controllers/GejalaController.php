@@ -24,7 +24,10 @@ class GejalaController extends Controller
      */
     public function create()
     {
-        //
+        // return ('test');
+        return view('admin.gejala.create',[
+            'title' => 'Input Data Gejala'
+        ]);
     }
 
     /**
@@ -36,6 +39,28 @@ class GejalaController extends Controller
     public function store(Request $request)
     {
         //
+        $gejala = Gejala::latest()->first();
+        $kodeGejalas = "G";
+
+        if ($gejala == null) {
+            // kode Pertama
+            $nomorUrut = "01";
+        } else {
+            $nomorUrut = substr($gejala->kode_gejala, 1, 2)+1;
+            $nomorUrut = str_pad($nomorUrut, 2, "0", STR_PAD_LEFT);
+        }
+        $kodePenyakit = $kodeGejalas . $nomorUrut;
+        $requestData = $request->validate([
+            'id_gejala' => ['required'],
+            'nama_gejala' => ['required'],
+        ]);
+        $requestData['kode_gejala'] = $kodePenyakit;
+        
+        if (Gejala::create($requestData)) {
+            return redirect('/admin/gejala/show')->with('success', 'Data Gejala Sudah Ditambahkan');
+        } else {
+            return back()->withErrors('GejalaFailed', 'Data yang dimasukkan tidak sesuai');
+        }
     }
 
     /**
@@ -44,9 +69,13 @@ class GejalaController extends Controller
      * @param  \App\Models\Gejala  $gejala
      * @return \Illuminate\Http\Response
      */
-    public function show(Gejala $gejala)
+    public function show(Gejala $id)
     {
-        //
+        // return ('test');
+        return view("admin.gejala.show",[
+            'title' => 'Report Gejala Tuberkulosis',
+            'gejala' => Gejala::all()
+        ]);
     }
 
     /**
