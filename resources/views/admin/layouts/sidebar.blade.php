@@ -46,7 +46,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index3.html" class="nav-link">
+                <a href="/admin/rule/create" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Data Rule</p>
                 </a>

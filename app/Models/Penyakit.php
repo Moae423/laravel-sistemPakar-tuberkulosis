@@ -10,4 +10,10 @@ class Penyakit extends Model
     use HasFactory;
     // public $timestamps = false;
     protected $guarded = ['id'];
+    protected $table = 'penyakits';
+
+    public function gejalas()
+    {
+        return $this->belongsToMany(Gejala::class, 'rules', 'id_penyakit', 'id_gejala');
+    }
 }

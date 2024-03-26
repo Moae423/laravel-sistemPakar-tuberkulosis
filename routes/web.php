@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RuleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
@@ -50,6 +51,10 @@ Route::resource('/admin/penyakit', PenyakitController::class)->middleware('auth'
 
 // gejala
 Route::resource('/admin/gejala', GejalaController::class)->middleware('auth');
+
+// konsultasi
+Route::resource('/admin/rule', RuleController::class);
+
 
 // konsultasi
 Route::resource('/konsultasi', KonsultasiController::class);
