@@ -33,6 +33,8 @@ class RuleController extends Controller
             'penyakit'=>Penyakit::all(),
         ]);
 
+        
+
         // $title = "Input Data Rule";
         // $penyakits = Penyakit::all();
         // $gejalas = Gejala::all();
@@ -51,6 +53,16 @@ class RuleController extends Controller
     public function store(Request $request)
     {
         //
+        $requestData = $request->validate([
+            'nama_gejala' => ['required'],
+            'nama_penyakit' => ['required'],
+            'nilai_probabilitas' => ['required'],
+        ]);
+        if (Rule::create($requestData)) {
+            return redirect('/admin/rule/create')->with('success', 'Data Rule Sudah Ditambahkan');
+        } else {
+            return back()->withErrors('RuleFailed', 'Data yang dimasukkan tidak sesuai');
+        }
     }
 
     /**
@@ -59,9 +71,12 @@ class RuleController extends Controller
      * @param  \App\Models\Rule  $rule
      * @return \Illuminate\Http\Response
      */
-    public function show(Rule $rule)
+    public function show(Rule $id)
     {
-        //
+        return view('admin.rule.show',[
+            'title'=> 'Laporan Data Rule',
+            'rules'=> rule::all(),
+        ]);
     }
 
     /**
