@@ -27,24 +27,24 @@
           <form action="/admin/rule" method="POST" class="center-form">
             @csrf
             <div class="form-group">
-                <label for="id_penyakit">Penyakit:</label>
-                <select name="id_penyakit" id="id_penyakit" class="form-control">
+                <label for="nama_penyakit">Penyakit:</label>
+                <select name="nama_penyakit" id="nama_penyakit" class="form-control">
                     @foreach ($penyakit as $penyakit_s)
-                        <option value="{{ $penyakit_s->id }}">{{ $penyakit_s->nama_penyakit }}</option>
+                        <option value="{{ $penyakit_s->nama_penyakit }}">{{ $penyakit_s->nama_penyakit }}</option>
                     @endforeach
                 </select>
             </div>
             <div class="form-group">
-                <label for="id_gejala">Gejala:</label>
-                <select name="id_gejala" id="id_gejala" class="form-control" >
+                <label for="nama_gejala">Gejala:</label>
+                <select name="nama_gejala" id="nama_gejala" class="form-control" >
                     @foreach ($gejala as $gejala_s)
-                        <option value="{{ $gejala_s->id }}">{{ $gejala_s->nama_gejala }}</option>
+                        <option value="{{ $gejala_s->nama_gejala }}">{{ $gejala_s->nama_gejala }}</option>
                     @endforeach
                 </select>
             </div>
             <div class="form-group">
-                <label for="probabilitas">Probabilitas:</label>
-            <input type="text" name="probabilitas" id="probabilitas" class="form-control">
+                <label for="nilai_probabilitas">Nilai Probabilitas</label>
+            <input type="text" name="nilai_probabilitas" id="nilai_probabilitas" class="form-control">
             </div>
             <button type="submit" class="btn btn-primary btn-block">Submit</button>
           </form>

@@ -14,6 +14,6 @@ class Penyakit extends Model
 
     public function gejalas()
     {
-        return $this->belongsToMany(Gejala::class, 'rules', 'id_penyakit', 'id_gejala');
+        return $this->belongsTo(Gejala::class, 'rules', 'id_penyakit', 'id_gejala');
     }
 }

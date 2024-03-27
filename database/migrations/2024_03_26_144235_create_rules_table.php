@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('rules', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('nama_gejala');
+            $table->string('nama_penyakit');
+            $table->decimal('nilai_probabilitas');
             $table->timestamps();
         });
     }

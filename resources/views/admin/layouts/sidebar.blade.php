@@ -75,9 +75,9 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/forms/editors.html" class="nav-link">
+                <a href="/admin/rule/show" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Editors</p>
+                  <p>Reports Data Rule</p>
                 </a>
               </li>
               <li class="nav-item">
