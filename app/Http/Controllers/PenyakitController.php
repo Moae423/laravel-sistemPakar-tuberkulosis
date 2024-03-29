@@ -125,6 +125,7 @@ class PenyakitController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Penyakit::destroy($id);
+        return redirect('/admin/penyakit/show')->with('success', 'Data Penyakit Sudah Dihapus');
     }
 }

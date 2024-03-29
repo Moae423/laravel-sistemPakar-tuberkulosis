@@ -17,33 +17,60 @@ class GejalaSeeder extends Seeder
     {
         //
         $sample = [
-            ['id_gejala' => 'G01',
-            'nama_gejala' => 'Frekuesi perafasan meningkat dan sering meloncat-loncat'],
-            ['id_gejala' => 'G02',
-            'nama_gejala' => 'Gelisah dan lamban'],
-            ['id_gejala' => 'G03',
-            'nama_gejala' => 'Ikan tampak kurus'],
-            ['id_gejala' => 'G04',
-            'nama_gejala' => 'Luka disekitar mulut dan bagian tubuh lainnya'],
-            ['id_gejala' => 'G05',
-            'nama_gejala' => 'Menggosok-gosokkan badan pada benda di sekitarnya'],
-            ['id_gejala' => 'G06',
-            'nama_gejala' => 'Menginfeksi jaringan ikat tapis insang, tulang kartilag, otot/daging dan beberapa organ dalam ikan (terutama benih)'],
-            ['id_gejala' => 'G07',
-            'nama_gejala' => 'Produksi lendir berlebihan'],
-            ['id_gejala' => 'G08',
-            'nama_gejala' => 'Warna tubuh pucat'],
-            ['id_gejala' => 'G09',
-            'nama_gejala' => 'Apabila menginfeksi insang, kerusakan dimulai dari ujung filamen insang dan merambat ke bagian pangkal, akhirnya filamen membusuk dan rontok'],
-            ['id_gejala' => 'G10',
-            'nama_gejala' => 'Bengkak-bengkak di bagian tubuh (kanan/kiri)'],
+            ['kode_gejala' => 'G01',
+            'id_gejala'=> '01',
+            'nama_gejala' => 'Batuk yang berlangsung lama 2 minggu'],
+            ['kode_gejala' => 'G02',
+            'id_gejala'=> '02',
+            'nama_gejala' => 'Batuk yang disertai darah'],
+            ['kode_gejala' => 'G03',
+            'id_gejala'=> '03',
+            'nama_gejala' => 'Nyeri dada saat bernapas atau batuk'],
+            ['kode_gejala' => 'G04',
+            'id_gejala'=> '04',
+            'nama_gejala' => 'Berkeringat di malam hari'],
+            ['kode_gejala' => 'G05',
+            'id_gejala'=> '05',
+            'nama_gejala' => 'Hilang nafsu makan'],
+            ['kode_gejala' => 'G06',
+            'id_gejala'=> '06',
+            'nama_gejala' => 'Penurunan berat badan'],
+            ['kode_gejala' => 'G07',
+            'id_gejala'=> '07',
+            'nama_gejala' => 'Rasa nyeri pada tulang atau jaringan sendi'],
+            ['kode_gejala' => 'G08',
+            'id_gejala'=> '08',
+            'nama_gejala' => 'Bengkak pada bagian tulang/sendi abses'],
+            ['kode_gejala' => 'G09',
+            'id_gejala'=> '09',
+            'nama_gejala' => 'Kekakuan tulang belakang'],
+            ['kode_gejala' => 'G10',
+            'id_gejala'=> '10',
+            'nama_gejala' => 'Tulang belakang bungkuk'],
+            ['kode_gejala' => 'G11',
+            'id_gejala'=> '11',
+            'nama_gejala' => 'Demam dan menggigil'],
+            ['kode_gejala' => 'G12',
+            'id_gejala'=> '12',
+            'nama_gejala' => 'Kulit kemerahan berisi nanah '],
+            ['kode_gejala' => 'G13',
+            'id_gejala'=> '13',
+            'nama_gejala' => 'Mudah lelah'],
+            ['kode_gejala' => 'G14',
+            'id_gejala'=> '14',
+            'nama_gejala' => 'Muncul benjolan di leher bagian depan'],
+            ['kode_gejala' => 'G15',
+            'id_gejala'=> '15',
+            'nama_gejala' => 'Terasa Gatal di area Lesi'],
+
         ];
 
         foreach ($sample as $s) {
-        	$g = new Gejala;
-        	$g->id_gejala = $s['id_gejala'];
-        	$g->nama_gejala = $s['nama_gejala'];
-        	$g->save();
+        	$gejala = new Gejala;
+        	$gejala->kode_gejala = $s['kode_gejala'];
+        	$gejala->id_gejala = $s['id_gejala'];
+        	$gejala->nama_gejala = $s['nama_gejala'];
+        	$gejala->save();
         }
     }
 }

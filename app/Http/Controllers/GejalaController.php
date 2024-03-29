@@ -107,8 +107,9 @@ class GejalaController extends Controller
      * @param  \App\Models\Gejala  $gejala
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Gejala $gejala)
+    public function destroy($id)
     {
-        //
+        Gejala::destroy($id);
+        return redirect('/admin/gejala/show')->with('success', 'Data Gejala Sudah Dihapus');
     }
 }

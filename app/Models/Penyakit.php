@@ -10,7 +10,7 @@ class Penyakit extends Model
     use HasFactory;
     // public $timestamps = false;
     protected $guarded = ['id'];
-    protected $table = 'penyakits';
+    // protected $table = 'penyakits';
 
     public function gejalas()
     {

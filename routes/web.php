@@ -53,8 +53,8 @@ Route::resource('/admin/penyakit', PenyakitController::class)->middleware('auth'
 Route::resource('/admin/gejala', GejalaController::class)->middleware('auth');
 
 // konsultasi
-Route::resource('/admin/rule', RuleController::class);
+Route::resource('/admin/rule', RuleController::class)->middleware('auth');
 
 
 // konsultasi
-Route::resource('/konsultasi', KonsultasiController::class);
+Route::resource('/konsultasi', KonsultasiController::class)->middleware('auth');

@@ -38,7 +38,7 @@
                 <label for="nama_gejala">Gejala:</label>
                 <select name="nama_gejala" id="nama_gejala" class="form-control" >
                     @foreach ($gejala as $gejala_s)
-                        <option value="{{ $gejala_s->nama_gejala }}">{{ $gejala_s->nama_gejala }}</option>
+                        <option value="{{ $gejala_s->nama_gejala }}">{{ $gejala_s->kode_gejala }}</option>
                     @endforeach
                 </select>
             </div>

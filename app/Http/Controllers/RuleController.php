@@ -105,11 +105,12 @@ class RuleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Rule  $rule
+     * @param  \App\Models\Rule  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Rule $rule)
+    public function destroy($id)
     {
-        //
+        Rule::destroy($id);
+        return redirect('/admin/rule/show')->with('success', 'Data Rule Sudah Dihapus');
     }
 }
