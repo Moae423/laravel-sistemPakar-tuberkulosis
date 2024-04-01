@@ -34,7 +34,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/admin/penyakit/create" class="nav-link {{ Request::is('/admin/penyakit*') ? 'active' : '' }}">
+                <a href="/admin/penyakit/create" class="nav-link {{ Request::is('/admin/penyakit/create') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Data Penyakit</p>
                 </a>
@@ -53,37 +53,37 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item">
+          <li class="nav-item active">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
+              <i class="nav-icon fas fa-book"></i>
               <p>
                 Reports
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="/admin/penyakit/show" class="nav-link {{ Request::is('/admin/penyakit*') ? 'active' : '' }}">
+              <li class="nav-item menu-open">
+                <a href="/admin/penyakit/show" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Reports Data Penyakit</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/admin/gejala/show" class="nav-link">
+                <a href="/admin/gejala/show" class="nav-link {{ Request::is('/admin/gejala/show') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Reports Data Gejala</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/admin/rule/show" class="nav-link">
+                <a href="/admin/rule/show" class="nav-link {{ Request::is('/admin/rule/show') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Reports Data Rule</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/forms/validation.html" class="nav-link">
+                <a href="/register/show" class="nav-link {{ Request::is('/register/show') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Validation</p>
+                  <p>Reports Data Pasien</p>
                 </a>
               </li>
             </ul>

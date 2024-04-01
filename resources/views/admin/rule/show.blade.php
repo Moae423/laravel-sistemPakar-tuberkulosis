@@ -1,7 +1,7 @@
 @extends('admin.layouts.main')
 @section('content')
 <div class="container pt-3">
-    <h2 class="text-center">Daftar Gejala</h2>
+    <h2 class="text-center">Daftar Rule</h2>
     
     @if (session()->has('success'))
     <div class="alert alert-success alert-dismissible fade show mt-5" role="alert">
@@ -12,8 +12,8 @@
       <thead class="text-center">
         <tr>
           <th scope="col">Nomor</th>
-          <th scope="col">Nama Penyakit</th>
-          <th scope="col">Nama Gejala</th>
+          <th scope="col">Kode Penyakit</th>
+          <th scope="col">Kode Gejala</th>
           <th scope="col">Nilai Probabilitas</th>
           <th colspan="2" scope="col">Aksi</th>
         </tr>
@@ -23,11 +23,10 @@
             $no=1;
         @endphp
         @foreach ($rules as $rule)
-        <center>
-        <tr>
+          <tr>
           <th scope="row">{{ $no++ }}</th>
-          <td>{{ $rule->nama_penyakit }}</td>
-          <td>{{ $rule->nama_gejala }}</td>
+          <td>{{ $rule->kode_penyakit }}</td>
+          <td>{{ $rule->kode_gejala }}</td>
           <td>{{ $rule->nilai_probabilitas }}</td>
           <td>
             <a href="#" class="btn btn-primary">
@@ -43,7 +42,6 @@
           </td>
 
         </tr>
-      </center>
         @endforeach
       </tbody>
     </table>

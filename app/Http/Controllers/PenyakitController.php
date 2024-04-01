@@ -86,7 +86,6 @@ class PenyakitController extends Controller
      */
     public function show(Penyakit $id)
     {
-        $penyakit = Penyakit::findOrFail($id); // Retrieve the Penyakit with the given ID or throw an error if not found
         return view('admin.penyakit.show', [
             'title' => 'Data Penyakit',
             'penyakit' => Penyakit::all()

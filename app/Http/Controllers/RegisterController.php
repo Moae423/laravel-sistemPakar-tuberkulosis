@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Pasien;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -68,7 +69,11 @@ class RegisterController extends Controller
      */
     public function show($id)
     {
-        // 
+        //
+        return view('register.show', [
+            'title'=> 'Laporan Data Pasien', 
+            'users' => User::all()
+        ]);
     }
 
     /**

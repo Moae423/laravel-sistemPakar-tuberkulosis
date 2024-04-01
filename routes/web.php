@@ -40,21 +40,14 @@ Route::get('/login', [MasukController::class, 'index'])->middleware('guest');
 Route::post('/login', [MasukController::class, 'authenticate']);
 // LOG OUT
 Route::post('/logout', [MasukController::class, 'logout']);
-
 Route::resource('/register', RegisterController::class);
-
 // home
 Route::get('/home', [HomeController::class, 'index'])->middleware('auth');
-
 // penyakit
 Route::resource('/admin/penyakit', PenyakitController::class)->middleware('auth');
-
 // gejala
 Route::resource('/admin/gejala', GejalaController::class)->middleware('auth');
-
 // konsultasi
 Route::resource('/admin/rule', RuleController::class)->middleware('auth');
-
-
 // konsultasi
 Route::resource('/konsultasi', KonsultasiController::class)->middleware('auth');
