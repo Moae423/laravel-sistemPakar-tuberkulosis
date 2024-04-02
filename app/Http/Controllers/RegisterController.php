@@ -69,10 +69,9 @@ class RegisterController extends Controller
      */
     public function show($id)
     {
-        //
         return view('register.show', [
             'title'=> 'Laporan Data Pasien', 
-            'users' => User::all()
+            'users' => User::where('userType', 'user')->get(),
         ]);
     }
 
