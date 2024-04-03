@@ -39,7 +39,7 @@
             <form action="/register/{{$user->id}}" method="POST">
               @method('delete')
               @csrf
-              <button class="btn btn-danger" onclick="return confirm('Apakah Anda Yakin Data Rule Mau Dihapus')"><i class="fas fa-trash-alt"></i> </button>
+              <button class="btn btn-danger" onclick="return confirm('Apakah Anda Yakin Data Pasien Mau Dihapus')"><i class="fas fa-trash-alt"></i> </button>
             </form>
           </td>
 

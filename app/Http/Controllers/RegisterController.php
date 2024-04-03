@@ -106,6 +106,7 @@ class RegisterController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::destroy($id);
+        return redirect('/register/show')->with('success', 'Data Pasien Sudah Dihapus');
     }
 }

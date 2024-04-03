@@ -18,11 +18,11 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'namaPasien' => fake()->name(),
+            'namaPasien' => fake()->userName(),
             'userType' => 'user',
             'email' => fake()->unique()->safeEmail(),
             'password' => fake()->password(2, 6),
-            'umur' => fake()->randomDigitNot(2),
+            'umur' => fake()->numberBetween(20, 50),
             "alamat" => $this->faker->sentence(mt_rand(2, 8)),
         ];
     }
