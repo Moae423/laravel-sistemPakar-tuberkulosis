@@ -105,24 +105,24 @@ class RuleController extends Controller
     public function update(Request $request, $id)
     {
         // return ('test');
-         $request->validate([
-            'kode_penyakit' => 'required',
-            'kode_gejala' => 'required',
-            'nilai_probabilitas' => 'required',
-        ]);
-        $rules = Rule::findOrFail($id);
-        $rules = Gejala::all();
-        $rules = Penyakit::all();
+        //  $request->validate([
+        //     'kode_penyakit' => 'required',
+        //     'kode_gejala' => 'required',
+        //     'nilai_probabilitas' => 'required',
+        // ]);
+        $rule = Rule::findOrFail($id);
+        $rule->kode_penyakit = $request->kode_penyakit;
+        $rule->kode_gejala = $request->kode_gejala;
+        $rule->nilai_probabilitas = $request->nilai_probabilitas;
+        $rule->save();
+
         // $rules->kode_penyakit = $request->kode_penyakit;
         // $rules->kode_gejala = $request->kode_gejala;
         // $rules->nilai_probabilitas = $request->nilai_probabilitas;
         // $rules->save();
 
-        if ($rules->update($request->all())) {
-            return redirect('/admin/rule/show')->with('success', 'Data Rule berhasil diupdate.');
-        } else {
-            return back()->withErrors('RuleFailed','Ada Yang Salah');
-        }
+        
+            return redirect('/admin/rule/show')->with('success', 'Data Rule berhasil diupdate.'); 
         
         
         
