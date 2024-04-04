@@ -101,7 +101,10 @@ class PenyakitController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin.penyakit.edit', [
+            'title' => 'Edit Data Penyakit',
+            'penyakit' => Penyakit::findOrFail($id)
+        ]);
     }
 
     /**
@@ -113,7 +116,15 @@ class PenyakitController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nama_penyakit' => 'required',
+            'detail_penyakit' => 'required',
+            'solusi_penyakit' => 'required',
+        ]);
+        $penyakit = Penyakit::findOrFail($id);
+        $penyakit->update($request->all());
+    
+        return redirect('/admin/penyakit/show')->with('success', 'Data penyakit berhasil diupdate.');
     }
 
     /**

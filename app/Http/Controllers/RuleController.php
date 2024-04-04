@@ -54,8 +54,8 @@ class RuleController extends Controller
     {
         //
         $requestData = $request->validate([
-            'nama_gejala' => ['required'],
-            'nama_penyakit' => ['required'],
+            'kode_gejala' => ['required'],
+            'kode_penyakit' => ['required'],
             'nilai_probabilitas' => ['required'],
         ]);
         if (Rule::create($requestData)) {
@@ -85,9 +85,14 @@ class RuleController extends Controller
      * @param  \App\Models\Rule  $rule
      * @return \Illuminate\Http\Response
      */
-    public function edit(Rule $rule)
+    public function edit($id)
     {
-        //
+        return view('admin.rule.edit' ,[
+            'title' => 'Edit Data Rule',
+            'penyakit' => Penyakit::all(),
+            'gejala' => Gejala::all(),
+            'rules' => rule::findOrFail( $id ),
+        ]);
     }
 
     /**
@@ -97,9 +102,30 @@ class RuleController extends Controller
      * @param  \App\Models\Rule  $rule
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Rule $rule)
+    public function update(Request $request, $id)
     {
-        //
+        // return ('test');
+         $request->validate([
+            'kode_penyakit' => 'required',
+            'kode_gejala' => 'required',
+            'nilai_probabilitas' => 'required',
+        ]);
+        $rules = Rule::findOrFail($id);
+        $rules = Gejala::all();
+        $rules = Penyakit::all();
+        // $rules->kode_penyakit = $request->kode_penyakit;
+        // $rules->kode_gejala = $request->kode_gejala;
+        // $rules->nilai_probabilitas = $request->nilai_probabilitas;
+        // $rules->save();
+
+        if ($rules->update($request->all())) {
+            return redirect('/admin/rule/show')->with('success', 'Data Rule berhasil diupdate.');
+        } else {
+            return back()->withErrors('RuleFailed','Ada Yang Salah');
+        }
+        
+        
+        
     }
 
     /**

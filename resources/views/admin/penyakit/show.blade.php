@@ -32,7 +32,7 @@
           <td>{{ $p->detail_penyakit }}</td>
           <td>{{ $p->solusi_penyakit }}</td>
           <td>
-            <a href="#" class="btn btn-primary">
+            <a href="/admin/penyakit/{{$p->id}}/edit" class="btn btn-primary">
               <i class="fas fa-edit"></i> 
            </a>
           </td>

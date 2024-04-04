@@ -22,29 +22,21 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
               </div>
           @endif
-        <h2 class="fs-2 text-center">Input Data Rule</h2>
+        <h2 class="fs-2 text-center">Edit Data Gejala</h2>
         <div class="card-body ">
-          <form action="/admin/rule" method="POST" class="center-form">
+          <form action="/admin/gejala/{{$gejala->id}}" method="POST" class="center-form">
+            @method('PUT')
             @csrf
             <div class="form-group">
-                <label for="kode_penyakit">Penyakit:</label>
-                <select name="kode_penyakit" id="kode_penyakit" class="form-control">
-                    @foreach ($penyakit as $penyakit_s)
-                        <option value="{{ $penyakit_s->kode_penyakit }}">{{ $penyakit_s->kode_penyakit }}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="kode_gejala">Gejala:</label>
-                <select name="kode_gejala" id="kode_gejala" class="form-control" >
-                    @foreach ($gejala as $gejala_s)
-                        <option value="{{ $gejala_s->kode_gejala }}">{{ $gejala_s->kode_gejala }}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="nilai_probabilitas">Nilai Probabilitas</label>
-            <input type="text" name="nilai_probabilitas" id="nilai_probabilitas" class="form-control">
+              <label for="nama">Nama Gejala</label>
+              <input type="text" class="form-control @error('nama_gejala')
+              is-invalid
+              @enderror " name="nama_gejala" id="penyakit" placeholder="Masukkan Nama Gejala" value="{{$gejala->nama_gejala}}" >
+              @error('nama_gejala')
+              <div class="invalid-feedback">
+                {{ $message }}
+              </div>
+              @enderror
             </div>
             <button type="submit" class="btn btn-primary btn-block">Submit</button>
           </form>

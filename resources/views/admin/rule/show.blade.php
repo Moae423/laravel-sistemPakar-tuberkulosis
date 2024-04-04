@@ -29,7 +29,7 @@
           <td>{{ $rule->kode_gejala }}</td>
           <td>{{ $rule->nilai_probabilitas }}</td>
           <td>
-            <a href="#" class="btn btn-primary">
+            <a href="/admin/rule/{{$rule->id}}/edit" class="btn btn-primary">
               <i class="fas fa-edit"></i> 
            </a>
           </td>

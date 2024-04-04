@@ -84,9 +84,12 @@ class GejalaController extends Controller
      * @param  \App\Models\Gejala  $gejala
      * @return \Illuminate\Http\Response
      */
-    public function edit(Gejala $gejala)
+    public function edit($id)
     {
-        //
+        return view('admin.gejala.edit' ,[
+            'title' => 'Edit Data Gejala',
+            'gejala' => Gejala::findOrFail($id)
+        ]);
     }
 
     /**
@@ -96,9 +99,15 @@ class GejalaController extends Controller
      * @param  \App\Models\Gejala  $gejala
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Gejala $gejala)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nama_gejala' => 'required',
+        ]);
+        $gejala = Gejala::findOrFail($id);
+        $gejala->update($request->all());
+    
+        return redirect('/admin/gejala/show')->with('success', 'Data Gejala berhasil diupdate.');
     }
 
     /**

@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('rules', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('kode_gejala');
             $table->string('kode_penyakit');
             $table->decimal('nilai_probabilitas');

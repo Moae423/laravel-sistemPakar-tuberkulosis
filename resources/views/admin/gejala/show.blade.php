@@ -29,7 +29,7 @@
           <td>{{ $g->kode_gejala }}</td>
           <td>{{ $g->nama_gejala }}</td>
           <td>
-            <a href="#" class="btn btn-primary">
+            <a href="/admin/gejala/{{$g->id}}/edit" class="btn btn-primary">
               <i class="fas fa-edit"></i> 
            </a>
           </td>
