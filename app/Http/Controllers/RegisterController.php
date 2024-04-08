@@ -83,9 +83,12 @@ class RegisterController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('register.edit', [
+            'title'=> 'Edit Data Pasien',
+            'users' => User::findOrFail( $id ),
+        ]);
     }
-
+        
     /**
      * Update the specified resource in storage.
      *
@@ -95,7 +98,17 @@ class RegisterController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'namaPasien' => ['required'],
+            'email' => ['required'],
+            'password' => 'required',
+            'umur' => 'required',
+            'alamat' => 'required',
+        ]);
+        $penyakit = User::findOrFail($id);
+        $penyakit->update($request->all());
+    
+        return redirect('/register/show')->with('success', 'Data Pasien berhasil Di edit.');
     }
 
     /**

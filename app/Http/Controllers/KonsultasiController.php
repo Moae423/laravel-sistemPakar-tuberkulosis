@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Gejala;
 use App\Models\Konsultasi;
 use Illuminate\Http\Request;
 
@@ -15,9 +16,12 @@ class KonsultasiController extends Controller
     public function index()
     {
         //
-        return view('konsultasi.index', [
-            'title' => 'Konsultasi'
+        return view('konsultasi.create', [
+            'title' => 'Konsultasi',
+            'gejalas' => Gejala::all(),
         ]);
+        
+        
     }
 
     /**
@@ -28,6 +32,7 @@ class KonsultasiController extends Controller
     public function create()
     {
         //
+        
     }
 
     /**
@@ -39,7 +44,8 @@ class KonsultasiController extends Controller
     public function store(Request $request)
     {
         //
-    }
+        return ('test');
+        }
 
     /**
      * Display the specified resource.

@@ -31,7 +31,7 @@
           <td>{{ $user->umur }}</td>
           <td>{{ $user->alamat }}</td>
           <td>
-            <a href="#" class="btn btn-primary">
+            <a href="/register/{{$user->id}}/edit" class="btn btn-primary">
               <i class="fas fa-edit"></i> 
            </a>
           </td>
