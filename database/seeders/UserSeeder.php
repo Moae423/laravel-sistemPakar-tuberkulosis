@@ -15,7 +15,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        //
+       
 
         // \App\Models\User::factory(10)->create();
 
@@ -25,12 +25,12 @@ class UserSeeder extends Seeder
         // ]);
 
         $u = new User;
-        $u->namaPasien = 'Chevien Walidain';
+        $u->namaPasien = 'Angelina';
         $u->userType = 'admin';
-        $u->email = 'kepin@gmail.com';
+        $u->email = 'angelina@gmail.com';
         $u->password = bcrypt('123');
         $u->umur = 22;
-        $u->alamat = 'Guguak Bulek';
+        $u->alamat = 'Birugo';
         $u->save();
         User::factory(10)->create();
 

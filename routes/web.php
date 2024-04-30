@@ -36,10 +36,14 @@ Route::get('/admin', function () {
 })->middleware('auth','admin');
 
 // LOGIN
+// Route::resource('/login',LoginController::class);
+
+
+// LOGIN With Breeze
 Route::get('/login', [MasukController::class, 'index'])->middleware('guest');
-Route::post('/login', [MasukController::class, 'authenticate']);
-// LOG OUT
+Route::post('/login', [MasukController::class, 'login']); 
 Route::post('/logout', [MasukController::class, 'logout']);
+// LOG OUT
 Route::resource('/register', RegisterController::class);
 // home
 Route::get('/home', [HomeController::class, 'index'])->middleware('auth');

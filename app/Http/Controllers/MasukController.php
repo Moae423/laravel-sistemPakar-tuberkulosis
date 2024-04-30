@@ -14,7 +14,7 @@ class MasukController extends Controller
             "title" => "Login",
         ]);
     }
-    public function authenticate(Request $request)
+    public function login(Request $request)
     {
         $credentials = $request->validate([
             "email"=> "required|email:rfc,dns",
@@ -36,4 +36,4 @@ class MasukController extends Controller
         request()->session()->regenerateToken();
         return redirect('/');
     }
-}
+} 

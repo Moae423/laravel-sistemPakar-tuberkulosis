@@ -44,7 +44,9 @@ class KonsultasiController extends Controller
     public function store(Request $request)
     {
         //
-        return ('test');
+        return view('', [
+            'title' => 'hHasil Konsultasi'
+        ]);
         }
 
     /**

@@ -38,7 +38,7 @@
           </div>
       @endif
         <h2 class="text-center mb-4">Sign In</h2>
-        <form action="/login" method="POST">
+        <form action="/login" method="POST">-
             @csrf
             <div class="mb-3">
                 <label for="email" class="form-label" >Email address</label>
@@ -57,7 +57,7 @@
                 is-invalid
             @enderror" id="password" name="password" required>
                 <div class="invalid-feedback">
-                    @error('email')
+                    @error('password')
                         {{$message}}
                     @enderror
                 </div>
