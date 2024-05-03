@@ -11,6 +11,8 @@ body {
 
 
 
+
+
 .form-signin .form-floating:focus-within {
   z-index: 2;
 }
@@ -25,4 +27,27 @@ body {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+
+.background-image {
+  position: relative;
+  background-color: #fff; /* Fallback color */
+  background-image: url('image/1.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.nav-link {
+  transition:  0.3s;
+  color: #ffffff;
+}
+.nav-link:active {
+  border-radius: 5px;
+  background-color: #427676;
+  color: #ffffff;
+}
+.nav-link:hover {
+  color: #E1E48C;
+  text-decoration: underline;
+  transition:  0.3s;
 }
