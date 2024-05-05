@@ -53,5 +53,5 @@ Route::resource('/admin/penyakit', PenyakitController::class)->middleware('auth'
 Route::resource('/admin/gejala', GejalaController::class)->middleware('auth');
 // konsultasi
 Route::resource('/admin/rule', RuleController::class)->middleware('auth');
-// konsultasi
+// konsultasiA
 Route::resource('/konsultasi', KonsultasiController::class)->middleware('auth');

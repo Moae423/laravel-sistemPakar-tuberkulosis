@@ -31,6 +31,7 @@ body {
 
 .background-image {
   position: relative;
+  min-height: 100vh;
   background-color: #fff; /* Fallback color */
   background-image: url('image/1.png');
   background-size: cover;
