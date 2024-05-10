@@ -16,7 +16,7 @@
         margin: 0 auto;
         padding: 50px;
         border-radius: 8px;
-        background-color: #4276765b;
+        background-color: #ffffff;
         box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
         margin-top: 50px;
     }
@@ -31,7 +31,7 @@
 <div class="container">
     <div class="row justify-content-center">
     <div class="register-container">
-        <h2 class="text-center mb-4 fs-1" style="color: #E1E48C">Pendaftaran</h2>
+        <h2 class="text-center mb-4 fs-1" >PENDAFTARAN</h2>
         @if (session()->has('registerFailed'))
           <div class="alert alert-danger alert-dismissible fade show" role="alert">
             {{ session('LoginFailed') }}
@@ -41,7 +41,7 @@
         <form action="/register" method="POST">
             @csrf
             <div class="mb-3">
-                <label for="namapasien" class="form-label" style="color: #E1E48C">Nama Pasien</label>
+                <label for="namapasien" class="form-label fs-4" >Nama</label>
                 <input type="text" class="form-control @error('namaPasien')
                 is-invalid
             @enderror" id="namapasien" name="namaPasien" >
@@ -52,7 +52,7 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="email" class="form-label" style="color: #E1E48C">Email address</label>
+                <label for="email" class="form-label fs-4" >Email address</label>
                 <input type="email" class="form-control  @error('email')
                 is-invalid
             @enderror" id="email" name="email" >
@@ -63,7 +63,7 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="password" class="form-label" style="color: #E1E48C">Password</label>
+                <label for="password" class="form-label fs-4" >Password</label>
                 <input type="password" class="form-control  @error('password')
                 is-invalid
             @enderror" id="password" name="password" >
@@ -74,7 +74,7 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="umur" class="form-label" style="color: #E1E48C">Umur</label>
+                <label for="umur" class="form-label fs-4" >Umur</label>
                 <input type="number" class="form-control @error('umur')
                 is-invalid
             @enderror" id="umur" name="umur" >
@@ -85,7 +85,7 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="alamat" class="form-label" style="color: #E1E48C">Alamat</label>
+                <label for="alamat" class="form-label fs-4" >Alamat</label>
                 <textarea class="form-control @error('alamat')
                 is-invalid
             @enderror" id="alamat" name="alamat" rows="3" ></textarea>
@@ -96,7 +96,7 @@
                 @enderror
             </div>
             <div class="text-center">
-            <button type="submit" class="tombol btn btn-primary fs-3 fw-bold btn-block w-100 p-3" style="background-color: #0D5447; color:#E1E48C">Register</button>
+            <button type="submit" class="tombol btn btn-primary fs-3 fw-bold btn-block w-100 p-3">Register</button>
             </div>
         </form>
     </div>

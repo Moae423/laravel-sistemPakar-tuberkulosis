@@ -27,6 +27,8 @@ class MasukController extends Controller
          if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->intended('/home');
+         } else { 
+            return back()->with('loginFailed','Username Atau Password Salah');
          }
          
     }

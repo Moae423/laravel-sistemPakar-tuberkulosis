@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Gejala;
+use App\Models\Penyakit;
 use App\Models\Konsultasi;
 use Illuminate\Http\Request;
 
@@ -44,9 +45,22 @@ class KonsultasiController extends Controller
     public function store(Request $request)
     {
         //
-        return view('', [
-            'title' => 'hHasil Konsultasi'
-        ]);
+        $gejala_terpilih = $request->gejala;
+        $penyakits = Penyakit::all();
+        $hasil = [];
+
+        // foreach
+        foreach ($penyakits  as $penyakit ) {
+            $probabilitas = $penyakit->probabilitas;
+            foreach ($gejala_terpilih  as $gejala) {
+                $probabilitas_gejala = Gejala::where('nama', $gejala)->first()->probabilitas;    
+                // rumus teorema bayes
+                $probabilitas *= $probabilitas_gejala;
+            }
+                    $hasil[$penyakit->nama] = $probabilitas;
+        }
+        arsort($hasil);
+        return view('konsultasi.show');
         }
 
     /**

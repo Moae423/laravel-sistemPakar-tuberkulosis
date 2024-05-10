@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Pasien;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\RedirectResponse;
 
 class RegisterController extends Controller
 {
@@ -52,7 +53,7 @@ class RegisterController extends Controller
         User::create($validatedData);
         return redirect('/login')->with('success','Pendaftaran Berhasil!!');
 
-        if (Auth::attempt($validateData)) {
+        if (Auth::attempt($validatedData)) {
             request()->session()->regenerate();
         } else {
             return back()->withErrors('registerFailed', 'ERROR BWANG');
