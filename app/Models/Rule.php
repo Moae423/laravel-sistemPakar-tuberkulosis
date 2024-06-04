@@ -11,12 +11,19 @@ class Rule extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
-    public function penyakit(): HasMany
+    public function disease()
     {
-        return $this->hasMany(penyakit::class);
+        return $this->belongsTo(Penyakit::class);
     }
-    public function gejala(): HasMany
+
+    public function symptom()
     {
-        return $this->hasMany(penyakit::class);
+        return $this->belongsTo(Gejala::class);
     }
+    // protected $fillable = ['kode_penyakit', 'kode_gejala', 'nilai_probabilitas'];
+    // Jika nama tabel tidak sesuai dengan penamaan konvensi Laravel, sebutkan nama tabelnya
+    // protected $table = 'rules';
+
+    // // Tentukan kolom yang boleh diisi
+    // protected $fillable = ['nilai_probabilitas'];
 }

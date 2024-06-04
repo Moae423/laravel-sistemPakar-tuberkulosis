@@ -18,7 +18,7 @@
                 @endauth
                     <div class="text-center d-flex gap-2"> <!-- Added a new div for centering the button -->
                         @auth
-                        <a href="/konsultasi">
+                        <a href="{{ route('konsultasi.index') }}">
                             <button class="btn fw-semibold fs-4  p-3" style="background-color: #427676; color: #A1CD73">Konsultasi</button>
                         </a>
                         @endauth

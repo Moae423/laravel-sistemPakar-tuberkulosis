@@ -2,109 +2,160 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Rule;
 use App\Models\Gejala;
+use App\Models\Result;
 use App\Models\Penyakit;
-use App\Models\Konsultasi;
 use Illuminate\Http\Request;
 
 class KonsultasiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
-        return view('konsultasi.create', [
-            'title' => 'Konsultasi',
-            'gejalas' => Gejala::all(),
+        
+        $gejala = Gejala::all();
+        return view('konsultasi.create',[
+           'title' => 'Konsultasi',
+           'gejalas' =>   $gejala
         ]);
-        
-        
     }
+public function diagnosa(Request $request) {
+    $selectedGejalas = $request->input('gejala');
+    $result = $this->proccess($selectedGejalas);
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    return view('konsultasi.show', [
+        'title' => 'Diagnose Results',
+        'result' => $result,
+    ]);
+}
+
+    public function proccess($selectedGejalas) 
     {
-        //
-        
-    }
+        $getSelectedGejalas = Gejala::whereIn('id', $selectedGejalas)->get()->keyBy('id');
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+        if ($getSelectedGejalas->isEmpty()) {
+            return redirect()->route('konsultasi.create')->with('message', 'Tidak Ada Gejala');
+        }
+
+        $relatedpenyakit = Rule::whereIn('kode_gejala', $selectedGejalas)
+            ->groupBy('kode_penyakit')
+            ->pluck('kode_penyakit');
+         // Mengambil nama penyakit yang terkait dari tabel Penyakit
+        $relatedpenyakitNames =Penyakit::whereIn('id', $relatedpenyakit)->get(['id', 'nama_penyakit'])->keyBy('id');
+
+        $relatedGejalas = [];
+        foreach ($relatedpenyakit as $kode_penyakit) {
+            $relatedGejalas[$kode_penyakit] = Rule::select('kode_penyakit', 'kode_gejala', 'nilai_probabilitas')
+                ->where('kode_penyakit', $kode_penyakit)
+                ->whereIn('kode_gejala', $selectedGejalas)
+                ->get();
+        }
+
+        //SUM PROBABILITY OF EACH SYMPTOM
+        $totalProbabilities = [];
+
+        foreach ($relatedGejalas as $kode_penyakit => $gejalas) {
+            $totalProbability = 0;
+
+            foreach ($gejalas as $gejala) {
+                $totalProbability += $gejala->nilai_probabilitas;
+            }
+
+            $totalProbabilities[$kode_penyakit] = $totalProbability;
+        }
+
+        //DIVIDE PROBABILITY OF EACH SYMPTOM BY TOTAL PROBABILITY
+        $totalProbabilities_H = [];
+        foreach ($relatedGejalas as $kode_penyakit => $gejalas) {
+            $totalProbH = 0;
+
+            foreach ($gejalas as  $gejala) {
+                $totalProbH = $gejala->nilai_probabilitas / $totalProbabilities[$kode_penyakit];
+                $totalProbabilities_H[$kode_penyakit][$gejala->kode_gejala] = $totalProbH;
+            }
+        }
+
+        $totalProbabilitiesE = [];
+        foreach ($relatedGejalas as $kode_penyakit => $gejalas) {
+            $totalProbE = 0;
+
+            foreach ($gejalas as  $gejala) {
+                $ProbE = $gejala->nilai_probabilitas * $totalProbabilities_H[$kode_penyakit][$gejala->kode_gejala];
+                $totalProbE += $ProbE;
+            }
+
+            $totalProbabilitiesE[$kode_penyakit] = $totalProbE;
+        }
+        
+        $totalProbabilitiesHE = [];
+
+        foreach ($relatedGejalas as $kode_penyakit => $gejalas) {
+            foreach ($gejalas as $gejala) {
+                $totalProbabilitiesHE[$kode_penyakit][$gejala->kode_gejala] = ($gejala->nilai_probabilitas * $totalProbabilities_H[$kode_penyakit][$gejala->kode_gejala]) / $totalProbabilitiesE[$kode_penyakit];
+            }
+        }
+
+        // Menghitung Total Bayes
+        $totalBayes = [];
+
+        foreach ($relatedGejalas as $kode_penyakit => $gejalas) {
+            $result = 0;
+            // Temukan nama penyakit berdasarkan kode penyakit
+            $penyakit = Penyakit::where('id', $kode_penyakit)->first();
+            foreach ($gejalas as $gejala) {
+                $total = $gejala->nilai_probabilitas * $totalProbabilitiesHE[$kode_penyakit][$gejala->kode_gejala];
+                $result += $total;
+            }
+
+            // Simpan hasil bersama dengan nama penyakit
+            $totalBayes[$kode_penyakit] = [
+                'id' => $kode_penyakit,
+                'nama_penyakit' => $penyakit->nama_penyakit,
+                'solusi_penyakit' => $penyakit->solusi_penyakit,
+                'result' => $result,
+            ];
+            
+            usort($totalBayes, function ($a, $b) {
+                // Urutkan dari yang terbesar ke yang terkecil berdasarkan nilai 'result'
+                return $b['result'] <=> $a['result'];
+            });
+        }
+        
+
+        return view('konsultasi.show',[
+            'title' => 'Diagnosis Results',
+            'selectedGejalas' => $getSelectedGejalas,
+            'relatedPenyakits' => $relatedpenyakitNames,
+            'relateGejalas' => $relatedGejalas,
+            'totalProbability' => $totalProbabilities,
+            'totalProbabilities_H' => $totalProbabilities_H,
+            'totalProbE' => $totalProbabilitiesE,
+            'totalProbabilitiesHE' => $totalProbabilitiesHE,
+            'totalBayes' => $totalBayes
+        ]);
+        // return 
+        // [
+        //     'selectedGejalas' => $getSelectedGejalas,
+        //     'relatedPenyakits' => $relatedpenyakitNames,
+        //     'relateGejalas' => $relatedGejalas,
+        //     'totalProbability' => $totalProbabilities,
+        //     'totalProbabilities_H' => $totalProbabilities_H,
+        //     'totalProbE' => $totalProbabilitiesE,
+        //     'totalProbabilitiesHE' => $totalProbabilitiesHE,
+        //     'totalBayes' => $totalBayes
+        // ];
+    }
     public function store(Request $request)
     {
-        //
-        $gejala_terpilih = $request->gejala;
-        $penyakits = Penyakit::all();
-        $hasil = [];
+        $selectedGejalasString = implode(', ', $request->selected_gejalas);
 
-        // foreach
-        foreach ($penyakits  as $penyakit ) {
-            $probabilitas = $penyakit->probabilitas;
-            foreach ($gejala_terpilih  as $gejala) {
-                $probabilitas_gejala = Gejala::where('nama', $gejala)->first()->probabilitas;    
-                // rumus teorema bayes
-                $probabilitas *= $probabilitas_gejala;
-            }
-                    $hasil[$penyakit->nama] = $probabilitas;
-        }
-        arsort($hasil);
-        return view('konsultasi.show');
-        }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Konsultasi  $konsultasi
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Konsultasi $konsultasi)
-    {
-        //
+        $konsultasi = Result::create([
+            'selected_gejalas' => $selectedGejalasString,
+            'kode_penyakit' => $request->kode_penyakit,
+            'result' => $request->result
+        ]);
+        return redirect()->route('results.index')->with('message', 'Diagnosa result saved successfully.');
+    }
+  
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Konsultasi  $konsultasi
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Konsultasi $konsultasi)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Konsultasi  $konsultasi
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Konsultasi $konsultasi)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Konsultasi  $konsultasi
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Konsultasi $konsultasi)
-    {
-        //
-    }
-}

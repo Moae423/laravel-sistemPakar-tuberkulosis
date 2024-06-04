@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\RuleController;
+use App\Http\Controllers\Diagnose;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RuleController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MasukController;
 use App\Http\Controllers\GejalaController;
@@ -54,4 +55,9 @@ Route::resource('/admin/gejala', GejalaController::class)->middleware('auth');
 // konsultasi
 Route::resource('/admin/rule', RuleController::class)->middleware('auth');
 // konsultasiA
-Route::resource('/konsultasi', KonsultasiController::class)->middleware('auth');
+// Route::resource('/konsultasi', KonsultasiController::class)->middleware('auth');
+
+// diagnose
+Route::get('konsultasi', [KonsultasiController::class, 'index'])->name('konsultasi.index');
+Route::post('konsultasi/diagnosa', [KonsultasiController::class, 'diagnosa'])->name('konsultasi.diagnosa');
+Route::post('konsultasi', [KonsultasiController::class, 'store'])->name('konsultasi.store');

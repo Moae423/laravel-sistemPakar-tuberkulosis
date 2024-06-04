@@ -1,7 +1,6 @@
 @extends('layouts.main')
 <div class="background-image">
   <img src="/image/1.png" alt="" style="position: absolute; top: 0; left: 0; z-index: -1; width: 100%; height: 100%;">
-
 @section('content')
 <style>
     .form-check-input-shadow {
@@ -15,7 +14,7 @@
             <h1 class="card-title" style="color: #E1E48C">Form Konsultasi Pasien</h1>
           </div>
             <div class="card-body ">
-              <form action="/konsultasi" method="POST">
+              <form action="{{ route('konsultasi.diagnosa') }}" method="POST">
                 @csrf
                 <h3 style="color: #E1E48C">Apa yang anda rasakan?</h3>
                 @foreach ($gejalas as $gejala)

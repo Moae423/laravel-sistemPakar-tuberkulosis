@@ -13,9 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('konsultasis', function (Blueprint $table) {
+        Schema::create('results', function (Blueprint $table) {
             $table->id();
+            $table->float('result');
+            $table->foreignId('kode_penyakit');
+            $table->string('selected_gejalas');
             $table->timestamps();
+
+            $table->foreign('kode_penyakit')->references('id')->on('penyakits')->onDelete('cascade');
         });
     }
 
@@ -26,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('konsultasis');
+        Schema::dropIfExists('results');
     }
 };

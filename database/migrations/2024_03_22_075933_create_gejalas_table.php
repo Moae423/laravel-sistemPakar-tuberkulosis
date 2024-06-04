@@ -16,8 +16,6 @@ return new class extends Migration
         Schema::create('gejalas', function (Blueprint $table) {
             // $table->increments('id');
             $table->id();
-            // $table->string('kode_gejala')->unique();
-            $table->string('id_gejala')->unique();
             $table->string('nama_gejala');
             $table->timestamps();
         });

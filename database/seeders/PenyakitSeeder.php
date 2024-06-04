@@ -15,33 +15,29 @@ class PenyakitSeeder extends Seeder
      */
     public function run()
     {
-        $sample = [
-            ['kode_penyakit' => 'KP001',
-            'id_penyakit'=> '001',
-            'nama_penyakit' => 'Tuberkulosis Paru-Paru',
-            'detail_penyakit' => 'jenis TB yang paling umum terjadi. Infeksi biasanya terjadi saat seseorang menghirup bakteri TB yang tersebar di udara melalui droplet dari seseorang yang terinfeksi.',
-            'solusi_penyakit' => 'terapi antibiotik jangka panjang, biasanya antara 6 hingga 9 bulan. Obat-obatan seperti isoniazid, rifampisin, pyrazinamide, dan ethambutol'],
-            ['kode_penyakit' => 'KP002',
-            'id_penyakit'=> '002',
-            'nama_penyakit' => 'Tuberkulosis Tulang',
-            'detail_penyakit' => 'Tuberkulosis tulang terjadi ketika bakteri TB menyebar ke tulang dari area lain dalam tubuh atau melalui aliran darah.',
-            'solusi_penyakit' => 'TB tulang melibatkan terapi antibiotik. Terapi ini mungkin juga memerlukan pembedahan dalam beberapa kasus untuk menghilangkan jaringan yang terinfeksi atau untuk mengurangi nyeri dan kecacatan.'],
-            ['kode_penyakit' => 'KP003',
-            'id_penyakit'=> '003',
-            'nama_penyakit' => 'Tuberkulosis Kulit',
-            'detail_penyakit' => 'TB kulit terjadi ketika bakteri TB memasuki kulit melalui luka atau lecet pada kulit atau melalui aliran darah.',
-            'solusi_penyakit' => 'sering kali dalam kombinasi dengan prosedur bedah untuk menghilangkan jaringan yang terinfeksi atau untuk mengurangi gejala yang tidak nyaman.'],
-
+        $penyakits = [
+            [
+                'nama_penyakit' => 'Influenza Like Common (ILI)',
+                'detail_penyakit' => 'Influenza Like Common (ILI) adalah penyakit pernapasan yang umum disebabkan oleh virus. Gejalanya termasuk demam, pilek, batuk, sakit tenggorokan, dan nyeri otot.',
+                'solusi_penyakit' => 'Istirahat yang cukup, minum air putih, konsumsi obat flu sesuai anjuran dokter.',
+            ],
+            [
+                'nama_penyakit' => 'Bronkhitis',
+                'detail_penyakit' => 'Bronkhitis adalah peradangan saluran bronkial yang menyebabkan batuk persisten dengan lendir. Gejala lainnya termasuk sesak napas dan nyeri dada.',
+                'solusi_penyakit' => 'Istirahat, minum banyak air, obat batuk dan pereda nyeri jika diperlukan.',
+            ],
+            [
+                'nama_penyakit' => 'Faringitis',
+                'detail_penyakit' => 'Faringitis adalah peradangan pada tenggorokan yang dapat menyebabkan sakit tenggorokan, kemerahan, dan sulit menelan. Biasanya disebabkan oleh infeksi virus atau bakteri.',
+                'solusi_penyakit' => 'Minum air hangat, garam air garam, istirahat yang cukup, konsumsi obat pereda nyeri tenggorokan.',
+            ],
+            [
+                'nama_penyakit' => 'Tonsilitis',
+                'detail_penyakit' => 'Tonsilitis adalah peradangan amandel, organ kecil di belakang tenggorokan. Gejala umum termasuk sakit tenggorokan, kesulitan menelan, dan mungkin demam.',
+                'solusi_penyakit' => 'Minum air hangat, garam air garam, istirahat yang cukup, konsumsi obat pereda nyeri tenggorokan.',
+            ],
         ];
 
-        foreach ($sample as $penyakit) {
-        	$g = new Penyakit;
-        	$g->kode_penyakit = $penyakit['kode_penyakit'];
-        	$g->id_penyakit = $penyakit['id_penyakit'];
-        	$g->nama_penyakit = $penyakit['nama_penyakit'];
-        	$g->detail_penyakit = $penyakit['detail_penyakit'];
-        	$g->solusi_penyakit = $penyakit['solusi_penyakit'];
-        	$g->save();
-        }
+        Penyakit::insert($penyakits);
     }
 }

@@ -15,14 +15,17 @@ return new class extends Migration
     {
         Schema::create('rules', function (Blueprint $table) {
             $table->id(); 
-            $table->string('kode_gejala');
-            $table->string('kode_penyakit');
-            $table->decimal('nilai_probabilitas');
+            $table->foreignId('kode_gejala')->constrained('gejalas')->onDelete('cascade');
+            $table->foreignId('kode_penyakit')->constrained('gejalas')->onDelete('cascade');
+            $table->float('nilai_probabilitas');
             $table->timestamps();
+
+            // $table->foreign('kode_penyakit')->references('id')->on('penyakits');
+            // $table->foreign('kode_gejala')->references('id')->on('gejalas');
         });
     }
 
-    /**
+    /**f
      * Reverse the migrations.
      *
      * @return void
