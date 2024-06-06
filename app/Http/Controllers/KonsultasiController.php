@@ -123,7 +123,7 @@ public function diagnosa(Request $request) {
         
 
         return view('konsultasi.show',[
-            'title' => 'Diagnosis Results',
+            'title' => 'Diagnosa Results',
             'selectedGejalas' => $getSelectedGejalas,
             'relatedPenyakits' => $relatedpenyakitNames,
             'relateGejalas' => $relatedGejalas,

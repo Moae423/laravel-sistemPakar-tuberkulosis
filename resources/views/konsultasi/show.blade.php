@@ -17,11 +17,11 @@
 </style>
 <div class="center-container">
 <div class="container">
-    <h1 class="text-center text-primary">Diagnosis Results</h1>
+    <h1 class="text-center text-white mb-3">Hasil Diagnosa</h1>
 
     <div class="card">
         <div class="card-header">
-            <h2>Selected Symptoms</h2>
+            <h2 class="text-center">Gejala Yang Dipilih</h2>
         </div>
         <div class="card-body">
             @if(!empty($selectedGejalas))
@@ -38,14 +38,14 @@
 
     <div class="card mt-4">
         <div class="card-header">
-            <h2>Related Diseases</h2>
+            <h2>Hasil Menunjukkan bahwa : </h2>
         </div>
         <div class="card-body">
             @if(!empty($totalBayes))
                 <table class="table">
-                    <thead>
+                    <thead class="text-center fs-3">
                         <tr>
-                            <th>Peenyakit</th>
+                            <th>Penyakit</th>
                             <th>Probability</th>
                             <th>Solusi</th>
                         </tr>
@@ -64,6 +64,10 @@
                 <p>No related diseases found.</p>
             @endif
         </div>
+    </div>
+    <form action="" method="post"></form>
+    <div class="text-center mt-3">
+        <button type="button" class="btn btn-lg btn-success">Simpan</button>
     </div>
 </div>
 </div>

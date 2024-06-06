@@ -17,24 +17,23 @@ class PenyakitSeeder extends Seeder
     {
         $penyakits = [
             [
-                'nama_penyakit' => 'Influenza Like Common (ILI)',
-                'detail_penyakit' => 'Influenza Like Common (ILI) adalah penyakit pernapasan yang umum disebabkan oleh virus. Gejalanya termasuk demam, pilek, batuk, sakit tenggorokan, dan nyeri otot.',
-                'solusi_penyakit' => 'Istirahat yang cukup, minum air putih, konsumsi obat flu sesuai anjuran dokter.',
+                'kode_penyakit' => 'P01',
+                'nama_penyakit' => 'Tuberkulosis Paru (TBC Paru-Paru)',
+                'detail_penyakit' => 'Tuberkulosis (TBC) adalah penyakit menular yang disebabkan oleh bakteri Mycobacterium tuberculosis.
+                                        Penyakit ini umumnya menyerang paru-paru,',
+                'solusi_penyakit' => 'Pengawasan langsung (DOT) untuk memastikan pasien meminum obat secara teratur dan minum obat anti-biotik secara teratur',
             ],
             [
-                'nama_penyakit' => 'Bronkhitis',
-                'detail_penyakit' => 'Bronkhitis adalah peradangan saluran bronkial yang menyebabkan batuk persisten dengan lendir. Gejala lainnya termasuk sesak napas dan nyeri dada.',
-                'solusi_penyakit' => 'Istirahat, minum banyak air, obat batuk dan pereda nyeri jika diperlukan.',
+                'kode_penyakit' => 'P02',
+                'nama_penyakit' => 'Tuberkulosis Tulang (TBC Tulang)',
+                'detail_penyakit' => 'Tuberkulosis tulang, atau osteoarticular tuberculosis, adalah infeksi bakteri Mycobacterium tuberculosis yang mempengaruhi tulang dan sendi. ',
+                'solusi_penyakit' => 'Kombinasi antibiotik seperti isoniazid, rifampicin, pyrazinamide, dan ethambutol selama minimal 9-12 bulan dan juga pembedahan jika diperlukana',
             ],
             [
-                'nama_penyakit' => 'Faringitis',
-                'detail_penyakit' => 'Faringitis adalah peradangan pada tenggorokan yang dapat menyebabkan sakit tenggorokan, kemerahan, dan sulit menelan. Biasanya disebabkan oleh infeksi virus atau bakteri.',
-                'solusi_penyakit' => 'Minum air hangat, garam air garam, istirahat yang cukup, konsumsi obat pereda nyeri tenggorokan.',
-            ],
-            [
-                'nama_penyakit' => 'Tonsilitis',
-                'detail_penyakit' => 'Tonsilitis adalah peradangan amandel, organ kecil di belakang tenggorokan. Gejala umum termasuk sakit tenggorokan, kesulitan menelan, dan mungkin demam.',
-                'solusi_penyakit' => 'Minum air hangat, garam air garam, istirahat yang cukup, konsumsi obat pereda nyeri tenggorokan.',
+                'kode_penyakit' => 'P03',
+                'nama_penyakit' => 'Tuberkulosis Kulit (TBC Kulit)',
+                'detail_penyakit' => 'uberkulosis kulit, atau cutaneous tuberculosis, adalah infeksi kulit yang disebabkan oleh Mycobacterium tuberculosis. Ini adalah bentuk ekstrapulmoner dari TBC yang jarang terjadi. ',
+                'solusi_penyakit' => 'Antibiotik yang sama dengan yang digunakan untuk TBC paru, biasanya dalam jangka waktu 6-12 bulan.',
             ],
         ];
 

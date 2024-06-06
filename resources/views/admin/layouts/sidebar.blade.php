@@ -75,15 +75,15 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/admin/rule/show" class="nav-link {{ Request::is('/admin/rule/show') ? 'active' : '' }}">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Reports Data Rule</p>
-                </a>
-              </li>
-              <li class="nav-item">
                 <a href="/register/show" class="nav-link {{ Request::is('/register/show') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Reports Data Pasien</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/admin/hasil" class="nav-link {{ Request::is('/register/show') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Reports Data Konsultasi </p>
                 </a>
               </li>
             </ul>

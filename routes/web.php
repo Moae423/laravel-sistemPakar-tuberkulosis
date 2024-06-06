@@ -11,6 +11,7 @@ use App\Http\Controllers\PasienController;
 use App\Http\Controllers\PenyakitController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\KonsultasiController;
+use App\Http\Controllers\ResultController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,8 +57,10 @@ Route::resource('/admin/gejala', GejalaController::class)->middleware('auth');
 Route::resource('/admin/rule', RuleController::class)->middleware('auth');
 // konsultasiA
 // Route::resource('/konsultasi', KonsultasiController::class)->middleware('auth');
+// hasil
+Route::resource('/admin/hasil', ResultController::class)->middleware('auth');
 
 // diagnose
-Route::get('konsultasi', [KonsultasiController::class, 'index'])->name('konsultasi.index');
-Route::post('konsultasi/diagnosa', [KonsultasiController::class, 'diagnosa'])->name('konsultasi.diagnosa');
-Route::post('konsultasi', [KonsultasiController::class, 'store'])->name('konsultasi.store');
+Route::get('konsultasi', [KonsultasiController::class, 'index'])->name('konsultasi.index')->middleware('auth');
+Route::post('konsultasi/diagnosa', [KonsultasiController::class, 'diagnosa'])->name('konsultasi.diagnosa')->middleware('auth');
+Route::post('konsultasi', [KonsultasiController::class, 'store'])->name('konsultasi.store')->middleware('auth');

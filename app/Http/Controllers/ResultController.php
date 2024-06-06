@@ -15,7 +15,10 @@ class ResultController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.hasil.index' ,
+        [
+            'title' => 'Hasil Diagnosa Pasien',
+        ]);
     }
 
     /**
