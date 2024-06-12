@@ -13,9 +13,10 @@
       <thead class="text-center">
         <tr>
           <th scope="col">Nomor</th>
-          <th scope="col">Kode Hasil</th>
           <th scope="col">Nama Pasien</th>
           <th scope="col">Nama Penyakit</th>
+          <th scope="col">Result</th>
+          <th scope="col">Tanggal</th>
           <th colspan="2" scope="col">Aksi</th>
         </tr>
       </thead>
@@ -28,8 +29,8 @@
     <tr>
       <th scope="row">{{ $no++ }}</th>
       <td>test</td>
-      <td>test</td>
-      <td>test</td>
+      <td>{{ $result->namaPasien }}</td>
+      <td>{{ $result->nama_penyakit }}</td>
       <td>
         <a href="#" class="btn btn-primary">
           <i class="fas fa-edit"></i> 

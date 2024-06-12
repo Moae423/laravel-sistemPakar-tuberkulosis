@@ -18,8 +18,16 @@
 <div class="center-container">
 <div class="container">
     <h1 class="text-center text-white mb-3">Hasil Diagnosa</h1>
-
+    <form action="{{ route('konsultasi.store') }}" method="post">
+        @csrf
     <div class="card">
+        <div class="card-header">
+                <div class="fs-5">
+                <p class="">Nama Anda : {{ $namaPasien }}</p>
+                <p>Umur :{{ $umurPasien }}</p>
+                <p>Alamat :{{ $alamatPasien }}</p>
+        </div>
+        </div>
         <div class="card-header">
             <h2 class="text-center">Gejala Yang Dipilih</h2>
         </div>
@@ -43,7 +51,7 @@
         <div class="card-body">
             @if(!empty($totalBayes))
                 <table class="table">
-                    <thead class="text-center fs-3">
+                    <thead class="text-center fs-4">
                         <tr>
                             <th>Penyakit</th>
                             <th>Probability</th>
@@ -65,10 +73,28 @@
             @endif
         </div>
     </div>
-    <form action="" method="post"></form>
-    <div class="text-center mt-3">
-        <button type="button" class="btn btn-lg btn-success">Simpan</button>
+    <div class="card mt-4">
+        <div class="card-header">
+            <h2 class="text-center">Conclusion</h2>
+        </div>
+        @if(!empty($totalBayes))
+                <table class="table text-center">
+                    <tbody class="">
+                            <p class="fs-5">Jadi dari hasil system diagnosa menunjukkan bahwa anda mengalami <span class="text-danger fw-bolder "> {{ $nilai_tertinggi['nama_penyakit'] }} </span>
+                                dengan tingkat kemungkinan terjadinya <span  class="text-danger fw-bolder "> {{ number_format($nilai_tertinggi['result'] * 100, 2) }}%</span></p>
+                            </tr>
+                    </tbody>
+                </table>
+            @else
+                <p>No related diseases found.</p>
+            @endif
     </div>
+        
+            
+            <div class="text-center mt-3">
+                <button type="submit" class="btn btn-lg btn-success">Simpan</button>
+            </div>
+        </form>
 </div>
 </div>
 @endsection

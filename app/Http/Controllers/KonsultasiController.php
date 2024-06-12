@@ -7,6 +7,7 @@ use App\Models\Gejala;
 use App\Models\Result;
 use App\Models\Penyakit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class KonsultasiController extends Controller
 {
@@ -22,19 +23,31 @@ class KonsultasiController extends Controller
 public function diagnosa(Request $request) {
     $selectedGejalas = $request->input('gejala');
     $result = $this->proccess($selectedGejalas);
+    $namaPasien = Auth::user()->namaPasien;
+    $umurPasien = Auth::user()->umur;
+    $alamatPasien = Auth::user()->alamat;
 
     return view('konsultasi.show', [
         'title' => 'Diagnose Results',
         'result' => $result,
+        'namaPasien' => $namaPasien,
+        'umurPasien' => $umurPasien,
+        'alamatPasien' => $alamatPasien,
+
+        
     ]);
 }
 
     public function proccess($selectedGejalas) 
     {
+        if (is_null($selectedGejalas) || !is_array($selectedGejalas) || count($selectedGejalas) == 0) {
+            return redirect()->route('konsultasi.index')->with('message', 'Tidak Ada Gejala');
+        }
+       
         $getSelectedGejalas = Gejala::whereIn('id', $selectedGejalas)->get()->keyBy('id');
 
         if ($getSelectedGejalas->isEmpty()) {
-            return redirect()->route('konsultasi.create')->with('message', 'Tidak Ada Gejala');
+            return redirect()->route('konsultasi.index')->with('message', 'Tidak Ada Gejala');
         }
 
         $relatedpenyakit = Rule::whereIn('kode_gejala', $selectedGejalas)
@@ -114,15 +127,27 @@ public function diagnosa(Request $request) {
                 'solusi_penyakit' => $penyakit->solusi_penyakit,
                 'result' => $result,
             ];
-            
             usort($totalBayes, function ($a, $b) {
                 // Urutkan dari yang terbesar ke yang terkecil berdasarkan nilai 'result'
                 return $b['result'] <=> $a['result'];
             });
+            if (!empty($totalBayes)) {
+                $nilaiTertinggi = max(array_column($totalBayes, 'result'));
+                $penyakitTerdiagnosa = array_filter($totalBayes, function($item) use ($nilaiTertinggi) {
+                    return $item['result'] == $nilaiTertinggi;
+                });
+                $penyakitTerdiagnosa = array_values($penyakitTerdiagnosa)[0];
+            } else {
+                // Handle the case when $totalBayes is empty
+                $penyakitTerdiagnosa = null; // or any other appropriate action
+            }
         }
         
-
+        $namaPasien = Auth::user()->namaPasien;
+        $umurPasien = Auth::user()->umur;
+        $alamatPasien = Auth::user()->alamat;
         return view('konsultasi.show',[
+            
             'title' => 'Diagnosa Results',
             'selectedGejalas' => $getSelectedGejalas,
             'relatedPenyakits' => $relatedpenyakitNames,
@@ -131,7 +156,11 @@ public function diagnosa(Request $request) {
             'totalProbabilities_H' => $totalProbabilities_H,
             'totalProbE' => $totalProbabilitiesE,
             'totalProbabilitiesHE' => $totalProbabilitiesHE,
-            'totalBayes' => $totalBayes
+            'totalBayes' => $totalBayes,
+            'namaPasien' => $namaPasien,
+            'umurPasien' => $umurPasien,
+            'alamatPasien' => $alamatPasien,
+            'nilai_tertinggi' => $penyakitTerdiagnosa
         ]);
         // return 
         // [
@@ -147,15 +176,22 @@ public function diagnosa(Request $request) {
     }
     public function store(Request $request)
     {
+        $request->validate([
+            'result' => 'required|string',
+            'kode_penyakit' => 'required|string',
+            'selected_gejalas' => 'required|array',
+        ]);
         $selectedGejalasString = implode(', ', $request->selected_gejalas);
+
 
         $konsultasi = Result::create([
             'selected_gejalas' => $selectedGejalasString,
             'kode_penyakit' => $request->kode_penyakit,
             'result' => $request->result
         ]);
-        return redirect()->route('results.index')->with('message', 'Diagnosa result saved successfully.');
+        
+        return redirect()->route('welcome')->with('message', 'Diagnose result saved successfully.');
     }
-  
-    }
+
+}
 

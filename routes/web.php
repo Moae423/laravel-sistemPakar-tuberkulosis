@@ -63,4 +63,4 @@ Route::resource('/admin/hasil', ResultController::class)->middleware('auth');
 // diagnose
 Route::get('konsultasi', [KonsultasiController::class, 'index'])->name('konsultasi.index')->middleware('auth');
 Route::post('konsultasi/diagnosa', [KonsultasiController::class, 'diagnosa'])->name('konsultasi.diagnosa')->middleware('auth');
-Route::post('konsultasi', [KonsultasiController::class, 'store'])->name('konsultasi.store')->middleware('auth');
+Route::post('konsultasi/store', [KonsultasiController::class, 'store'])->name('konsultasi.store')->middleware('auth');

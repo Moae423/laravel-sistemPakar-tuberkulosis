@@ -3,22 +3,49 @@
 namespace App\Http\Controllers;
 
 use App\Models\Result;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreResultRequest;
 use App\Http\Requests\UpdateResultRequest;
 
 class ResultController extends Controller
 {
+    protected $KonsultasiController;
+
+    public function __construct()
+    {
+
+        $this->KonsultasiController = new KonsultasiController();
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('admin.hasil.index' ,
-        [
-            'title' => 'Hasil Diagnosa Pasien',
+        $query = Result::query()->with('peny')->when($request->get('search'), function ($query, $search) {
+            return $query->whereAny([
+                'namaPasien',
+                'nama_penyakit',
+                'selected_gejalas',
+                'result',
+            ], 'like', '%' . $search . '%')->orWhereHas('peny', function ($query) use ($search) {
+                $query->where('name', 'like', '%' . $search . '%');
+            });
+        })->when($request->has('month'), function ($query) use ($request) {
+            $query->whereMonth('created_at', $request->get('month') + 1);
+        })->when($request->has('year'), function ($query) use ($request) {
+            $query->whereYear('created_at', $request->get('year'));
+        });
+
+
+        $results = $query->paginate($request->get('limit', 10));
+
+        return view('admin.hasil.index',[
+            'results' => $results,
+            'filters' => $request->only(['search', 'month', 'year']),
         ]);
+        
     }
 
     /**

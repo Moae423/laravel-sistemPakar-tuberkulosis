@@ -79,6 +79,36 @@ class RuleSeeder extends Seeder
                 'nilai_probabilitas' => 0.4,
             ],
             [
+                'kode_gejala' => '1', // Kode gejala Batuk
+                'kode_penyakit' => '3', // Kode penyakit Influenza Like Common (ILI)
+                'nilai_probabilitas' => 0.8,
+            ],
+            [
+                'kode_gejala' => '2', // Kode gejala Hidung Tersumbat
+                'kode_penyakit' => '3',
+                'nilai_probabilitas' => 0.6,
+            ],
+            [
+                'kode_gejala' => '3', // Kode gejala Demam
+                'kode_penyakit' => '3',
+                'nilai_probabilitas' => 0.7,
+            ],
+            [
+                'kode_gejala' => '4',
+                'kode_penyakit' => '3', // Kode penyakit Bronkhitis
+                'nilai_probabilitas' => 0.4,
+            ],
+            [
+                'kode_gejala' => '5',
+                'kode_penyakit' => '3', // Kode penyakit Bronkhitis
+                'nilai_probabilitas' => 0.4,
+            ],
+            [
+                'kode_gejala' => '6',
+                'kode_penyakit' => '3', // Kode penyakit Bronkhitis
+                'nilai_probabilitas' => 0.4,
+            ],
+            [
                 'kode_gejala' => '11',
                 'kode_penyakit' => '1', // Kode penyakit Bronkhitis
                 'nilai_probabilitas' => 0.4,
@@ -90,7 +120,7 @@ class RuleSeeder extends Seeder
             ],
             [
                 'kode_gejala' => '12',
-                'kode_penyakit' => '2',
+                'kode_penyakit' => '3',
                 'nilai_probabilitas' => 0.5,
             ],
             [
