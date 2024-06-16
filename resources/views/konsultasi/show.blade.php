@@ -18,7 +18,7 @@
 <div class="center-container">
 <div class="container">
     <h1 class="text-center text-white mb-3">Hasil Diagnosa</h1>
-    <form action="{{ route('konsultasi.store') }}" method="post">
+    <form action="{{ route('konsultasi.store') }}" method="POST">
         @csrf
     <div class="card">
         <div class="card-header">

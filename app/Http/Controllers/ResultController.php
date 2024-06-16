@@ -23,13 +23,13 @@ class ResultController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Result::query()->with('peny')->when($request->get('search'), function ($query, $search) {
+        $query = Result::query()->with('penyakit')->when($request->get('search'), function ($query, $search) {
             return $query->whereAny([
                 'namaPasien',
                 'nama_penyakit',
                 'selected_gejalas',
                 'result',
-            ], 'like', '%' . $search . '%')->orWhereHas('peny', function ($query) use ($search) {
+            ], 'like', '%' . $search . '%')->orWhereHas('penyakit', function ($query) use ($search) {
                 $query->where('name', 'like', '%' . $search . '%');
             });
         })->when($request->has('month'), function ($query) use ($request) {
@@ -41,7 +41,8 @@ class ResultController extends Controller
 
         $results = $query->paginate($request->get('limit', 10));
 
-        return view('admin.hasil.index',[
+        return view('riwayatKonsultasi.index',[
+            'title' => 'Riwayak Konsultasi',
             'results' => $results,
             'filters' => $request->only(['search', 'month', 'year']),
         ]);
@@ -77,7 +78,13 @@ class ResultController extends Controller
      */
     public function show(Result $result)
     {
-        //
+        $selected_gejalas = explode(', ', $result->selected_gejalas);
+
+            + $this->KonsultasiController->proccess($selected_gejalas);
+
+        return view('riwayatKonsultasi.index',[
+            'result' => $result,
+        ]);
     }
 
     /**

@@ -137,6 +137,13 @@ public function diagnosa(Request $request) {
                     return $item['result'] == $nilaiTertinggi;
                 });
                 $penyakitTerdiagnosa = array_values($penyakitTerdiagnosa)[0];
+
+                // Simpan hasil diagnosis ke database
+                $diagnosis = new Result();
+                $diagnosis->user_id = Auth::id(); // Atau Auth::user()->id
+                $diagnosis->kode_penyakit = $penyakitTerdiagnosa['id'];
+                $diagnosis->nilai_probabi = $penyakitTerdiagnosa['result'];
+                $diagnosis->save();
             } else {
                 // Handle the case when $totalBayes is empty
                 $penyakitTerdiagnosa = null; // or any other appropriate action
@@ -176,21 +183,29 @@ public function diagnosa(Request $request) {
     }
     public function store(Request $request)
     {
-        $request->validate([
-            'result' => 'required|string',
-            'kode_penyakit' => 'required|string',
-            'selected_gejalas' => 'required|array',
-        ]);
-        $selectedGejalasString = implode(', ', $request->selected_gejalas);
+        // dd($request->selected_gejalas);
 
+        $selectedGejalasString = implode(', ', $request->gejala);
+        // Menggabungkan array gejala menjadi string
+        // $selectedGejalasString = implode(', ', $request->gejala);
 
-        $konsultasi = Result::create([
+        // Membuat data untuk disimpan
+        Result::create([
             'selected_gejalas' => $selectedGejalasString,
             'kode_penyakit' => $request->kode_penyakit,
             'result' => $request->result
-        ]);
         
-        return redirect()->route('welcome')->with('message', 'Diagnose result saved successfully.');
+        ]);
+        return redirect()->route('riwayatKonsultasi.index')->with('message', 'Diagnose result saved successfully.'); 
+
+        // Menyimpan data konsultasi
+        // if (Result::create($konsultasiData)) {
+        //     return redirect('welcome')->with('success', 'Data Konsultasi Sudah disimpan');
+        // } else {
+        //     return back()->withErrors(['failed' => 'Data konsultasi tidak dapat disimpan']);
+        // }
+        
+        // return redirect()->route('welcome')->with('message', 'Diagnose result saved successfully.');
     }
 
 }
