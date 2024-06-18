@@ -66,3 +66,5 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT). -->
 
 Aplikasi Sistem Pakar Tuberkulosis dengan Laravel 9.5.0
+
+Inshallah Spetember is DONE!!!!
