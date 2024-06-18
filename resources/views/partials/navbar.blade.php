@@ -25,7 +25,7 @@
             <a class="nav-link  fs-4" href="/konsultasi">Konsultasi</a>
           </li>
           <li class="nav-item">
-          <a class="nav-link  fs-5" href="{{ route('riwayat.index') }}">Riwayat Konsultasi</a>
+          <a class="nav-link  fs-5" href="{{ route('konsultasi.riwayat') }}">Riwayat Konsultasi</a>
         </li>
           <li class="nav-item ">
             <form action="/logout" method="post">

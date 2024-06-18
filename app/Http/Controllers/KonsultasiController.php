@@ -138,11 +138,15 @@ public function diagnosa(Request $request) {
                 });
                 $penyakitTerdiagnosa = array_values($penyakitTerdiagnosa)[0];
 
+                
+                $namaPasien = Auth::user()->namaPasien;
                 // Simpan hasil diagnosis ke database
                 $diagnosis = new Result();
-                $diagnosis->user_id = Auth::id(); // Atau Auth::user()->id
-                $diagnosis->kode_penyakit = $penyakitTerdiagnosa['id'];
-                $diagnosis->nilai_probabi = $penyakitTerdiagnosa['result'];
+                $diagnosis->namaPasien = $namaPasien; // Atau Auth::user()->id
+                $diagnosis->nama_penyakit = $penyakitTerdiagnosa['nama_penyakit'];
+                $diagnosis->nilai_probabilitas = $penyakitTerdiagnosa['result'];
+                $diagnosis->result = $penyakitTerdiagnosa['result'];
+                $diagnosis->selected_gejalas = json_encode($selectedGejalas);
                 $diagnosis->save();
             } else {
                 // Handle the case when $totalBayes is empty
@@ -206,6 +210,24 @@ public function diagnosa(Request $request) {
         // }
         
         // return redirect()->route('welcome')->with('message', 'Diagnose result saved successfully.');
+    }
+        public function riwayatKonsultasi()
+    {
+        // Ambil data riwayat konsultasi untuk pengguna yang sedang login
+        $riwayat = Result::where('namaPasien', Auth::user()->namaPasien)
+        ->orderBy('nilai_probabilitas', 'desc')
+        // ->with('penyakit')
+        ->get();
+         // Memastikan ada hasil sebelum memproses
+    // if ($riwayat->isNotEmpty()) {
+    //     $highestRiwayat = $riwayat->first();
+    // } else {
+    //     $highestRiwayat = null;
+    // }
+        return view('riwayatKonsultasi.index', [
+            'title' => 'Riwayat Konsultasi',
+            'riwayat' => $riwayat
+        ]);
     }
 
 }

@@ -15,12 +15,14 @@ return new class extends Migration
     {
         Schema::create('results', function (Blueprint $table) {
             $table->id();
+            $table->string('namaPasien');
             $table->float('result');
-            $table->foreignId('kode_penyakit');
+            $table->string('nama_penyakit');
             $table->string('selected_gejalas');
+            $table->float('nilai_probabilitas');
             $table->timestamps();
 
-            $table->foreign('kode_penyakit')->references('id')->on('penyakits')->onDelete('cascade');
+            // $table->foreign('kode_penyakit')->references('id')->on('penyakits')->onDelete('cascade');
         });
     }
 
