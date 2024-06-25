@@ -23,28 +23,10 @@ class ResultController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Result::query()->with('penyakit')->when($request->get('search'), function ($query, $search) {
-            return $query->whereAny([
-                'namaPasien',
-                'nama_penyakit',
-                'selected_gejalas',
-                'result',
-            ], 'like', '%' . $search . '%')->orWhereHas('penyakit', function ($query) use ($search) {
-                $query->where('name', 'like', '%' . $search . '%');
-            });
-        })->when($request->has('month'), function ($query) use ($request) {
-            $query->whereMonth('created_at', $request->get('month') + 1);
-        })->when($request->has('year'), function ($query) use ($request) {
-            $query->whereYear('created_at', $request->get('year'));
-        });
-
-
-        $results = $query->paginate($request->get('limit', 10));
-
-        return view('riwayatKonsultasi.index',[
-            'title' => 'Riwayak Konsultasi',
+        $results = Result::orderBy('created_at', 'desc')->get();
+        return view('admin.hasil.index', [
             'results' => $results,
-            'filters' => $request->only(['search', 'month', 'year']),
+            'title' => 'Laporan Konsultasi Pasien'
         ]);
         
     }
@@ -78,9 +60,9 @@ class ResultController extends Controller
      */
     public function show(Result $result)
     {
-        $selected_gejalas = explode(', ', $result->selected_gejalas);
+        // $selected_gejalas = explode(', ', $result->selected_gejalas);
 
-            + $this->KonsultasiController->proccess($selected_gejalas);
+        //     + $this->KonsultasiController->proccess($selected_gejalas);
 
         return view('riwayatKonsultasi.index',[
             'result' => $result,

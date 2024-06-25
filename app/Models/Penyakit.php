@@ -10,15 +10,12 @@ class Penyakit extends Model
 {
     use HasFactory;
     // public $timestamps = false;
-    protected $fillable = [
-        'nama_penyakit',
-        'id_penyakit',
-        'code',
-        'detail_penyakit',
-        'solusi_penyakit',
-    ];
+    protected $guarded = ['id'];
     // protected $table = 'penyakits';
-
+    public function rules()
+    {
+        return $this->belongsTo(Rule::class, 'idPenyakit');
+    }
     public function gejalas()
     {
         return Attribute::make(

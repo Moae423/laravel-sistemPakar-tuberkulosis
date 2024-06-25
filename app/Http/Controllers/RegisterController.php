@@ -45,6 +45,7 @@ class RegisterController extends Controller
         $validatedData = $request->validate([
             'namaPasien' => ['required', 'max:50'],
             'email' => ['required','email:rfc,dns'],
+            'userType' => ['required', 'string', 'in:admin,pasien'], 
             'password' => ['required', 'min:3','max:20'],
             'umur' => ['required'],
             'alamat' => ['required'],

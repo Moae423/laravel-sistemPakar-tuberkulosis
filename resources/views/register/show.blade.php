@@ -8,27 +8,29 @@
       {{ session('success') }}
     </div>
   @endif
-    <table class="table table-striped">
+    <table class="table table-striped table-bordered ">
       <thead class="text-center">
         <tr>
           <th scope="col">Nomor</th>
           <th scope="col">Nama Pasien</th>
-          <th scope="col">Email</th>
+          <th scope="col">Nama Penyakit</th>
+          <th scope="col">Result</th>
+          <th scope="col">Tanggal</th>
           <th scope="col">Umur</th>
           <th scope="col">Alamat</th>
           <th colspan="2" scope="col">Aksi</th>
         </tr>
       </thead>
-      <tbody class="text-center">
+      <tbody>
        @php
             $no=1;
         @endphp
         @foreach ($users as $user)
           <tr>
-          <th scope="row">{{ $no++ }}</th>
+          <th scope="row" class="text-center">{{ $no++ }}</th>
           <td>{{ $user->namaPasien }}</td>
           <td>{{ $user->email }}</td>
-          <td>{{ $user->umur }}</td>
+          <td class="text-center">{{ $user->umur }}</td>
           <td>{{ $user->alamat }}</td>
           <td>
             <a href="/register/{{$user->id}}/edit" class="btn btn-primary">

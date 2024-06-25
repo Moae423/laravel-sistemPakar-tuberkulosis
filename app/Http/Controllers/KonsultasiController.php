@@ -50,79 +50,79 @@ public function diagnosa(Request $request) {
             return redirect()->route('konsultasi.index')->with('message', 'Tidak Ada Gejala');
         }
 
-        $relatedpenyakit = Rule::whereIn('kode_gejala', $selectedGejalas)
-            ->groupBy('kode_penyakit')
-            ->pluck('kode_penyakit');
+        $relatedpenyakit = Rule::whereIn('idGejala', $selectedGejalas)
+            ->groupBy('idPenyakit')
+            ->pluck('idPenyakit');
          // Mengambil nama penyakit yang terkait dari tabel Penyakit
         $relatedpenyakitNames =Penyakit::whereIn('id', $relatedpenyakit)->get(['id', 'nama_penyakit'])->keyBy('id');
 
         $relatedGejalas = [];
-        foreach ($relatedpenyakit as $kode_penyakit) {
-            $relatedGejalas[$kode_penyakit] = Rule::select('kode_penyakit', 'kode_gejala', 'nilai_probabilitas')
-                ->where('kode_penyakit', $kode_penyakit)
-                ->whereIn('kode_gejala', $selectedGejalas)
+        foreach ($relatedpenyakit as $idPenyakit) {
+            $relatedGejalas[$idPenyakit] = Rule::select('idPenyakit', 'idGejala', 'nilai_probabilitas')
+                ->where('idPenyakit', $idPenyakit)
+                ->whereIn('idGejala', $selectedGejalas)
                 ->get();
         }
 
         //SUM PROBABILITY OF EACH SYMPTOM
         $totalProbabilities = [];
 
-        foreach ($relatedGejalas as $kode_penyakit => $gejalas) {
+        foreach ($relatedGejalas as $idPenyakit => $gejalas) {
             $totalProbability = 0;
 
             foreach ($gejalas as $gejala) {
                 $totalProbability += $gejala->nilai_probabilitas;
             }
 
-            $totalProbabilities[$kode_penyakit] = $totalProbability;
+            $totalProbabilities[$idPenyakit] = $totalProbability;
         }
 
         //DIVIDE PROBABILITY OF EACH SYMPTOM BY TOTAL PROBABILITY
         $totalProbabilities_H = [];
-        foreach ($relatedGejalas as $kode_penyakit => $gejalas) {
+        foreach ($relatedGejalas as $idPenyakit => $gejalas) {
             $totalProbH = 0;
 
             foreach ($gejalas as  $gejala) {
-                $totalProbH = $gejala->nilai_probabilitas / $totalProbabilities[$kode_penyakit];
-                $totalProbabilities_H[$kode_penyakit][$gejala->kode_gejala] = $totalProbH;
+                $totalProbH = $gejala->nilai_probabilitas / $totalProbabilities[$idPenyakit];
+                $totalProbabilities_H[$idPenyakit][$gejala->idGejala] = $totalProbH;
             }
         }
 
         $totalProbabilitiesE = [];
-        foreach ($relatedGejalas as $kode_penyakit => $gejalas) {
+        foreach ($relatedGejalas as $idPenyakit => $gejalas) {
             $totalProbE = 0;
 
             foreach ($gejalas as  $gejala) {
-                $ProbE = $gejala->nilai_probabilitas * $totalProbabilities_H[$kode_penyakit][$gejala->kode_gejala];
+                $ProbE = $gejala->nilai_probabilitas * $totalProbabilities_H[$idPenyakit][$gejala->idGejala];
                 $totalProbE += $ProbE;
             }
 
-            $totalProbabilitiesE[$kode_penyakit] = $totalProbE;
+            $totalProbabilitiesE[$idPenyakit] = $totalProbE;
         }
         
         $totalProbabilitiesHE = [];
 
-        foreach ($relatedGejalas as $kode_penyakit => $gejalas) {
+        foreach ($relatedGejalas as $idPenyakit => $gejalas) {
             foreach ($gejalas as $gejala) {
-                $totalProbabilitiesHE[$kode_penyakit][$gejala->kode_gejala] = ($gejala->nilai_probabilitas * $totalProbabilities_H[$kode_penyakit][$gejala->kode_gejala]) / $totalProbabilitiesE[$kode_penyakit];
+                $totalProbabilitiesHE[$idPenyakit][$gejala->idGejala] = ($gejala->nilai_probabilitas * $totalProbabilities_H[$idPenyakit][$gejala->idGejala]) / $totalProbabilitiesE[$idPenyakit];
             }
         }
 
         // Menghitung Total Bayes
         $totalBayes = [];
 
-        foreach ($relatedGejalas as $kode_penyakit => $gejalas) {
+        foreach ($relatedGejalas as $idPenyakit => $gejalas) {
             $result = 0;
             // Temukan nama penyakit berdasarkan kode penyakit
-            $penyakit = Penyakit::where('id', $kode_penyakit)->first();
+            $penyakit = Penyakit::where('id', $idPenyakit)->first();
             foreach ($gejalas as $gejala) {
-                $total = $gejala->nilai_probabilitas * $totalProbabilitiesHE[$kode_penyakit][$gejala->kode_gejala];
+                $total = $gejala->nilai_probabilitas * $totalProbabilitiesHE[$idPenyakit][$gejala->idGejala];
                 $result += $total;
             }
 
             // Simpan hasil bersama dengan nama penyakit
-            $totalBayes[$kode_penyakit] = [
-                'id' => $kode_penyakit,
+            $totalBayes[$idPenyakit] = [
+                'id' => $idPenyakit,
                 'nama_penyakit' => $penyakit->nama_penyakit,
                 'solusi_penyakit' => $penyakit->solusi_penyakit,
                 'result' => $result,
@@ -146,10 +146,11 @@ public function diagnosa(Request $request) {
                 $diagnosis->nama_penyakit = $penyakitTerdiagnosa['nama_penyakit'];
                 $diagnosis->nilai_probabilitas = $penyakitTerdiagnosa['result'];
                 $diagnosis->result = $penyakitTerdiagnosa['result'];
+                $diagnosis->solusi_penyakit = $penyakitTerdiagnosa['solusi_penyakit'];
                 $diagnosis->selected_gejalas = json_encode($selectedGejalas);
                 $diagnosis->save();
             } else {
-                // Handle the case when $totalBayes is empty
+                
                 $penyakitTerdiagnosa = null; // or any other appropriate action
             }
         }
@@ -196,7 +197,7 @@ public function diagnosa(Request $request) {
         // Membuat data untuk disimpan
         Result::create([
             'selected_gejalas' => $selectedGejalasString,
-            'kode_penyakit' => $request->kode_penyakit,
+            'idPenyakit' => $request->idPenyakit,
             'result' => $request->result
         
         ]);
@@ -211,19 +212,21 @@ public function diagnosa(Request $request) {
         
         // return redirect()->route('welcome')->with('message', 'Diagnose result saved successfully.');
     }
-        public function riwayatKonsultasi()
+        public function riwayatKonsultasi(Request $request)
     {
-        // Ambil data riwayat konsultasi untuk pengguna yang sedang login
-        $riwayat = Result::where('namaPasien', Auth::user()->namaPasien)
-        ->orderBy('nilai_probabilitas', 'desc')
-        // ->with('penyakit')
-        ->get();
-         // Memastikan ada hasil sebelum memproses
-    // if ($riwayat->isNotEmpty()) {
-    //     $highestRiwayat = $riwayat->first();
-    // } else {
-    //     $highestRiwayat = null;
-    // }
+        $query = Result::where('namaPasien', Auth::user()->namaPasien);
+       // Filter berdasarkan nama pasien jika ada
+    if ($request->filled('namaPasien')) {
+        $query->where('namaPasien', 'like', '%' . $request->namaPasien . '%');
+    }
+
+    // Sortir berdasarkan tanggal jika ada
+    if ($request->filled('sort_by') && in_array($request->sort_by, ['asc', 'desc'])) {
+        $query->orderBy('created_at', $request->sort_by);
+    } else {
+        $query->orderBy('created_at', 'desc'); // Default sorting
+    }
+    $riwayat = $query->get();
         return view('riwayatKonsultasi.index', [
             'title' => 'Riwayat Konsultasi',
             'riwayat' => $riwayat

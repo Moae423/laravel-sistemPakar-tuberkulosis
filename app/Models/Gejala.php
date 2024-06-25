@@ -8,8 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Gejala extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'nama_gejala',
-        'code'
-    ];
+    protected $guarded = ['id'];
+    public function rules()
+    {
+        return $this->belongsTo(Rule::class, 'idGejala');
+    }
 }

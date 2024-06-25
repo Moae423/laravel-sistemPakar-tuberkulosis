@@ -23,11 +23,20 @@ class UserSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-
+        // user
         $u = new User;
         $u->namaPasien = 'Angelina';
-        $u->userType = 'admin';
+        $u->userType = 'pasien';
         $u->email = 'angelina@gmail.com';
+        $u->password = bcrypt('123');
+        $u->umur = 22;
+        $u->alamat = 'Birugo';
+        $u->save();
+        // admin
+        $u = new User;
+        $u->namaPasien = 'Daffa';
+        $u->userType = 'admin';
+        $u->email = 'daffa@gmail.com';
         $u->password = bcrypt('123');
         $u->umur = 22;
         $u->alamat = 'Birugo';

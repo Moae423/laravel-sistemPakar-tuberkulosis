@@ -12,7 +12,7 @@ class HomeController extends Controller
     {
         if (Auth::id()) {
             $userType = auth()->user()->userType;
-            if ($userType=='user') {
+            if ($userType=='pasien') {
                 return view('welcome', [
                     'title'=> 'Beranda',
                 ]);

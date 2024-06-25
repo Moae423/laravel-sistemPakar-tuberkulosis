@@ -6,7 +6,7 @@
     <title>Halaman | {{$title}} </title>
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('style.css') }}">
-    
+    @vite([])
   <body>
     
     @include(' partials.navbar')

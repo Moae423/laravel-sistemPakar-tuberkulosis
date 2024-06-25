@@ -75,10 +75,10 @@
             </div>
             <div class="mb-3">
                 <label for="umur" class="form-label fs-4" >Umur</label>
-                <input type="number" class="form-control @error('umur')
+                <input type="number"  class="form-control  @error('umur') 
                 is-invalid
-            @enderror" id="umur" name="umur" >
-                @error('umur')
+            @enderror" id="umur" name="umur" value="old('email')" >
+                @error('umur') 
                 <div class="invalid-tooltip">
                   {{ $message }}
                 </div>
@@ -92,6 +92,26 @@
                 @error('alamat')
                 <div class="invalid-tooltip">
                   {{ $message }}
+                </div>
+                @enderror
+            </div>
+            <div class="mb-3">
+                <label class="form-label fs-4">User Type</label><br>
+                <div class="form-check form-check-inline">
+                    <label>
+                        <input type="radio" name="userType" value="admin" {{ old('userType') == 'admin' ? 'checked' : '' }}>
+                        Admin
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label>
+                        <input type="radio" name="userType" value="pasien" {{ old('userType') == 'pasien' ? 'checked' : '' }}>
+                        Pasien
+                    </label>
+                </div>
+                @error('userType')
+                <div class="invalid-feedback d-block">
+                    {{ $message }}
                 </div>
                 @enderror
             </div>

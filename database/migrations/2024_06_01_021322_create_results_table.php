@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('nama_penyakit');
             $table->string('selected_gejalas');
             $table->float('nilai_probabilitas');
+            $table->string('solusi_penyakit');
             $table->timestamps();
 
             // $table->foreign('kode_penyakit')->references('id')->on('penyakits')->onDelete('cascade');
