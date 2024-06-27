@@ -4,14 +4,15 @@ use App\Http\Controllers\Diagnose;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RuleController;
+use App\Http\Controllers\SesiController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MasukController;
 use App\Http\Controllers\GejalaController;
 use App\Http\Controllers\PasienController;
+use App\Http\Controllers\ResultController;
 use App\Http\Controllers\PenyakitController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\KonsultasiController;
-use App\Http\Controllers\ResultController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,13 +41,16 @@ Route::get('/admin', function () {
 // LOGIN
 // Route::resource('/login',LoginController::class);
 
+// LOGIN WITH SESI
+Route::get('/daftar', [SesiController::class, 'daftar'])->name('sesi.daftar');
+
 
 // LOGIN With Breeze
 Route::get('/login', [MasukController::class, 'index'])->middleware('guest');
 Route::post('/login', [MasukController::class, 'login']); 
 Route::post('/logout', [MasukController::class, 'logout']);
 // LOG OUT
-Route::resource('/register', RegisterController::class);
+// Route::resource('/register', RegisterController::class);
 // home
 Route::get('/home', [HomeController::class, 'index'])->middleware('auth');
 // penyakit

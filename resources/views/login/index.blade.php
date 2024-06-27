@@ -68,7 +68,7 @@
                     </div>
                 </div>
                 <div class="mb-3">
-                    <p class="fw-bold">Belum Punya Akun? <a href="/register" class="text-decoration-none">Register Now</a></p>
+                    <p class="fw-bold">Belum Punya Akun? <a href="/daftar" class="text-decoration-none">Register Now</a></p>
                 </div>
                 <button type="submit" class="btn btn-primary btn-block w-100">Login</button>
             </form>
