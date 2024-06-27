@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('rules', function (Blueprint $table) {
             $table->id(); 
-            $table->unsignedBigInteger('kode_gejala')->references('id')->constrained('gejalas')->onDelete('cascade');
-            $table->unsignedBigInteger('kode_penyakit')->references('id')->constrained('penyakits')->onDelete('cascade');
+            $table->unsignedBigInteger('idGejala')->references('id')->constrained('gejalas')->onDelete('cascade');
+            $table->unsignedBigInteger('idPenyakit')->references('id')->constrained('penyakits')->onDelete('cascade');
             $table->float('nilai_probabilitas');
             $table->timestamps();
 
