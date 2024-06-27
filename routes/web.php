@@ -42,7 +42,7 @@ Route::get('/admin', function () {
 // Route::resource('/login',LoginController::class);
 
 // LOGIN WITH SESI
-Route::get('/daftar', [SesiController::class, 'daftar'])->name('sesi.daftar');
+Route::resource('/daftar', SesiController::class);
 
 
 // LOGIN With Breeze
