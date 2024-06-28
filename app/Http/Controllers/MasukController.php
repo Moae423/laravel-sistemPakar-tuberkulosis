@@ -17,7 +17,7 @@ class MasukController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->validate([
-            "email"=> "required|email:rfc,dns",
+            "email"=> "required",
             "password"=> "required",
          ],[
             "email.required"=> "Email Wajib Diisi",
