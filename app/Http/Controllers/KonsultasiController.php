@@ -215,6 +215,10 @@ public function diagnosa(Request $request) {
         public function riwayatKonsultasi(Request $request)
     {
         $query = Result::where('namaPasien', Auth::user()->namaPasien);
+         // Filter berdasarkan tanggal
+    if ($request->filled('filter_date')) {
+        $query->whereDate('created_at', $request->filter_date);
+    }
        // Filter berdasarkan nama pasien jika ada
     if ($request->filled('namaPasien')) {
         $query->where('namaPasien', 'like', '%' . $request->namaPasien . '%');

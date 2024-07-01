@@ -14,27 +14,36 @@
 .table th, .table td {
     vertical-align: middle;
 }
+
+.tombolCari {
+    width: 308%;
+}
 </style>
 <div class="container pt-3">
     <h2 class="text-center">Laporan Hasil Diagnosa</h2>
 
     <!-- Form Pencarian dan Sortir -->
     <form method="GET" action="{{ route('hasil.index') }}" class="mb-4">
-        <div class="row g-3 align-items-end text-white">
+        <div class="row g-3 align-items-end  text-white">
             <div class="col-md-4">
                 <label for="namaPasien" class="form-label text-dark">Nama Pasien</label>
                 <input type="text" name="namaPasien" id="namaPasien" class="form-control" value="{{ request('namaPasien') }}" placeholder="Cari nama pasien">
             </div>
             <div class="col-md-4">
-                <label for="sort_by" class="form-label text-dark">Sortir Berdasarkan Tanggal</label>
+                <label for="filter_date" class="form-label text-dark">Pilih Tanggal Konsultasi</label>
+                <input type="date" name="filter_date" id="filter_date" class="form-control" value="{{ request('filter_date') }}">
+            </div>
+            <div class="col-md-4">
+                <label for="sort_by" class="form-label text-dark mr-2">Sortir Berdasarkan Tanggal</label>
                 <select name="sort_by" id="sort_by" class="form-select">
                     <option value="">Pilih</option>
                     <option value="asc" {{ request('sort_by') == 'asc' ? 'selected' : '' }}>Terlama</option>
                     <option value="desc" {{ request('sort_by') == 'desc' ? 'selected' : '' }}>Terbaru</option>
                 </select>
             </div>
-            <div class="col-md-4">
-                <button type="submit" class="btn btn-primary w-100">Cari</button>
+            
+            <div class="col-md-4 mt-3">
+                <button type="submit" class="btn btn-primary  tombolCari">Cari</button>
             </div>
         </div>
     </form>
@@ -54,7 +63,7 @@
                 <th scope="col">Nama Penyakit</th>
                 <th scope="col">Result</th>
                 <th scope="col">Tanggal</th>
-                <th colspan="2" scope="col">Aksi</th>
+                <th colspan="3" scope="col">Aksi</th>
             </tr>
         </thead>
         <tbody class="text-center">
@@ -72,6 +81,11 @@
                 <td>
                     <a href="#" class="btn btn-primary">
                         <i class="fas fa-edit"></i> 
+                    </a>
+                </td>
+                <td>
+                    <a href="#" class="btn btn btn-info">
+                        <img src="/image/cloud_download_24dp.svg" alt="">
                     </a>
                 </td>
                 <td>
