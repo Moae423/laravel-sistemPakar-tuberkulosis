@@ -9,7 +9,7 @@
     </div>
   @endif
   <center>
-    <table class="table table-striped">
+    <table class="table table-striped table-bordered ">
       <thead class="text-center">
         <tr>
           <th scope="col">Nomor</th>

@@ -8,7 +8,7 @@
       {{ session('success') }}
     </div>
   @endif
-    <table class="table table-striped">
+    <table class="table table-striped table-bordered">
       <thead class="text-center">
         <tr>
           <th scope="col">Nomor</th>
@@ -19,15 +19,15 @@
           <th colspan="2" scope="col">Aksi</th>
         </tr>
       </thead>
-      <tbody class="text-center">
+      <tbody >
         @php
             $no=1;
         @endphp
         @foreach ($penyakit as $p)
         <center>
         <tr>
-          <th scope="row">{{ $no++ }}</th>
-          <td>{{ $p->kode_penyakit }}</td>
+          <th scope="row" class="text-center">{{ $no++ }}</th>
+          <td class="text-center">{{ $p->kode_penyakit }}</td>
           <td>{{ $p->nama_penyakit }}</td>
           <td>{{ $p->detail_penyakit }}</td>
           <td>{{ $p->solusi_penyakit }}</td>

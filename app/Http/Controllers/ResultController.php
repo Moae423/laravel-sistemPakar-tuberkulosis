@@ -38,7 +38,7 @@ class ResultController extends Controller
          $query->orderBy('created_at', 'desc'); // Default sorting
      }
 
-     $riwayat = $query->get();
+     $riwayat = $query->paginate(5);
         return view('admin.hasil.index',[
             'title' => 'Laporan Konsultasi Pasien',
             'results' => $riwayat

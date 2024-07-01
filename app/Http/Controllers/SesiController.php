@@ -68,7 +68,7 @@ class SesiController extends Controller
     {
         return view('register.show', [
             'title'=> 'Laporan Data Pasien', 
-            'users' => User::where('userType', 'pasien')->get(),
+            'users' => User::where('userType', 'pasien')->paginate(10),
         ]);
     }
 
