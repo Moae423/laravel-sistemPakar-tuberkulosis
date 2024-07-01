@@ -18,6 +18,27 @@
 <div class="container pt-3">
     <h2 class="text-center">Laporan Hasil Diagnosa</h2>
 
+    <!-- Form Pencarian dan Sortir -->
+    <form method="GET" action="{{ route('hasil.index') }}" class="mb-4">
+        <div class="row g-3 align-items-end text-white">
+            <div class="col-md-4">
+                <label for="namaPasien" class="form-label text-dark">Nama Pasien</label>
+                <input type="text" name="namaPasien" id="namaPasien" class="form-control" value="{{ request('namaPasien') }}" placeholder="Cari nama pasien">
+            </div>
+            <div class="col-md-4">
+                <label for="sort_by" class="form-label text-dark">Sortir Berdasarkan Tanggal</label>
+                <select name="sort_by" id="sort_by" class="form-select">
+                    <option value="">Pilih</option>
+                    <option value="asc" {{ request('sort_by') == 'asc' ? 'selected' : '' }}>Terlama</option>
+                    <option value="desc" {{ request('sort_by') == 'desc' ? 'selected' : '' }}>Terbaru</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-primary w-100">Cari</button>
+            </div>
+        </div>
+    </form>
+
     @if (session()->has('success'))
     <div class="alert alert-success alert-dismissible fade show mt-5" role="alert">
         {{ session('success') }}

@@ -75,7 +75,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/register/show" class="nav-link {{ Request::is('/register/show') ? 'active' : '' }}">
+                <a href="/daftar/show" class="nav-link {{ Request::is('/daftar/show') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Reports Data Pasien</p>
                 </a>

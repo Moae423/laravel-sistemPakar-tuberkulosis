@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Result;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreResultRequest;
 use App\Http\Requests\UpdateResultRequest;
 
@@ -23,10 +24,24 @@ class ResultController extends Controller
      */
     public function index(Request $request)
     {
-        $results = Result::orderBy('created_at', 'desc')->get();
-        return view('admin.hasil.index', [
-            'results' => $results,
-            'title' => 'Laporan Konsultasi Pasien'
+
+        $query = Result::query();
+        // Filter berdasarkan nama pasien jika ada
+     if ($request->filled('namaPasien')) {
+         $query->where('namaPasien', 'like', '%' . $request->namaPasien . '%');
+     }
+ 
+     // Sortir berdasarkan tanggal jika ada
+     if ($request->filled('sort_by') && in_array($request->sort_by, ['asc', 'desc'])) {
+         $query->orderBy('created_at', $request->sort_by);
+     } else {
+         $query->orderBy('created_at', 'desc'); // Default sorting
+     }
+
+     $riwayat = $query->get();
+        return view('admin.hasil.index',[
+            'title' => 'Laporan Konsultasi Pasien',
+            'results' => $riwayat
         ]);
         
     }
@@ -64,9 +79,8 @@ class ResultController extends Controller
 
         //     + $this->KonsultasiController->proccess($selected_gejalas);
 
-        return view('riwayatKonsultasi.index',[
-            'result' => $result,
-        ]);
+
+        
     }
 
     /**

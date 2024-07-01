@@ -66,7 +66,10 @@ class SesiController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('register.show', [
+            'title'=> 'Laporan Data Pasien', 
+            'users' => User::where('userType', 'pasien')->get(),
+        ]);
     }
 
     /**
