@@ -7,6 +7,7 @@
       }
   </style>
 <div class="container pt-3">
+  
     <h2 class="text-center">Laporan Data Pasien</h2>
     @if (session()->has('success'))
     <div class="alert alert-success alert-dismissible fade show mt-5" role="alert">

@@ -70,6 +70,7 @@ Route::resource('/admin/hasil', ResultController::class)->middleware('auth');
 // Route::resource('/riwayat', ResultController::class)->middleware('auth');
 
 Route::get('/download', [PdfController::class, 'downloadPdf'])->name('pdf.downloadPdf')->middleware('auth');
+Route::get('/dataGejala', [PdfController::class, 'dataGejala'])->name('pdf.dataGejala')->middleware('auth');
 // diagnose
 Route::get('konsultasi', [KonsultasiController::class, 'index'])->name('konsultasi.index')->middleware('auth');
 Route::post('konsultasi/diagnosa', [KonsultasiController::class, 'diagnosa'])->name('konsultasi.diagnosa')->middleware('auth');
