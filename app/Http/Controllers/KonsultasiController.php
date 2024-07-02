@@ -7,7 +7,10 @@ use App\Models\Gejala;
 use App\Models\Result;
 use App\Models\Penyakit;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
 
 class KonsultasiController extends Controller
 {
@@ -21,11 +24,14 @@ class KonsultasiController extends Controller
         ]);
     }
 public function diagnosa(Request $request) {
-    $selectedGejalas = $request->input('gejala');
-    $result = $this->proccess($selectedGejalas);
+    $selectedGejalas = $request->input('selectedGejalas');
+    $request->validate([
+        'selectedGejalas' => 'required|array|min:3',
+    ]);
     $namaPasien = Auth::user()->namaPasien;
     $umurPasien = Auth::user()->umur;
     $alamatPasien = Auth::user()->alamat;
+    $result = $this->proccess($selectedGejalas);
 
     return view('konsultasi.show', [
         'title' => 'Diagnose Results',
@@ -174,43 +180,24 @@ public function diagnosa(Request $request) {
             'alamatPasien' => $alamatPasien,
             'nilai_tertinggi' => $penyakitTerdiagnosa
         ]);
-        // return 
-        // [
-        //     'selectedGejalas' => $getSelectedGejalas,
-        //     'relatedPenyakits' => $relatedpenyakitNames,
-        //     'relateGejalas' => $relatedGejalas,
-        //     'totalProbability' => $totalProbabilities,
-        //     'totalProbabilities_H' => $totalProbabilities_H,
-        //     'totalProbE' => $totalProbabilitiesE,
-        //     'totalProbabilitiesHE' => $totalProbabilitiesHE,
-        //     'totalBayes' => $totalBayes
-        // ];
     }
     public function store(Request $request)
     {
-        // dd($request->selected_gejalas);
+        // $selectedSymptomsString = $request->input('selectedGejalas');
+        // // $selectedSymptomsString = implode(', ', $request->selectedGejalas);
+        // $namaPasien = Auth::user()->namaPasien;
+        // $umurPasien = Auth::user()->umur;
+        // $alamatPasien = Auth::user()->alamat;
 
-        $selectedGejalasString = implode(', ', $request->gejala);
-        // Menggabungkan array gejala menjadi string
-        // $selectedGejalasString = implode(', ', $request->gejala);
+        // Result::create([
+        //     'namaPasien' => $namaPasien,
+        //     'selected_gejalas' => $selectedSymptomsString,
+        //     'idPenyakit' => $request->idPenyakit,
+        //     'solusi_penyakit' => $request->solusi_penyakit,
+        //     'result' => $request->result
+        // ]);
+        // return redirect()->route('results.index')->with('message', 'Diagnose result saved successfully.');
 
-        // Membuat data untuk disimpan
-        Result::create([
-            'selected_gejalas' => $selectedGejalasString,
-            'idPenyakit' => $request->idPenyakit,
-            'result' => $request->result
-        
-        ]);
-        return redirect()->route('riwayatKonsultasi.index')->with('message', 'Diagnose result saved successfully.'); 
-
-        // Menyimpan data konsultasi
-        // if (Result::create($konsultasiData)) {
-        //     return redirect('welcome')->with('success', 'Data Konsultasi Sudah disimpan');
-        // } else {
-        //     return back()->withErrors(['failed' => 'Data konsultasi tidak dapat disimpan']);
-        // }
-        
-        // return redirect()->route('welcome')->with('message', 'Diagnose result saved successfully.');
     }
         public function riwayatKonsultasi(Request $request)
     {
@@ -235,6 +222,19 @@ public function diagnosa(Request $request) {
             'title' => 'Riwayat Konsultasi',
             'riwayat' => $riwayat
         ]);
+    }
+    
+    public function downloadPdf(Request $request)
+    {
+
+        $query = Result::where('namaPasien', Auth::user()->namaPasien);
+        $results = $query->get();
+
+    $pdf = PDF::loadView('Exports.hasilKonsultasi', [
+        'results' => $results
+    ]);
+
+    return $pdf->stream('Hasil Konsultasi.pdf');
     }
 
 }

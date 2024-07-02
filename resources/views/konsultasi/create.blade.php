@@ -19,7 +19,7 @@
                 <h3 style="color: #E1E48C">Apa yang anda rasakan?</h3>
                 @foreach ($gejalas as $gejala)
                 <div class="form-check " style="color: #ffffff">
-                  <input class="form-check-input" name="gejala[]" type="checkbox" value="{{ $gejala->id }}">{{ $gejala->nama_gejala }}
+                  <input class="form-check-input" name="selectedGejalas[]" type="checkbox" value="{{ $gejala->id }}">{{ $gejala->nama_gejala }}
                 </div>
                 @endforeach
                 <button type="submit" class="btn btn-primary mt-3">Kirim</button>

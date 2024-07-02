@@ -23,7 +23,7 @@
             <input type="date" name="filter_date" id="filter_date" class="form-control" value="{{ request('filter_date') }}">
         </div>
         <div class="col-md-4">
-            <label for="sort_by" class="form-label text-white">Sortir Berdasarkan Tanggal</label>
+            <label for="sort_by" class="form-label text-white">Sortir Data Berdasarkan</label>
             <select name="sort_by" id="sort_by" class="form-select">
                 <option value="">Pilih</option>
                 <option value="asc" {{ request('sort_by') == 'asc' ? 'selected' : '' }}>Terlama</option>

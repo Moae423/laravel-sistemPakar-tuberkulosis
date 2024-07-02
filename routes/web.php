@@ -1,7 +1,10 @@
 <?php
 
+use Dompdf\Dompdf;
 use App\Http\Controllers\Diagnose;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PdfController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RuleController;
 use App\Http\Controllers\SesiController;
@@ -73,3 +76,5 @@ Route::post('konsultasi/diagnosa', [KonsultasiController::class, 'diagnosa'])->n
 Route::post('konsultasi/store', [KonsultasiController::class, 'store'])->name('konsultasi.store')->middleware('auth');
 Route::get('/riwayatKonsultasi', [KonsultasiController::class, 'riwayatKonsultasi'])->name('konsultasi.riwayat');
 
+// pdf
+Route::get('/download', [KonsultasiController::class, 'downloadPdf'])->name('konsutlasi.downloadPdf');
