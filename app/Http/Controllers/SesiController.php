@@ -64,8 +64,20 @@ class SesiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
+        $query = User::query();
+        // Filter berdasarkan nama pasien jika ada
+     if ($request->filled('namaPasien')) {
+         $query->where('namaPasien', 'like', '%' . $request->namaPasien . '%');
+     }
+ 
+     // Sortir berdasarkan tanggal jika ada
+     if ($request->filled('sort_by') && in_array($request->sort_by, ['asc', 'desc'])) {
+         $query->orderBy('created_at', $request->sort_by);
+     } else {
+         $query->orderBy('created_at', 'desc'); // Default sorting
+     }
         return view('register.show', [
             'title'=> 'Laporan Data Pasien', 
             'users' => User::where('userType', 'pasien')->paginate(10),
@@ -80,7 +92,10 @@ class SesiController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('register.edit', [
+            'title'=> 'Edit Data Pasien',
+            'users' => User::findOrFail( $id ),
+        ]);
     }
 
     /**
@@ -92,7 +107,17 @@ class SesiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'namaPasien' => ['required'],
+            'email' => ['required'],
+            'password' => 'required',
+            'umur' => 'required',
+            'alamat' => 'required',
+        ]);
+        $penyakit = User::findOrFail($id);
+        $penyakit->update($request->all());
+    
+        return redirect('/daftar/show')->with('success', 'Data Pasien berhasil Di edit.');
     }
 
     /**

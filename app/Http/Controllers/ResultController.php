@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Result;
+use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreResultRequest;
 use App\Http\Requests\UpdateResultRequest;
@@ -116,4 +118,5 @@ class ResultController extends Controller
     {
         //
     }
+    
 }

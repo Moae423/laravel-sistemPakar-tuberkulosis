@@ -16,7 +16,7 @@
 }
 
 .tombolCari {
-    width: 308%;
+    width: 100%;
 }
 </style>
 <div class="container pt-3">
@@ -24,26 +24,26 @@
 
     <!-- Form Pencarian dan Sortir -->
     <form method="GET" action="{{ route('hasil.index') }}" class="mb-4">
-        <div class="row g-3 align-items-end  text-white">
-            <div class="col-md-4">
+        <div class="row g-3 align-items-end text-white">
+            <div class="col-md-3">
                 <label for="namaPasien" class="form-label text-dark">Nama Pasien</label>
                 <input type="text" name="namaPasien" id="namaPasien" class="form-control" value="{{ request('namaPasien') }}" placeholder="Cari nama pasien">
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <label for="filter_date" class="form-label text-dark">Pilih Tanggal Konsultasi</label>
                 <input type="date" name="filter_date" id="filter_date" class="form-control" value="{{ request('filter_date') }}">
             </div>
-            <div class="col-md-4">
-                <label for="sort_by" class="form-label text-dark mr-2">Sortir Berdasarkan Tanggal</label>
+            <div class="col-md-3">
+                <label for="sort_by" class="form-label text-dark">Sortir Berdasarkan Tanggal</label>
                 <select name="sort_by" id="sort_by" class="form-select">
                     <option value="">Pilih</option>
                     <option value="asc" {{ request('sort_by') == 'asc' ? 'selected' : '' }}>Terlama</option>
                     <option value="desc" {{ request('sort_by') == 'desc' ? 'selected' : '' }}>Terbaru</option>
                 </select>
             </div>
-            
-            <div class="col-md-4 mt-3">
-                <button type="submit" class="btn btn-primary  tombolCari">Cari</button>
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-primary tombolCari">Cari</button>
+                <a href="{{ route('pdf.downloadPdf') }}" class="btn btn-danger tombolCari">Download PDF</a>
             </div>
         </div>
     </form>
@@ -56,7 +56,7 @@
 
     <center>
     <table class="table table-striped table-bordered rounded">
-        <thead class=" rounded-top text-center">
+        <thead class="rounded-top text-center">
             <tr>
                 <th scope="col">Nomor</th>
                 <th scope="col">Nama Pasien</th>
@@ -79,12 +79,7 @@
                 <td>{{ number_format($result->result * 100) }}%</td>
                 <td>{{ $result->created_at->format('d-m-Y H:i') }}</td>
                 <td>
-                    <a href="#" class="btn btn-primary">
-                        <i class="fas fa-edit"></i> 
-                    </a>
-                </td>
-                <td>
-                    <a href="#" class="btn btn btn-info">
+                    <a href="#" class="btn btn-info">
                         <img src="/image/cloud_download_24dp.svg" alt="">
                     </a>
                 </td>

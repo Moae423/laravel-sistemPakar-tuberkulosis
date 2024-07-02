@@ -8,14 +8,12 @@
   </style>
 <div class="container pt-3">
     <h2 class="text-center">Laporan Data Pasien</h2>
-     
-
     @if (session()->has('success'))
     <div class="alert alert-success alert-dismissible fade show mt-5" role="alert">
       {{ session('success') }}
     </div>
   @endif
-    <table class="table table-striped table-bordered ">
+    <table class="table table-striped table-bordered rounded">
       <thead class="text-center">
         <tr>
           <th scope="col">Nomor</th>
@@ -40,12 +38,12 @@
           <td>{{ $user->created_at->format('d-m-Y') }}</td>
           <td>{{ $user->alamat }}</td>
           <td>
-            <a href="/register/{{$user->id}}/edit" class="btn btn-primary">
+            <a href="/daftar/{{$user->id}}/edit" class="btn btn-primary">
               <i class="fas fa-edit"></i> 
            </a>
           </td>
           <td>
-            <form action="/register/{{$user->id}}" method="POST">
+            <form action="/daftar/{{$user->id}}" method="POST">
               @method('delete')
               @csrf
               <button class="btn btn-danger" onclick="return confirm('Apakah Anda Yakin Data Pasien Mau Dihapus')"><i class="fas fa-trash-alt"></i> </button>

@@ -69,6 +69,7 @@ Route::resource('/admin/hasil', ResultController::class)->middleware('auth');
 
 // Route::resource('/riwayat', ResultController::class)->middleware('auth');
 
+Route::get('/download', [PdfController::class, 'downloadPdf'])->name('pdf.downloadPdf')->middleware('auth');
 // diagnose
 Route::get('konsultasi', [KonsultasiController::class, 'index'])->name('konsultasi.index')->middleware('auth');
 Route::post('konsultasi/diagnosa', [KonsultasiController::class, 'diagnosa'])->name('konsultasi.diagnosa')->middleware('auth');
@@ -77,4 +78,5 @@ Route::post('konsultasi/store', [KonsultasiController::class, 'store'])->name('k
 Route::get('/riwayatKonsultasi', [KonsultasiController::class, 'riwayatKonsultasi'])->name('konsultasi.riwayat');
 
 // pdf
-Route::get('/download', [KonsultasiController::class, 'downloadPdf'])->name('konsutlasi.downloadPdf');
+// Route::get('/download', [KonsultasiController::class, 'downloadPdf'])->name('konsutlasi.downloadPdf');
+// Route::get('/download', [ResultController::class, 'downloadPdf'])->name('result.downloadPdf');

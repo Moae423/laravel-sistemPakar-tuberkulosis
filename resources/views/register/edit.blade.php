@@ -36,7 +36,7 @@
           </div>
       @endif
       {{-- FORM EDIT --}}
-        <form action="/register/{{$users->id}}" method="POST">
+        <form action="/daftar/{{$users->id}}" method="POST">
             @method('PUT')
             @csrf
             {{-- FORM INPUT --}}
