@@ -20,7 +20,7 @@
     <div class="row g-3 align-items-end">
         <div class="col-md-4">
             <label for="filter_date" class="form-label text-white">Pilih Tanggal Konsultasi</label>
-            <input type="date" name="filter_date" id="filter_date" class="form-control" value="{{ request('filter_date') }}">
+            <input type="date" name="filter_date" id="filter_date" class="form-control w-50" value="{{ request('filter_date') }}">
         </div>
         <div class="col-md-4">
             <label for="sort_by" class="form-label text-white">Sortir Data Berdasarkan</label>
@@ -57,7 +57,7 @@
                     @foreach($riwayat as $entry)
                     <tr>
                         <td>{{ $entry->created_at->format('d-m-Y') }}</td>
-                        <td>{{ $entry->namaPasien }}</td>
+                        <td>{{ $entry->nama }}</td>
                         <td>{{ $entry->nama_penyakit }}</td>
                         {{-- @if ($entry->result == $highestResult) style="background-color: yellow;" @endif> --}}
                         <td>{{ number_format($entry->result * 100, 2) }}%</td>

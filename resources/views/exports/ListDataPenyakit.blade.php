@@ -59,7 +59,7 @@
     <tr>
         <td>Penanggung Jawab</td>
         <td>:</td>
-        <td>dr {{ Auth::user()->namaPasien }}</td>
+        <td>dr {{ Auth::user()->nama }}</td>
     </tr>
     <tr>
         <td>Kecamatan/Kabupatan</td>
@@ -113,7 +113,7 @@
         <br>
         <br>
         <br>
-        <div class="">Dr {{ Auth::user()->namaPasien }}, {{ now()->format('d-m-Y') }} </div>
+        <div class="">Dr {{ Auth::user()->nama }}, {{ now()->format('d-m-Y') }} </div>
     </div>
 </div>
 </div>

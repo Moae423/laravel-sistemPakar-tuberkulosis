@@ -33,7 +33,7 @@
         @foreach ($users as $user)
           <tr>
           <th scope="row" class="text-center">{{ $no++ }}</th>
-          <td>{{ $user->namaPasien }}</td>
+          <td>{{ $user->nama }}</td>
           <td>{{ $user->email }}</td>
           <td class="text-center">{{ $user->umur }}</td>
           <td>{{ $user->created_at->format('d-m-Y') }}</td>

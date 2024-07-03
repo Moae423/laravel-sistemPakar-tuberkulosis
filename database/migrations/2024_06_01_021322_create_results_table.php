@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('results', function (Blueprint $table) {
             $table->id();
-            $table->string('namaPasien');
+            $table->string('nama');
             $table->float('result');
             $table->string('nama_penyakit');
             $table->string('selected_gejalas');

@@ -26,8 +26,8 @@
     <form method="GET" action="{{ route('hasil.index') }}" class="mb-4">
         <div class="row g-3 align-items-end text-white">
             <div class="col-md-3">
-                <label for="namaPasien" class="form-label text-dark">Nama Pasien</label>
-                <input type="text" name="namaPasien" id="namaPasien" class="form-control" value="{{ request('namaPasien') }}" placeholder="Cari nama pasien">
+                <label for="nama" class="form-label text-dark">Nama Pasien</label>
+                <input type="text" name="nama" id="nama" class="form-control" value="{{ request('nama') }}" placeholder="Cari nama pasien">
             </div>
             <div class="col-md-3">
                 <label for="filter_date" class="form-label text-dark">Pilih Tanggal Konsultasi</label>
@@ -74,7 +74,7 @@
             @foreach($results as $result)
             <tr>
                 <th scope="row">{{ $no++ }}</th>
-                <td>{{ $result->namaPasien }}</td>
+                <td>{{ $result->nama }}</td>
                 <td>{{ $result->nama_penyakit }}</td>
                 <td>{{ number_format($result->result * 100) }}%</td>
                 <td>{{ $result->created_at->format('d-m-Y H:i') }}</td>

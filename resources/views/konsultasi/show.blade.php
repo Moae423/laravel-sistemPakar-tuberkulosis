@@ -33,7 +33,7 @@
             @csrf
             <div class="card print-area ">
                 <div class="card-header">
-                            <p class="">Nama Anda : {{ $namaPasien }}</p>
+                            <p class="">Nama Anda : {{ $nama }}</p>
                             <p>Umur :{{ $umurPasien }}</p>
                             <p>Alamat :{{ $alamatPasien }}</p>
                             <hr>

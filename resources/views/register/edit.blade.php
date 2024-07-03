@@ -41,11 +41,11 @@
             @csrf
             {{-- FORM INPUT --}}
             <div class="mb-3">
-                <label for="namapasien" class="form-label ">Nama Pasien</label>
-                <input type="text" class="form-control @error('namaPasien') 
+                <label for="nama" class="form-label ">Nama Pasien</label>
+                <input type="text" class="form-control @error('nama') 
                 is-invalid
-            @enderror" id="namapasien" name="namaPasien" value="{{$users->namaPasien}}" >
-                @error('namaPasien')
+            @enderror" id="nama" name="nama" value="{{$users->nama}}" >
+                @error('nama')
                 <div class="invalid-tooltip">
                   {{ $message }}
                 </div>

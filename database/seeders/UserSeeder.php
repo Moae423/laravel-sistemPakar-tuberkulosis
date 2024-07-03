@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
         // ]);
         // user
         $u = new User;
-        $u->namaPasien = 'Angelina';
+        $u->nama = 'Angelina';
         $u->userType = 'pasien';
         $u->email = 'angelina@gmail.com';
         $u->password = bcrypt('123');
@@ -34,7 +34,7 @@ class UserSeeder extends Seeder
         $u->save();
         // admin
         $u = new User;
-        $u->namaPasien = 'Daffa';
+        $u->nama = 'Daffa';
         $u->userType = 'admin';
         $u->email = 'daffa@gmail.com';
         $u->password = bcrypt('123');

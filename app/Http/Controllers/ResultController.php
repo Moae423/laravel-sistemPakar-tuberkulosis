@@ -29,8 +29,8 @@ class ResultController extends Controller
 
         $query = Result::query();
         // Filter berdasarkan nama pasien jika ada
-     if ($request->filled('namaPasien')) {
-         $query->where('namaPasien', 'like', '%' . $request->namaPasien . '%');
+     if ($request->filled('nama')) {
+         $query->where('nama', 'like', '%' . $request->nama . '%');
      }
  
      // Sortir berdasarkan tanggal jika ada

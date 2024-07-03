@@ -43,7 +43,7 @@ class RegisterController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'namaPasien' => ['required', 'max:50'],
+            'nama' => ['required', 'max:50'],
             'email' => ['required'],
             'userType' => ['required', 'string', 'in:admin,pasien'], 
             'password' => ['required', 'min:3','max:20'],
@@ -101,7 +101,7 @@ class RegisterController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'namaPasien' => ['required'],
+            'nama' => ['required'],
             'email' => ['required'],
             'password' => 'required',
             'umur' => 'required',

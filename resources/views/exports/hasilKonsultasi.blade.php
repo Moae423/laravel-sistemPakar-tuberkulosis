@@ -47,7 +47,7 @@
     
     <h2>Puskesmas Padang Luar</h2>
     <div class="identitas">
-        <strong>Nama Pasien : {{ Auth::user()->namaPasien }}</strong><br>
+        <strong>Nama Pasien : {{ Auth::user()->nama }}</strong><br>
     </div>
     <table style="border-collapse: collapse;">
         <thead>
@@ -67,7 +67,7 @@
             @foreach($results as $result)
             <tr>
                 <th scope="row">{{ $no++ }}</th>
-                <td>{{ $result->namaPasien }}</td>
+                <td>{{ $result->nama }}</td>
                 <td>{{ $result->nama_penyakit }}</td>
                 <td>{{ number_format($result->result * 100) }}%</td>
                 <td>{{ $result->created_at->format('d-m-Y H:i') }}</td>

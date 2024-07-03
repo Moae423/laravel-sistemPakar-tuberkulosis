@@ -40,7 +40,7 @@ class SesiController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'namaPasien' => ['required', 'max:50'],
+            'nama' => ['required', 'max:50'],
             'email' => ['required'],
             'userType' => ['required', 'string', 'in:admin,pasien'], 
             'password' => ['required', 'min:3','max:20'],
@@ -68,8 +68,8 @@ class SesiController extends Controller
     {
         $query = User::query();
         // Filter berdasarkan nama pasien jika ada
-     if ($request->filled('namaPasien')) {
-         $query->where('namaPasien', 'like', '%' . $request->namaPasien . '%');
+     if ($request->filled('nama')) {
+         $query->where('nama', 'like', '%' . $request->nama . '%');
      }
  
      // Sortir berdasarkan tanggal jika ada
@@ -108,7 +108,7 @@ class SesiController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'namaPasien' => ['required'],
+            'nama' => ['required'],
             'email' => ['required'],
             'password' => 'required',
             'umur' => 'required',
@@ -128,6 +128,7 @@ class SesiController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::destroy($id);
+        return redirect('/daftar/show')->with('success', 'Data Pasien Sudah Dihapus');
     }
 }

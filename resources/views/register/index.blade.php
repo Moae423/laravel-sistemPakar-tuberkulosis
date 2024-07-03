@@ -36,11 +36,11 @@
         <form action="/daftar" method="POST">
             @csrf
             <div class="mb-3">
-                <label for="namapasien" class="form-label fs-4" >Nama</label>
-                <input type="text" class="form-control @error('namaPasien')
+                <label for="nama" class="form-label fs-4" >Nama</label>
+                <input type="text" class="form-control @error('nama')
                 is-invalid
-            @enderror" id="namapasien" name="namaPasien" >
-                @error('namaPasien')
+            @enderror" id="nama" name="nama" >
+                @error('nama')
                 <div class="invalid-tooltip">
                   {{ $message }}
                 </div>

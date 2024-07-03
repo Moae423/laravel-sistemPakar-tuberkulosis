@@ -28,7 +28,7 @@ public function diagnosa(Request $request) {
     $request->validate([
         'selectedGejalas' => 'required|array|min:3',
     ]);
-    $namaPasien = Auth::user()->namaPasien;
+    $nama = Auth::user()->nama;
     $umurPasien = Auth::user()->umur;
     $alamatPasien = Auth::user()->alamat;
     $result = $this->proccess($selectedGejalas);
@@ -36,7 +36,7 @@ public function diagnosa(Request $request) {
     return view('konsultasi.show', [
         'title' => 'Diagnose Results',
         'result' => $result,
-        'namaPasien' => $namaPasien,
+        'nama' => $nama,
         'umurPasien' => $umurPasien,
         'alamatPasien' => $alamatPasien,
 
@@ -145,10 +145,10 @@ public function diagnosa(Request $request) {
                 $penyakitTerdiagnosa = array_values($penyakitTerdiagnosa)[0];
 
                 
-                $namaPasien = Auth::user()->namaPasien;
+                $nama = Auth::user()->nama;
                 // Simpan hasil diagnosis ke database
                 $diagnosis = new Result();
-                $diagnosis->namaPasien = $namaPasien; // Atau Auth::user()->id
+                $diagnosis->nama = $nama; // Atau Auth::user()->id
                 $diagnosis->nama_penyakit = $penyakitTerdiagnosa['nama_penyakit'];
                 $diagnosis->nilai_probabilitas = $penyakitTerdiagnosa['result'];
                 $diagnosis->result = $penyakitTerdiagnosa['result'];
@@ -161,7 +161,7 @@ public function diagnosa(Request $request) {
             }
         }
         
-        $namaPasien = Auth::user()->namaPasien;
+        $nama = Auth::user()->nama;
         $umurPasien = Auth::user()->umur;
         $alamatPasien = Auth::user()->alamat;
         return view('konsultasi.show',[
@@ -175,7 +175,7 @@ public function diagnosa(Request $request) {
             'totalProbE' => $totalProbabilitiesE,
             'totalProbabilitiesHE' => $totalProbabilitiesHE,
             'totalBayes' => $totalBayes,
-            'namaPasien' => $namaPasien,
+            'nama' => $nama,
             'umurPasien' => $umurPasien,
             'alamatPasien' => $alamatPasien,
             'nilai_tertinggi' => $penyakitTerdiagnosa
@@ -183,32 +183,19 @@ public function diagnosa(Request $request) {
     }
     public function store(Request $request)
     {
-        // $selectedSymptomsString = $request->input('selectedGejalas');
-        // // $selectedSymptomsString = implode(', ', $request->selectedGejalas);
-        // $namaPasien = Auth::user()->namaPasien;
-        // $umurPasien = Auth::user()->umur;
-        // $alamatPasien = Auth::user()->alamat;
-
-        // Result::create([
-        //     'namaPasien' => $namaPasien,
-        //     'selected_gejalas' => $selectedSymptomsString,
-        //     'idPenyakit' => $request->idPenyakit,
-        //     'solusi_penyakit' => $request->solusi_penyakit,
-        //     'result' => $request->result
-        // ]);
-        // return redirect()->route('results.index')->with('message', 'Diagnose result saved successfully.');
+        // 
 
     }
         public function riwayatKonsultasi(Request $request)
     {
-        $query = Result::where('namaPasien', Auth::user()->namaPasien);
+        $query = Result::where('nama', Auth::user()->nama);
          // Filter berdasarkan tanggal
     if ($request->filled('filter_date')) {
         $query->whereDate('created_at', $request->filter_date);
     }
        // Filter berdasarkan nama pasien jika ada
-    if ($request->filled('namaPasien')) {
-        $query->where('namaPasien', 'like', '%' . $request->namaPasien . '%');
+    if ($request->filled('nama')) {
+        $query->where('nama', 'like', '%' . $request->nama . '%');
     }
 
     // Sortir berdasarkan tanggal jika ada
@@ -227,7 +214,7 @@ public function diagnosa(Request $request) {
     public function downloadPdf(Request $request)
     {
 
-        $query = Result::where('namaPasien', Auth::user()->namaPasien);
+        $query = Result::where('nama', Auth::user()->nama);
         $results = $query->get();
 
     $pdf = PDF::loadView('Exports.hasilKonsultasi', [

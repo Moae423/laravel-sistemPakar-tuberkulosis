@@ -50,7 +50,7 @@
         <tr>
             <td>Penanggung Jawab</td>
             <td>:</td>
-            <td>Dr. {{ Auth::user()->namaPasien }}</td>
+            <td>Dr. {{ Auth::user()->nama }}</td>
         </tr>
         <tr>
             <td>Kecamatan</td>
@@ -80,7 +80,7 @@
             @foreach($results as $result)
                 <tr>
                     <td>{{ $no++ }}</td>
-                    <td>{{ $result->namaPasien }}</td>
+                    <td>{{ $result->nama }}</td>
                     <td>{{ $result->nama_penyakit }}</td>
                     <td>{{ number_format($result->result * 100) }}%</td>
                     <td>{{ $result->created_at->format('d-m-Y H:i') }}</td>
