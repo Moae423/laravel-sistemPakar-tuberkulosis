@@ -75,5 +75,8 @@
             </table>
         </div>
     @endif
+    <div class="d-flex justify-content-center">
+        {{ $riwayat->links() }}
+    </div>
 </div>
 @endsection

@@ -29,8 +29,8 @@
 <div class="center-container">
     <div class="container  ">
         <h1 class="text-center text-white mb-3">Hasil Diagnosa</h1>
-        {{-- <form action="{{ route('konsultasi.riwayat') }}" method="POST">
-            @csrf --}}
+        <form action="{{ route('konsultasi.riwayat') }}" method="POST">
+            @csrf
             <div class="card print-area ">
                 <div class="card-header">
                             <p class="">Nama Anda : {{ $nama }}</p>
@@ -97,9 +97,9 @@
                 <button type="submit" class="btn btn-lg btn-success">Download</button>
             </div> --}}
             <div class="text-center mt-3 btn-print ">
-                <button class="btn btn-success no-print">Simpan</button>
+                <button type="submit" class="btn btn-success no-print">Simpan</button>
             </div>
-        {{-- </form> --}}
+        </form>
 </div>
 <script>
 </script>

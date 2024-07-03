@@ -12,7 +12,7 @@
         <div class="container" >
             <div class="d-flex justify-content-center min-vh-100 align-items-center flex-column">
                 @auth
-                <h1 class="p-5 fw-medium  text-center" style="color: #E1E48C">SELAMAT DATANG {{ auth()->user()->namaPasien }} DI APLIKASI SISTEM PAKAR TUBERKULOSIS PUSKESMAS PADANG LUAR</h1>
+                <h1 class="p-5 fw-medium  text-center" style="color: #E1E48C">SELAMAT DATANG {{ auth()->user()->nama }} DI APLIKASI SISTEM PAKAR TUBERKULOSIS PUSKESMAS PADANG LUAR</h1>
                 @else
                 <h1 class="p-5 fw-medium  text-center" style="color: #E1E48C">SELAMAT DATANG DI APLIKASI SISTEM PAKAR TUBERKULOSIS PUSKESMAS PADANG LUAR</h1>
                 @endauth

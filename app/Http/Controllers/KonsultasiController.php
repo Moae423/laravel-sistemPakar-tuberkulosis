@@ -26,7 +26,7 @@ class KonsultasiController extends Controller
 public function diagnosa(Request $request) {
     $selectedGejalas = $request->input('selectedGejalas');
     $request->validate([
-        'selectedGejalas' => 'required|array|min:3',
+        'selectedGejalas' => 'required|array|min:3',    
     ]);
     $nama = Auth::user()->nama;
     $umurPasien = Auth::user()->umur;
@@ -34,7 +34,7 @@ public function diagnosa(Request $request) {
     $result = $this->proccess($selectedGejalas);
 
     return view('konsultasi.show', [
-        'title' => 'Diagnose Results',
+        'title' => 'Hasil Diagnosa',
         'result' => $result,
         'nama' => $nama,
         'umurPasien' => $umurPasien,
@@ -132,33 +132,30 @@ public function diagnosa(Request $request) {
                 'nama_penyakit' => $penyakit->nama_penyakit,
                 'solusi_penyakit' => $penyakit->solusi_penyakit,
                 'result' => $result,
+                'nilai_probabilitas' => $totalProbabilities[$idPenyakit],
             ];
+            
+        }
+        if (!empty($totalBayes)) {
             usort($totalBayes, function ($a, $b) {
-                // Urutkan dari yang terbesar ke yang terkecil berdasarkan nilai 'result'
                 return $b['result'] <=> $a['result'];
             });
-            if (!empty($totalBayes)) {
-                $nilaiTertinggi = max(array_column($totalBayes, 'result'));
-                $penyakitTerdiagnosa = array_filter($totalBayes, function($item) use ($nilaiTertinggi) {
-                    return $item['result'] == $nilaiTertinggi;
-                });
-                $penyakitTerdiagnosa = array_values($penyakitTerdiagnosa)[0];
+            $penyakitTerdiagnosa = $totalBayes[0];
 
-                
-                $nama = Auth::user()->nama;
-                // Simpan hasil diagnosis ke database
-                $diagnosis = new Result();
-                $diagnosis->nama = $nama; // Atau Auth::user()->id
-                $diagnosis->nama_penyakit = $penyakitTerdiagnosa['nama_penyakit'];
-                $diagnosis->nilai_probabilitas = $penyakitTerdiagnosa['result'];
-                $diagnosis->result = $penyakitTerdiagnosa['result'];
-                $diagnosis->solusi_penyakit = $penyakitTerdiagnosa['solusi_penyakit'];
-                $diagnosis->selected_gejalas = json_encode($selectedGejalas);
-                $diagnosis->save();
-            } else {
-                
-                $penyakitTerdiagnosa = null; // or any other appropriate action
-            }
+            
+            $nama = Auth::user()->nama;
+            // Simpan hasil diagnosis ke database
+            $diagnosis = new Result();
+            $diagnosis->nama = $nama; 
+            $diagnosis->nama_penyakit = $penyakitTerdiagnosa['nama_penyakit'];
+            $diagnosis->nilai_probabilitas = $penyakitTerdiagnosa['nilai_probabilitas'];
+            $diagnosis->result = $penyakitTerdiagnosa['result'];
+            $diagnosis->solusi_penyakit = $penyakitTerdiagnosa['solusi_penyakit'];
+            $diagnosis->selected_gejalas = json_encode($selectedGejalas);
+            $diagnosis->save();
+        } else {
+            
+            $penyakitTerdiagnosa = null; // or any other appropriate action
         }
         
         $nama = Auth::user()->nama;
@@ -204,7 +201,7 @@ public function diagnosa(Request $request) {
     } else {
         $query->orderBy('created_at', 'desc'); // Default sorting
     }
-    $riwayat = $query->get();
+    $riwayat = $query->paginate(5);
         return view('riwayatKonsultasi.index', [
             'title' => 'Riwayat Konsultasi',
             'riwayat' => $riwayat
@@ -213,15 +210,10 @@ public function diagnosa(Request $request) {
     
     public function downloadPdf(Request $request)
     {
-
         $query = Result::where('nama', Auth::user()->nama);
-        $results = $query->get();
 
-    $pdf = PDF::loadView('Exports.hasilKonsultasi', [
-        'results' => $results
-    ]);
-
-    return $pdf->stream('Hasil Konsultasi.pdf');
+        $title = 'Hasil Konsultasi';
+        return view('exports.KonsultasiResult', compact('title'));
     }
 
 }
