@@ -22,7 +22,7 @@ class PdfController extends Controller
     public function dataGejala()
     {
         $gejala = Gejala::all();
-        $title = 'list data gejala TB';
+        $title = 'List Data Gejala TB 2024';
         return view('exports.ListDataGejala', compact('gejala','title'));
 
         // $gejala = Gejala::all();
@@ -34,7 +34,7 @@ class PdfController extends Controller
     public function dataPenyakit() 
     {
         $penyakit = Penyakit::all();
-        $title = 'List Data Penyakit TB';
+        $title = 'List Data Penyakit TB 2024';
         return view('exports.ListDataPenyakit', compact('penyakit','title'));
     }
 }
