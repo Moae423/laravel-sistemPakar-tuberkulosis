@@ -2,7 +2,7 @@
 @section('content')
 <div class="container pt-3">
     <h2 class="text-center">Daftar Penyakit</h2>
-    <a href="{{ route('pdf.dataGejala') }}" target="_blank"><button class="btn btn-info mb-3">Download PDF</button></a>
+    <a href="{{ route('pdf.dataPenyakit') }}" target="_blank"><button class="btn btn-info mb-3">Download PDF</button></a>
     @if (session()->has('success'))
     <div class="alert alert-success alert-dismissible fade show mt-5" role="alert">
       {{ session('success') }}
