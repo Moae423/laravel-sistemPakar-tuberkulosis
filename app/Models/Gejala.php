@@ -9,8 +9,4 @@ class Gejala extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
-    public function rules()
-    {
-        return $this->belongsTo(Rule::class, 'idGejala');
-    }
 }

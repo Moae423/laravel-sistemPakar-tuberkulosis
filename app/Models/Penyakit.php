@@ -14,12 +14,6 @@ class Penyakit extends Model
     // protected $table = 'penyakits';
     public function rules()
     {
-        return $this->belongsTo(Rule::class, 'idPenyakit');
-    }
-    public function gejalas()
-    {
-        return Attribute::make(
-            get: fn ($value) => $value ? asset('storage/diseases/' . basename($value)) : null
-        );
+        return $this->belongsTo(Rule::class);
     }
 }

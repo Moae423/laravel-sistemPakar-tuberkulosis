@@ -13,11 +13,11 @@ class Rule extends Model
     protected $guarded = ['id'];
     public function penyakit()
     {
-        return $this->hasMany(Penyakit::class, 'idPenyakit');
+        return $this->hasMany(Penyakit::class);
     }
     public function gejala()
     {
-        return $this->hasMany(Gejala::class, 'idGejala');
+        return $this->hasMany(Gejala::class);
     }
     // return $this->belongsTo(Produk::class, 'idbarang', 'idbarang');
     // public function gejala()

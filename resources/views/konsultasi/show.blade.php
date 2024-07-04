@@ -97,7 +97,7 @@
                 <button type="submit" class="btn btn-lg btn-success">Download</button>
             </div> --}}
             <div class="text-center mt-3 btn-print ">
-                <button class="btn btn-success no-print">Simpan</button>
+                <button class="btn btn-info no-print">Exports Hasil</button>
             </div>
         {{-- </form> --}}
 </div>

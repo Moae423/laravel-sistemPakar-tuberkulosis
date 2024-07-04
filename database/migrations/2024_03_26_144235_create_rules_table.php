@@ -15,13 +15,13 @@ return new class extends Migration
     {
         Schema::create('rules', function (Blueprint $table) {
             $table->id(); 
-            $table->unsignedBigInteger('idGejala')->references('id')->constrained('gejalas')->onDelete('cascade');
-            $table->unsignedBigInteger('idPenyakit')->references('id')->constrained('penyakits')->onDelete('cascade');
+            $table->unsignedBigInteger('idGejala');
+            $table->unsignedBigInteger('idPenyakit');
             $table->float('nilai_probabilitas');
             $table->timestamps();
 
-            // $table->foreign('kode_penyakit')->references('id')->on('penyakits');
-            // $table->foreign('kode_gejala')->references('id')->on('gejalas');
+            $table->foreign('idGejala')->references('id')->on('gejalas')->onDelete('cascade');
+            $table->foreign('idPenyakit')->references('id')->on('penyakits')->onDelete('cascade');
         });
     }
 
