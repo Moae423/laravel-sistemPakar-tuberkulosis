@@ -144,8 +144,10 @@ public function diagnosa(Request $request) {
 
             
             $nama = Auth::user()->nama;
+            $id_pasien = Auth::user()->id;
             // Simpan hasil diagnosis ke database
             $diagnosis = new Result();
+            $diagnosis->id_pasien = $id_pasien; 
             $diagnosis->nama = $nama; 
             $diagnosis->nama_penyakit = $penyakitTerdiagnosa['nama_penyakit'];
             $diagnosis->nilai_probabilitas = $penyakitTerdiagnosa['nilai_probabilitas'];
@@ -159,6 +161,7 @@ public function diagnosa(Request $request) {
         }
         
         $nama = Auth::user()->nama;
+        $id_pasien = Auth::user()->id;
         $umurPasien = Auth::user()->umur;
         $alamatPasien = Auth::user()->alamat;
         return view('konsultasi.show',[
@@ -173,6 +176,7 @@ public function diagnosa(Request $request) {
             'totalProbabilitiesHE' => $totalProbabilitiesHE,
             'totalBayes' => $totalBayes,
             'nama' => $nama,
+            'id_pasien' => $id_pasien,
             'umurPasien' => $umurPasien,
             'alamatPasien' => $alamatPasien,
             'nilai_tertinggi' => $penyakitTerdiagnosa
