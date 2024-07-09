@@ -53,7 +53,6 @@ class PenyakitController extends Controller
         }
         $kodePenyakit = $kodePenyakits . $nomorUrut;
         $requestData = $request->validate([
-            'id_penyakit' => ['required'],
             'nama_penyakit' => ['required'],
             'detail_penyakit' => ['required'],
             'solusi_penyakit' => ['required'],
