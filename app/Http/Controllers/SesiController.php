@@ -40,7 +40,7 @@ class SesiController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'nama' => ['required', 'max:50'],
+            'nama' => ['required', 'min:20'],
             'email' => ['required'],
             'userType' => ['required', 'string', 'in:admin,pasien'], 
             'password' => ['required', 'min:3','max:20'],

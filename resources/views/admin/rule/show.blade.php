@@ -25,8 +25,8 @@
         @foreach ($rules as $rule)
           <tr>
           <th scope="row">{{ $no++ }}</th>
-          <td>{{ $rule->kode_penyakit }}</td>
-          <td>{{ $rule->kode_gejala }}</td>
+          <td>{{$rule->idPenyakit }}</td>
+          <td>{{$rule->idGejala }}</td>
           <td>{{ $rule->nilai_probabilitas }}</td>
           <td>
             <a href="/admin/rule/{{$rule->id}}/edit" class="btn btn-primary">

@@ -28,17 +28,17 @@
             @csrf
             <div class="form-group">
                 <label for="kode_penyakit">Penyakit:</label>
-                <select name="kode_penyakit" id="kode_penyakit" class="form-control">
+                <select name="idPenyakit" id="kode_penyakit" class="form-control">
                     @foreach ($penyakit as $penyakit_s)
-                        <option value="{{ $penyakit_s->kode_penyakit }}">{{ $penyakit_s->kode_penyakit }}</option>
+                        <option value="{{ $penyakit_s->id }}">{{ $penyakit_s->nama_penyakit }}</option>
                     @endforeach
                 </select>
             </div>
             <div class="form-group">
                 <label for="kode_gejala">Gejala:</label>
-                <select name="kode_gejala" id="kode_gejala" class="form-control" >
+                <select name="idGejala" id="kode_gejala" class="form-control" >
                     @foreach ($gejala as $gejala_s)
-                        <option value="{{ $gejala_s->kode_gejala }}">{{ $gejala_s->kode_gejala }}</option>
+                        <option value="{{ $gejala_s->id }}">{{ $gejala_s->nama_gejala }}</option>
                     @endforeach
                 </select>
             </div>

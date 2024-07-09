@@ -51,7 +51,7 @@ class GejalaController extends Controller
         }
         $kodePenyakit = $kodeGejalas . $nomorUrut;
         $requestData = $request->validate([
-            'id_gejala' => ['required'],
+            // 'id_gejala' => ['required'],
             'nama_gejala' => ['required'],
         ]);
         $requestData['kode_gejala'] = $kodePenyakit;

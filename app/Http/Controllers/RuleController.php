@@ -54,8 +54,8 @@ class RuleController extends Controller
     {
         //
         $requestData = $request->validate([
-            'kode_gejala' => ['required'],
-            'kode_penyakit' => ['required'],
+            'idGejala' => ['required'],
+            'idPenyakit' => ['required'],
             'nilai_probabilitas' => ['required'],
         ]);
         if (Rule::create($requestData)) {
@@ -73,9 +73,20 @@ class RuleController extends Controller
      */
     public function show(Rule $id)
     {
+        $rules = rule::all()->map(function ($rule) {
+            $rule->idPenyakit = 'P0' . $rule->idPenyakit;
+    
+            if ($rule->idGejala <= 10) {
+                $rule->idGejala = 'G0' . $rule->idGejala;
+            } else {
+                $rule->idGejala = 'G' . $rule->idGejala;
+            }
+    
+            return $rule;
+        });
         return view('admin.rule.show',[
             'title'=> 'Laporan Data Rule',
-            'rules'=> rule::all(),
+            'rules'=> $rules,
         ]);
     }
 
@@ -87,10 +98,24 @@ class RuleController extends Controller
      */
     public function edit($id)
     {
+        $gejalas = Gejala::all()->map(function ($gejala) {
+            if ($gejala->id < 10) {
+                $gejala->displayId  = 'G0' . $gejala->id;
+            } else {
+                $gejala->displayId  = 'G' . $gejala->id;
+            }
+    
+            return $gejala;
+        });
+        $penyakits = Penyakit::all()->map(function ($penyakit) {
+                $penyakit->displayId  = 'P0' . $penyakit->id;
+    
+            return $penyakit;
+        });
         return view('admin.rule.edit' ,[
             'title' => 'Edit Data Rule',
-            'penyakit' => Penyakit::all(),
-            'gejala' => Gejala::all(),
+            'penyakits' => $penyakits,
+            'gejalas' => $gejalas,
             'rules' => rule::findOrFail( $id ),
         ]);
     }
@@ -111,8 +136,8 @@ class RuleController extends Controller
         //     'nilai_probabilitas' => 'required',
         // ]);
         $rule = Rule::findOrFail($id);
-        $rule->kode_penyakit = $request->kode_penyakit;
-        $rule->kode_gejala = $request->kode_gejala;
+        $rule->idPenyakit = $request->kode_penyakit;
+        $rule->idgejala = $request->kode_gejala;
         $rule->nilai_probabilitas = $request->nilai_probabilitas;
         $rule->save();
 

@@ -26,7 +26,7 @@
         <div class="card-body ">
           <form action="/admin/gejala" method="POST" class="center-form">
             @csrf
-            <div class="form-group">
+            {{-- <div class="form-group">
               <label for="kode">ID Gejala</label>
               <input type="text" class="form-control @error('id_gejala')
                 is-invalid
@@ -36,7 +36,7 @@
                 {{ $message }}
               </div>
               @enderror
-            </div>
+            </div> --}}
             <div class="form-group">
               <label for="nama">Nama Gejala</label>
               <input type="text" class="form-control @error('nama_gejala')

@@ -15,7 +15,7 @@
         </div>
         @auth
         <div class="info">
-          <a href="#" class="d-block">Dr. {{ auth()->user()->namaPasien }}</a>
+          <a href="#" class="d-block">Dr. {{ auth()->user()->nama }}</a>
         </div>
         @endauth
       </div>
@@ -78,6 +78,12 @@
                 <a href="/daftar/show" class="nav-link {{ Request::is('/daftar/show') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Reports Data Pasien</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/admin/rule/show" class="nav-link {{ Request::is('/daftar/show') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Reports Data Rule</p>
                 </a>
               </li>
               <li class="nav-item">
