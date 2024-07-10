@@ -34,12 +34,15 @@ Route::get('/', function () {
         'title'=> 'Home',
     ]);
 });
-Route::get('/admin', function () {
-    return view('admin.layouts.main' ,[
 
-        'title'=> 'Home',
-    ]);
-})->middleware('auth','admin');
+Route::get('dashboard', [KonsultasiController::class, 'dashboard'])->name('konsultasi.dashboard')->middleware('auth');
+
+
+// Route::get('/admin', function () {
+//     return view('admin.layouts.main' ,[
+//         'title'=> 'Home',
+//     ]);
+// })->middleware('auth','admin');
 
 // LOGIN
 // Route::resource('/login',LoginController::class);

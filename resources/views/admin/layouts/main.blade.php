@@ -49,8 +49,9 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
+        {{-- <h1 class="text-center"><strong>Lorem ipsum dolor sit amet.</strong></h1> --}}
         <!-- Main row -->
-        <div class="row">
+        
           <!-- right col (We are only adding the ID to make the widgets sortable)-->
           <section class="col-lg-5 connectedSortable">
             
@@ -63,7 +64,7 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  <footer class="main-footer">
+  <footer class="main-footer text-center">
     <strong>Made By Daffa Rihadatul Fairus &copy; 2024</strong>
     All rights reserved.
   </footer>
