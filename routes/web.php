@@ -35,8 +35,8 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('dashboard', [KonsultasiController::class, 'dashboard'])->name('konsultasi.dashboard')->middleware('auth');
-
+// Route::get('dashboard', [KonsultasiController::class, 'dashboard'])->name('konsultasi.dashboard')->middleware('auth');
+Route::get('/home', [HomeController::class, 'index'])->name('home.index')->middleware('auth');
 
 // Route::get('/admin', function () {
 //     return view('admin.layouts.main' ,[

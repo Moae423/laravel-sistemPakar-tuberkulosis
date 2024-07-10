@@ -221,17 +221,7 @@ public function diagnosa(Request $request) {
         $title = 'Hasil Konsultasi';
         return view('exports.KonsultasiResult', compact('title'));
     }
-    public function dashboard()
-    {
-        $penyakits = Penyakit::count();
-        $gejalas = Gejala::count();
-        $users = User::where('userType', 'pasien')->paginate(10);
-        $jumlahPasiens = User::count();
-        $rules = Rule::count();
-        $title = 'home';
-        return view('admin.layouts.main', compact('penyakits', 'jumlahPasiens', 'gejalas' ,'rules', 'title', 'users'));
 
-    }
 
 }
 
