@@ -97,7 +97,9 @@
                 <button type="submit" class="btn btn-lg btn-success">Download</button>
             </div> --}}
             <div class="text-center mt-3 btn-print ">
-                <button class="btn btn-info no-print">Exports Hasil</button>
+                <a href="{{ route('konsutlasi.downloadPdf') }}">    
+                    <button class="btn btn-info no-print">Exports Hasil</button>
+                </a>
             </div>
         {{-- </form> --}}
 </div>

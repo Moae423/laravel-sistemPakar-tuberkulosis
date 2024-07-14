@@ -82,8 +82,8 @@ Route::middleware(['auth'])->prefix('pdf')->name('pdf.')->group(function () {
 // Route::get('/download', [PdfController::class, 'dataPenyakit'])->name('pdf.dataPenyakit')->middleware('auth');
 // diagnose
 Route::get('konsultasi', [KonsultasiController::class, 'index'])->name('konsultasi.index')->middleware('auth');
+Route::get('konsultasi/downloadPdf', [KonsultasiController::class, 'downloadPdf'])->name('konsutlasi.downloadPdf')->middleware('auth');
 Route::post('konsultasi/diagnosa', [KonsultasiController::class, 'diagnosa'])->name('konsultasi.diagnosa')->middleware('auth');
-// Rute untuk menyimpan hasil konsultasi dengan metode POST
 Route::post('konsultasi/store', [KonsultasiController::class, 'store'])->name('konsultasi.store')->middleware('auth');
 Route::get('/riwayatKonsultasi', [KonsultasiController::class, 'riwayatKonsultasi'])->name('konsultasi.riwayat');
 

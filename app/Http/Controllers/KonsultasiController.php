@@ -149,7 +149,8 @@ public function diagnosa(Request $request) {
             $id_pasien = Auth::user()->id;
             // Simpan hasil diagnosis ke database
             $diagnosis = new Result();
-            $diagnosis->id_pasien = $id_pasien; 
+            $diagnosis->id_pasien = $id_pasien;
+            $diagnosis->idPenyakit = $penyakitTerdiagnosa['id'];
             $diagnosis->nama = $nama; 
             $diagnosis->nama_penyakit = $penyakitTerdiagnosa['nama_penyakit'];
             $diagnosis->nilai_probabilitas = $penyakitTerdiagnosa['nilai_probabilitas'];
@@ -216,10 +217,10 @@ public function diagnosa(Request $request) {
     
     public function downloadPdf(Request $request)
     {
-        $query = Result::where('nama', Auth::user()->nama);
-
-        $title = 'Hasil Konsultasi';
-        return view('exports.KonsultasiResult', compact('title'));
+        // $selectedGejalas = $request->input('selectedGejalas');
+        // $results = $this->proccess($selectedGejalas);
+        $pdf = PDF::loadView('exports.hasilKonsultasiPasien');
+        return $pdf->stream('diagnosa-results.pdf');
     }
 
 
