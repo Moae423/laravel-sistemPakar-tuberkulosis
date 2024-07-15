@@ -1,63 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diagnosa Results</title>
+    <title>{{ $title }}</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-        table, th, td {
-            border: 1px solid black;
-        }
-        th, td {
-            padding: 8px;
-            text-align: left;
-        }
+        body { font-family: DejaVu Sans, sans-serif; }
+        .text-danger { color: red; }
+        .fw-bolder { font-weight: bolder; }
     </style>
 </head>
 <body>
-    <h1>Diagnosa Results</h1>
-    <p>Nama: {{ Auth::user()->nama}}</p>
-    <p>Umur: {{ Auth::user()->umur }}</p>
-    <p>Alamat: {{ Auth::user()->alamat}}</p>
+    <h1>{{ $title }}</h1>
+    <p>Nama: {{ $nama }}</p>
+    <p>Umur: {{ $umurPasien }}</p>
+    <p>Alamat: {{ $alamatPasien }}</p>
 
-    <h2>Gejala yang Dipilih:</h2>
-    <ul>
-        @foreach ($selectedGejalas as $gejala)
-            <li>{{ $gejala->nama_gejala }}</li>
-        @endforeach
-    </ul>
+    @if(!empty($result['totalBayes']))
+        <p>Jadi dari hasil system diagnosa menunjukkan bahwa anda mengalami 
+            <span class="text-danger fw-bolder">{{ $nilai_tertinggi['nama_penyakit'] }}</span>
+            dengan tingkat kemungkinan terjadinya 
+            <span class="text-danger fw-bolder">{{ number_format($nilai_tertinggi['result'] * 100, 2) }}%</span>
+        </p>
+    @else
+        <p>Tidak ada data yang ditemukan</p>
+    @endif
 
-    <h2>Diagnosis:</h2>
-    <p>Penyakit: {{ $nilai_tertinggi['nama_penyakit'] }}</p>
-    <p>Probabilitas: {{ $nilai_tertinggi['nilai_probabilitas'] }}</p>
-    <p>Solusi: {{ $nilai_tertinggi['solusi_penyakit'] }}</p>
-
-    <h2>Probabilitas Total:</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>ID Penyakit</th>
-                <th>Nama Penyakit</th>
-                <th>Probabilitas</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($totalBayes as $bayes)
+    @if(isset($result['totalBayes']) && !empty($result['totalBayes']))
+        <h2>Hasil Diagnosa:</h2>
+        <table border="1">
+            <thead>
                 <tr>
-                    <td>{{ $bayes['id'] }}</td>
-                    <td>{{ $bayes['nama_penyakit'] }}</td>
-                    <td>{{ $bayes['result'] }}</td>
+                    <th>Nama Penyakit</th>
+                    <th>Probabilitas</th>
+                    <th>Solusi</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach($result['totalBayes'] as $bayes)
+                    <tr>
+                        <td>{{ $bayes['nama_penyakit'] }}</td>
+                        <td>{{ number_format($bayes['result'] * 100, 2)  }}%</td>
+                        <td>{{ $bayes['solusi_penyakit'] }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    @else
+        <p>Tidak ada data yang ditemukan</p>
+    @endif
 </body>
 </html>

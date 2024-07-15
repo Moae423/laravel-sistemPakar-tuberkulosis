@@ -40,9 +40,9 @@
                 {{-- </div> --}}
                     <h2 class="text-center">Gejala Yang Dipilih</h2>
                 <div class="card-body">
-                    @if(!empty($selectedGejalas))
+                    @if(!empty($result['totalBayes']))
                         <ul>
-                            @foreach($selectedGejalas as $gejala)
+                            @foreach($result['selectedGejalas'] as $gejala)
                                 <li>{{ $gejala->nama_gejala }}</li>
                             @endforeach
                         </ul>
@@ -56,7 +56,7 @@
                     <h2>Hasil Menunjukkan bahwa</h2>
                 </div>
                 <div class="card-body">
-                    @if(!empty($totalBayes))
+                    @if(!empty($result['totalBayes']))
                         <table class="table">
                             <thead class="text-center ">
                                 <tr>
@@ -66,7 +66,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($totalBayes as $bayes)
+                                @foreach($result['totalBayes'] as $bayes)
                                     <tr>
                                         <td>{{ $bayes['nama_penyakit'] }}</td>
                                         <td>{{ number_format($bayes['result'] * 100, 2) }}%</td>
@@ -83,7 +83,7 @@
                 {{-- <div class="card-header"> --}}
                     <h2 class="text-center ">Conclusion</h2>
                 {{-- </div> --}}
-                @if(!empty($totalBayes))
+                @if(!empty($result['totalBayes']))
                                     <p class="">Jadi dari hasil system diagnosa menunjukkan bahwa anda mengalami <span class="text-danger fw-bolder "> {{ $nilai_tertinggi['nama_penyakit'] }} </span>
                                         dengan tingkat kemungkinan terjadinya <span  class="text-danger fw-bolder "> {{ number_format($nilai_tertinggi['result'] * 100, 2) }}%</span></p>
                                     </tr>
@@ -91,17 +91,14 @@
                         <p>No related diseases found.</p>
                     @endif
                 </div>
+                <form method="POST" action="{{ route('konsultasi.printDiagnosaPDF') }}">
+                    @csrf
+                    @foreach($selectedGejalas as $gejala)
+                        <input type="hidden" name="selectedGejalas[]" value="{{ $gejala }}">
+                    @endforeach
+                    <button type="submit">Cetak PDF</button>
+                </form>
             </div>
-            
-            {{-- <div class="text-center mt-3">
-                <button type="submit" class="btn btn-lg btn-success">Download</button>
-            </div> --}}
-            <div class="text-center mt-3 btn-print ">
-                <a href="{{ route('konsutlasi.downloadPdf') }}">    
-                    <button class="btn btn-info no-print">Exports Hasil</button>
-                </a>
-            </div>
-        {{-- </form> --}}
 </div>
 <script>
 </script>

@@ -79,12 +79,7 @@
                 <td>{{ number_format($result->result * 100) }}%</td>
                 <td>{{ $result->created_at->format('d-m-Y H:i') }}</td>
                 <td>
-                    <a href="#" class="btn btn-info">
-                        <img src="/image/cloud_download_24dp.svg" alt="">
-                    </a>
-                </td>
-                <td>
-                    <form action="#" method="POST">
+                    <form action="/admin/hasil/{{ $result->id }}" method="POST">
                         @method('delete')
                         @csrf
                         <button class="btn btn-danger" onclick="return confirm('Apakah Anda Yakin Data Gejala Mau Dihapus')"><i class="fas fa-trash-alt"></i> </button>

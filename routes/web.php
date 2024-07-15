@@ -55,38 +55,34 @@ Route::resource('/daftar', SesiController::class);
 Route::get('/login', [MasukController::class, 'index'])->middleware('guest');
 Route::post('/login', [MasukController::class, 'login']); 
 Route::post('/logout', [MasukController::class, 'logout']);
-// LOG OUT
-// Route::resource('/register', RegisterController::class);
-// home
+// HOME
 Route::get('/home', [HomeController::class, 'index'])->middleware('auth');
-// penyakit
+// PENYAKIT
 Route::resource('/admin/penyakit', PenyakitController::class)->middleware('auth');
-// gejala
+// GEJALA
 Route::resource('/admin/gejala', GejalaController::class)->middleware('auth');
-// konsultasi
+// KONSULTASI
 Route::resource('/admin/rule', RuleController::class)->middleware('auth');
-// konsultasiA
-// Route::resource('/konsultasi', KonsultasiController::class)->middleware('auth');
-// hasil
+// HASIL
 Route::resource('/admin/hasil', ResultController::class)->middleware('auth');
 
-// Route::resource('/riwayat', ResultController::class)->middleware('auth');
+// PDF 
 Route::middleware(['auth'])->prefix('pdf')->name('pdf.')->group(function () {
     Route::get('/download', [PdfController::class, 'downloadPdf'])->name('downloadPdf');
     Route::get('/dataGejala', [PdfController::class, 'dataGejala'])->name('dataGejala');
+    Route::get('/hasilKonsultasi', [PdfController::class, 'konsultasi'])->name('konsultasi');
     Route::get('/dataPenyakit', [PdfController::class, 'dataPenyakit'])->name('dataPenyakit');
 });
 
-// Route::get('/download', [PdfController::class, 'downloadPdf'])->name('pdf.downloadPdf')->middleware('auth');
-// Route::get('/dataGejala', [PdfController::class, 'dataGejala'])->name('pdf.dataGejala')->middleware('auth');
-// Route::get('/download', [PdfController::class, 'dataPenyakit'])->name('pdf.dataPenyakit')->middleware('auth');
-// diagnose
-Route::get('konsultasi', [KonsultasiController::class, 'index'])->name('konsultasi.index')->middleware('auth');
-Route::get('konsultasi/downloadPdf', [KonsultasiController::class, 'downloadPdf'])->name('konsutlasi.downloadPdf')->middleware('auth');
-Route::post('konsultasi/diagnosa', [KonsultasiController::class, 'diagnosa'])->name('konsultasi.diagnosa')->middleware('auth');
-Route::post('konsultasi/store', [KonsultasiController::class, 'store'])->name('konsultasi.store')->middleware('auth');
-Route::get('/riwayatKonsultasi', [KonsultasiController::class, 'riwayatKonsultasi'])->name('konsultasi.riwayat');
+// KONSULTASI
+Route::middleware(['auth'])->name('konsultasi.')->group(function () {
+    Route::get('konsultasi', [KonsultasiController::class, 'index'])->name('index');
+    Route::post('konsultasi/diagnosa', [KonsultasiController::class, 'diagnosa'])->name('diagnosa');
+    Route::post('konsultasi/store', [KonsultasiController::class, 'store'])->name('store');
+    Route::get('/riwayatKonsultasi', [KonsultasiController::class, 'riwayatKonsultasi'])->name('riwayat');
+    // Route::post('/printpdf', [KonsultasiController::class, 'printDiagnosaPDF'])->name('printDiagnosaPDF');
+    Route::post('/konsultasi/print', [KonsultasiController::class, 'printDiagnosaPDF'])->name('printDiagnosaPDF');
 
-// pdf
-// Route::get('/download', [KonsultasiController::class, 'downloadPdf'])->name('konsutlasi.downloadPdf');
-// Route::get('/download', [ResultController::class, 'downloadPdf'])->name('result.downloadPdf');
+
+    
+});

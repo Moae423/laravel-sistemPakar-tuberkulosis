@@ -114,9 +114,10 @@ class ResultController extends Controller
      * @param  \App\Models\Result  $result
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Result $result)
+    public function destroy($id)
     {
-        //
+        Result::destroy($id);
+        return redirect('/admin/hasil')->with('success', 'Data Konsultasi Sudah Dihapus');
     }
     
 }

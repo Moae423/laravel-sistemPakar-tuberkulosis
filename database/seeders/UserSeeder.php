@@ -36,7 +36,7 @@ class UserSeeder extends Seeder
         $u = new User;
         $u->nama = 'Daffa';
         $u->userType = 'admin';
-        $u->email = 'daffa@gmail.com';
+        $u->email = 'admin@admin.com';
         $u->password = bcrypt('123');
         $u->umur = 22;
         $u->alamat = 'Birugo';

@@ -28,22 +28,18 @@ class KonsultasiController extends Controller
 public function diagnosa(Request $request) {
     $selectedGejalas = $request->input('selectedGejalas');
     $request->validate([
-        'selectedGejalas' => 'required|array|min:3',    
+        'selectedGejalas' => 'required|array|min:3',
     ]);
+    
+    $result = $this->proccess($selectedGejalas);
+
+    $title = 'Hasil Diagnosa';
     $nama = Auth::user()->nama;
     $umurPasien = Auth::user()->umur;
     $alamatPasien = Auth::user()->alamat;
-    $result = $this->proccess($selectedGejalas);
+    $nilai_tertinggi = $result['nilai_tertinggi'];
 
-    return view('konsultasi.show', [
-        'title' => 'Hasil Diagnosa',
-        'result' => $result,
-        'nama' => $nama,
-        'umurPasien' => $umurPasien,
-        'alamatPasien' => $alamatPasien,
-
-        
-    ]);
+    return view('konsultasi.show', compact('title', 'nama','nilai_tertinggi', 'umurPasien', 'alamatPasien', 'result','selectedGejalas'));
 }
 
     public function proccess($selectedGejalas) 
@@ -167,9 +163,12 @@ public function diagnosa(Request $request) {
         $id_pasien = Auth::user()->id;
         $umurPasien = Auth::user()->umur;
         $alamatPasien = Auth::user()->alamat;
-        return view('konsultasi.show',[
-            
-            'title' => 'Diagnosa Results',
+        return [
+            'title' => '',
+            'nama' => $nama,
+            'id_pasien' => $id_pasien,
+            'umurPasien' => $umurPasien,
+            'alamatPasien' => $alamatPasien,
             'selectedGejalas' => $getSelectedGejalas,
             'relatedPenyakits' => $relatedpenyakitNames,
             'relateGejalas' => $relatedGejalas,
@@ -178,12 +177,8 @@ public function diagnosa(Request $request) {
             'totalProbE' => $totalProbabilitiesE,
             'totalProbabilitiesHE' => $totalProbabilitiesHE,
             'totalBayes' => $totalBayes,
-            'nama' => $nama,
-            'id_pasien' => $id_pasien,
-            'umurPasien' => $umurPasien,
-            'alamatPasien' => $alamatPasien,
             'nilai_tertinggi' => $penyakitTerdiagnosa
-        ]);
+        ];
     }
     public function store(Request $request)
     {
@@ -214,14 +209,27 @@ public function diagnosa(Request $request) {
             'riwayat' => $riwayat
         ]);
     }
-    
-    public function downloadPdf(Request $request)
-    {
-        // $selectedGejalas = $request->input('selectedGejalas');
-        // $results = $this->proccess($selectedGejalas);
-        $pdf = PDF::loadView('exports.hasilKonsultasiPasien');
-        return $pdf->stream('diagnosa-results.pdf');
+    public function printDiagnosaPDF(Request $request) {
+        $selectedGejalas = $request->input('selectedGejalas');
+        $request->validate([
+            'selectedGejalas' => 'required|array|min:3',
+        ]);
+
+        $result = $this->proccess($selectedGejalas);
+
+        $title = 'Hasil Diagnosa';
+        $nama = Auth::user()->nama;
+        $umurPasien = Auth::user()->umur;
+        $alamatPasien = Auth::user()->alamat;
+        $nilai_tertinggi = $result['nilai_tertinggi'];
+
+        $data = compact('title', 'nama', 'umurPasien', 'alamatPasien', 'result', 'nilai_tertinggi', 'selectedGejalas');
+
+        $pdf = PDF::loadView('exports.hasilKonsultasiPasien', $data);
+        
+        return $pdf->stream('diagnosa.pdf');
     }
+
 
 
 }

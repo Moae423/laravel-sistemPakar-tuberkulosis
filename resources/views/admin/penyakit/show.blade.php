@@ -42,9 +42,6 @@
               @csrf
               <button class="btn btn-danger" onclick="return confirm('Apakah Anda Yakin Data Penyakit Mau Dihapus')"><i class="fas fa-trash-alt"></i> </button>
             </form>
-            {{-- <a href="#" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete?')">
-              <i class="fas fa-trash-alt"></i> 
-            </a> --}}
           </td>
 
         </tr>
