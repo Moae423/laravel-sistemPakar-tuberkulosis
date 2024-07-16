@@ -72,9 +72,6 @@
                 </div>
                 <button type="submit" class="btn btn-primary btn-block w-100">Login</button>
             </form>
-                <div class="text-center mt-3">
-                    <a href="#" class="text-decoration-none fw-medium">Forgot password?</a>
-                </div>
             </div>
         </div>
 </div>

@@ -60,21 +60,10 @@ class PenyakitController extends Controller
         $requestData['kode_penyakit'] = $kodePenyakit;
         
         if (Penyakit::create($requestData)) {
-            return redirect('/admin/penyakit/show')->with('success', 'Data Penyakit Sudah Ditambahkan');
+            return redirect('/admin/penyakit/create')->with('success', 'Data Penyakit Sudah Ditambahkan');
         } else {
             return back()->withErrors('penyakitFailed', 'Data yang dimasukkan tidak sesuai');
         }
-
-        // $validatedData = $request->validate([
-        //     'id_penyakit' => ['required', 'unique:penyakits', 'min:5'],
-        //     'nama_penyakit' => ['required', 'min:20', 'max:50'],
-        //     'detail_penyakit' => ['required', 'max:225'],
-        //     'solusi_penyakit' => ['required', 'max:255']
-        // ]);
-
-
-        // Penyakit::create($validatedData);
-        // return redirect('/admin/penyakit/create')->with('success', 'Data Penyakit Sudah Ditambahkan');
     }
 
     /**

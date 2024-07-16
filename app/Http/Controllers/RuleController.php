@@ -59,7 +59,7 @@ class RuleController extends Controller
             'nilai_probabilitas' => ['required'],
         ]);
         if (Rule::create($requestData)) {
-            return redirect('/admin/rule/show')->with('success', 'Data Rule Sudah Ditambahkan');
+            return redirect('/admin/rule/create')->with('success', 'Data Rule Sudah Ditambahkan');
         } else {
             return back()->withErrors('RuleFailed', 'Data yang dimasukkan tidak sesuai');
         }

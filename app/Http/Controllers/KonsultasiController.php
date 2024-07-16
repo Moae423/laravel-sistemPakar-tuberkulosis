@@ -225,9 +225,13 @@ public function diagnosa(Request $request) {
 
         $data = compact('title', 'nama', 'umurPasien', 'alamatPasien', 'result', 'nilai_tertinggi', 'selectedGejalas');
 
-        $pdf = PDF::loadView('exports.hasilKonsultasiPasien', $data);
+        return view('exports.hasilKonsultasiPasien', compact(
+            'title', 'nama', 'umurPasien', 'alamatPasien', 'result', 'nilai_tertinggi', 'selectedGejalas'
+        ));
+
+        // $pdf = PDF::loadView('exports.hasilKonsultasiPasien', $data);
         
-        return $pdf->stream('diagnosa.pdf');
+        // return $pdf->stream('diagnosa.pdf');
     }
 
 

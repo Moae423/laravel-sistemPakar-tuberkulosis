@@ -96,7 +96,9 @@
                     @foreach($selectedGejalas as $gejala)
                         <input type="hidden" name="selectedGejalas[]" value="{{ $gejala }}">
                     @endforeach
-                    <button type="submit">Cetak PDF</button>
+                    <div class="text-center">
+                        <button class="btn  btn-info target="_BLANK" no-print my-2" type="submit">Cetak</button>
+                    </div>
                 </form>
             </div>
 </div>

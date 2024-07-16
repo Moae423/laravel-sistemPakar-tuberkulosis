@@ -34,12 +34,12 @@ class UserSeeder extends Seeder
         $u->save();
         // admin
         $u = new User;
-        $u->nama = 'Daffa';
+        $u->nama = 'Yulia Sartika';
         $u->userType = 'admin';
         $u->email = 'admin@admin.com';
         $u->password = bcrypt('123');
         $u->umur = 22;
-        $u->alamat = 'Birugo';
+        $u->alamat = 'Padang Luar Kec. Banu Hampu Kabupate Agam';
         $u->save();
         User::factory(10)->create();
 

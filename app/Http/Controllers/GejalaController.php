@@ -57,7 +57,7 @@ class GejalaController extends Controller
         $requestData['kode_gejala'] = $kodePenyakit;
         
         if (Gejala::create($requestData)) {
-            return redirect('/admin/gejala/show')->with('success', 'Data Gejala Sudah Ditambahkan');
+            return redirect('/admin/gejala/create')->with('success', 'Data Gejala Sudah Ditambahkan');
         } else {
             return back()->withErrors('GejalaFailed', 'Data yang dimasukkan tidak sesuai');
         }
