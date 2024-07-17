@@ -107,15 +107,23 @@ class SesiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'nama' => ['required'],
             'email' => ['required'],
             'password' => 'required',
             'umur' => 'required',
             'alamat' => 'required',
         ]);
-        $penyakit = User::findOrFail($id);
-        $penyakit->update($request->all());
+        $user = User::findOrFail($id);
+        $user->nama = $validatedData['nama'];
+        $user->email = $validatedData['email'];
+        $user->umur = $validatedData['umur'];
+        $user->alamat = $validatedData['alamat'];
+
+        if (!empty($validatedData['password'])) {
+            $user->password = Hash::make($validatedData['password']); // Hash the new password
+        }
+        $user->save();
     
         return redirect('/daftar/show')->with('success', 'Data Pasien berhasil Di edit.');
     }

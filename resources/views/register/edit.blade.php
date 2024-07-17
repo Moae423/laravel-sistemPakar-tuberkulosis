@@ -36,7 +36,8 @@
           </div>
       @endif
       {{-- FORM EDIT --}}
-        <form action="/daftar/{{$users->id}}" method="POST">
+      {{-- /daftar/{{$users->id}} --}}
+        <form action="{{ route('daftar.update', $users->id) }}" method="POST">
             @method('PUT')
             @csrf
             {{-- FORM INPUT --}}
