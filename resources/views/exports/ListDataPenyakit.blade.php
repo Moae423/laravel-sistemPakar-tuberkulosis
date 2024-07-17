@@ -135,7 +135,7 @@
             <br>
             <br>
             <br>
-            <div class="">Dr {{ Auth::user()->nama }}, {{ now()->format('d-m-Y') }}</div>
+            <div class="">dr Yulia Sartika, {{ now()->format('d-m-Y') }}</div>
         </div>
     </div>
 </div>

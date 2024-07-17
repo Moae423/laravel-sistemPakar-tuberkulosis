@@ -28,12 +28,15 @@ class ResultController extends Controller
     {
 
         $query = Result::query();
-        // Filter berdasarkan nama pasien jika ada
+    // Filter Date
+    if ($request->filled('filter_date')) {
+        $query->whereDate('created_at', $request->filter_date);
+    }
+    // Filter Nama
      if ($request->filled('nama')) {
          $query->where('nama', 'like', '%' . $request->nama . '%');
      }
- 
-     // Sortir berdasarkan tanggal jika ada
+    // Filter Sortir
      if ($request->filled('sort_by') && in_array($request->sort_by, ['asc', 'desc'])) {
          $query->orderBy('created_at', $request->sort_by);
      } else {

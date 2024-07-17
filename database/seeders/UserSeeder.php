@@ -24,24 +24,24 @@ class UserSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         // user
-        $u = new User;
-        $u->nama = 'Angelina';
-        $u->userType = 'pasien';
-        $u->email = 'angelina@gmail.com';
-        $u->password = bcrypt('123');
-        $u->umur = 22;
-        $u->alamat = 'Birugo';
-        $u->save();
+        // $u = new User;
+        // $u->nama = 'Angelina';
+        // $u->userType = 'pasien';
+        // $u->email = 'angelina@gmail.com';
+        // $u->password = bcrypt('123');
+        // $u->umur = 22;
+        // $u->alamat = 'Birugo';
+        // $u->save();
         // admin
         $u = new User;
         $u->nama = 'Yulia Sartika';
         $u->userType = 'admin';
         $u->email = 'admin@admin.com';
-        $u->password = bcrypt('123');
+        $u->password = bcrypt('admin');
         $u->umur = 22;
-        $u->alamat = 'Padang Luar Kec. Banu Hampu Kabupate Agam';
+        $u->alamat = 'Padang Luar Kec. BanuHampu Kabupaten Agam';
         $u->save();
-        User::factory(10)->create();
+        // User::factory(10)->create();
 
     }
 }
