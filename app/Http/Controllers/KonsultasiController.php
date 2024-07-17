@@ -134,36 +134,35 @@ public function diagnosa(Request $request) {
             ];
             
         }
+        usort($totalBayes, function ($a, $b) {
+            return $b['result'] <=> $a['result'];
+        });
+        $penyakitTerdiagnosa = $totalBayes[0];
         if (!empty($totalBayes)) {
-            usort($totalBayes, function ($a, $b) {
-                return $b['result'] <=> $a['result'];
-            });
-            $penyakitTerdiagnosa = $totalBayes[0];
 
             
-            $nama = Auth::user()->nama;
-            $id_pasien = Auth::user()->id;
-            // Simpan hasil diagnosis ke database
-            $diagnosis = new Result();
-            $diagnosis->id_pasien = $id_pasien;
-            $diagnosis->idPenyakit = $penyakitTerdiagnosa['id'];
-            $diagnosis->nama = $nama; 
-            $diagnosis->nama_penyakit = $penyakitTerdiagnosa['nama_penyakit'];
-            $diagnosis->nilai_probabilitas = $penyakitTerdiagnosa['nilai_probabilitas'];
-            $diagnosis->result = $penyakitTerdiagnosa['result'];
-            $diagnosis->solusi_penyakit = $penyakitTerdiagnosa['solusi_penyakit'];
-            $diagnosis->selected_gejalas = json_encode($selectedGejalas);
-            $diagnosis->save();
+            // $nama = Auth::user()->nama;
+            // $id_pasien = Auth::user()->id;
+            // $diagnosis = new Result();
+            // $diagnosis->id_pasien = $id_pasien;
+            // $diagnosis->idPenyakit = $penyakitTerdiagnosa['id'];
+            // $diagnosis->nama = $nama; 
+            // $diagnosis->nama_penyakit = $penyakitTerdiagnosa['nama_penyakit'];
+            // $diagnosis->nilai_probabilitas = $penyakitTerdiagnosa['nilai_probabilitas'];
+            // $diagnosis->result = $penyakitTerdiagnosa['result'];
+            // $diagnosis->solusi_penyakit = $penyakitTerdiagnosa['solusi_penyakit'];
+            // $diagnosis->selected_gejalas = json_encode($selectedGejalas);
+            // $diagnosis->save();
         } else {
             
-            $penyakitTerdiagnosa = null; // or any other appropriate action
+            $penyakitTerdiagnosa = null;
         }
         
         $nama = Auth::user()->nama;
         $id_pasien = Auth::user()->id;
         $umurPasien = Auth::user()->umur;
         $alamatPasien = Auth::user()->alamat;
-        return [
+        $results =  [
             'title' => '',
             'nama' => $nama,
             'id_pasien' => $id_pasien,
@@ -179,6 +178,7 @@ public function diagnosa(Request $request) {
             'totalBayes' => $totalBayes,
             'nilai_tertinggi' => $penyakitTerdiagnosa
         ];
+        return $results;
     }
     public function store(Request $request)
     {
@@ -217,21 +217,42 @@ public function diagnosa(Request $request) {
 
         $result = $this->proccess($selectedGejalas);
 
+
+        if (!empty($result['totalBayes'])) {
+            usort($result['totalBayes'], function ($a, $b) {
+                return $b['result'] <=> $a['result'];
+            });
+            $penyakitTerdiagnosa = $result['totalBayes'][0];
+    
+            $nama = Auth::user()->nama;
+            $id_pasien = Auth::user()->id;
+    
+            // Simpan hasil diagnosis ke database
+            Result::create([
+                'id_pasien' => $id_pasien,
+                'idPenyakit' => $penyakitTerdiagnosa['id'],
+                'nama' => $nama,
+                'nama_penyakit' => $penyakitTerdiagnosa['nama_penyakit'],
+                'nilai_probabilitas' => $penyakitTerdiagnosa['nilai_probabilitas'],
+                'result' => $penyakitTerdiagnosa['result'],
+                'solusi_penyakit' => $penyakitTerdiagnosa['solusi_penyakit'],
+                'selected_gejalas' => json_encode($selectedGejalas)
+            ]);
+        } else {
+            $penyakitTerdiagnosa = null; // or any other appropriate action
+        }
+        
+
         $title = 'Hasil Diagnosa';
         $nama = Auth::user()->nama;
         $umurPasien = Auth::user()->umur;
         $alamatPasien = Auth::user()->alamat;
         $nilai_tertinggi = $result['nilai_tertinggi'];
 
-        $data = compact('title', 'nama', 'umurPasien', 'alamatPasien', 'result', 'nilai_tertinggi', 'selectedGejalas');
 
         return view('exports.hasilKonsultasiPasien', compact(
             'title', 'nama', 'umurPasien', 'alamatPasien', 'result', 'nilai_tertinggi', 'selectedGejalas'
         ));
-
-        // $pdf = PDF::loadView('exports.hasilKonsultasiPasien', $data);
-        
-        // return $pdf->stream('diagnosa.pdf');
     }
 
 

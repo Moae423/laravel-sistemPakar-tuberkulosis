@@ -51,7 +51,6 @@
                         <th>Probabilitas</th>
                         <th>Gejala yang Dipilih</th>
                         <th>Solusi Penyakit</th>
-                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="table-responsive ">
@@ -70,13 +69,6 @@
                             @endphp
                         </td>
                         <td>{{ $entry->solusi_penyakit }}</td>
-                        <td>
-                            <a href="{{ route('pdf.konsultasi') }}">
-                                <button class="border-0 p-4 btn btn-danger">
-                                    <img src="{{ asset('image/cloud_download_24dp.svg') }}" alt="PDF">
-                                </button>
-                            </a>
-                        </td>
                     </tr>
                     @endforeach
                 </tbody>

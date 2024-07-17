@@ -97,7 +97,7 @@
                         <input type="hidden" name="selectedGejalas[]" value="{{ $gejala }}">
                     @endforeach
                     <div class="text-center">
-                        <button class="btn  btn-info target="_BLANK" no-print my-2" type="submit">Cetak</button>
+                        <button target="_blank" class="btn  btn-info  no-print my-2" type="submit">Cetak</button>
                     </div>
                 </form>
             </div>
