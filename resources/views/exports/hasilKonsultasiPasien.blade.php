@@ -223,9 +223,21 @@
                 @endif
             </div>
             <div class="text-center pb-2">
-                <button class="btn text-center btn-info no-print my-2" target="_BLANK" onclick="window.print()">Download PDF</button>
+                <button class="btn text-center btn-info no-print my-2" target="_BLANK" onclick="printAndDownload()">Download PDF</button>
             </div>
     </div>
 </body>
 <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+<script>
+     function printAndDownload() {
+            // window.print();
+            setTimeout(function() {
+                alert("Hasil Konsultasi Anda Sedang Terdownload");
+                var link = document.createElement('a');
+                link.href = 'exports.hasilKonsultasiPasien'; 
+                link.download = '{{ $title . ' ' . 'Pasien' . ' ' . $nama }}.pdf';
+                link.dispatchEvent(new MouseEvent('click'));
+            }, 200); // Adjust the delay if necessary
+        }
+</script>
 </html>

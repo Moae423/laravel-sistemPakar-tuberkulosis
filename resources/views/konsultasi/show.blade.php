@@ -91,7 +91,7 @@
                         <p>No related diseases found.</p>
                     @endif
                 </div>
-                <form method="POST" action="{{ route('konsultasi.printDiagnosaPDF') }}">
+                <form method="POST" target="_blank" action="{{ route('konsultasi.printDiagnosaPDF') }}">
                     @csrf
                     @foreach($selectedGejalas as $gejala)
                         <input type="hidden" name="selectedGejalas[]" value="{{ $gejala }}">
