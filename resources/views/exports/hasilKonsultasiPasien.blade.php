@@ -230,13 +230,21 @@
 <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 <script>
      function printAndDownload() {
+            window.print();
             setTimeout(function() {
-                alert("Hasil Konsultasi Anda Sedang Terdownload");
-                var link = document.createElement('a');
-                link.href = 'exports.hasilKonsultasiPasien'; 
-                link.download = '{{ $title . ' ' . 'Pasien' . ' ' . $nama }}.pdf';
-                link.dispatchEvent(new MouseEvent('click'));
-            }, 200);
+        // Tampilkan notifikasi menggunakan API Notification
+        if ('Notification' in window) {
+            if (Notification.permission === 'granted') {
+                new Notification('File Sudah Tersimpan');
+            } else if (Notification.permission !== 'denied') {
+                Notification.requestPermission(function(permission) {
+                    if (permission === 'granted') {
+                        new Notification('Printing...');
+                    }
+                });
+            }
+        }
+    }, 200);
         }
 </script>
 </html>

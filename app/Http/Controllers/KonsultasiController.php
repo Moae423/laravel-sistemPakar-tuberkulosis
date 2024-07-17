@@ -245,13 +245,15 @@ public function diagnosa(Request $request) {
 
         $title = 'Hasil Diagnosa';
         $nama = Auth::user()->nama;
+        $id_pasien = Auth::user()->id;
         $umurPasien = Auth::user()->umur;
         $alamatPasien = Auth::user()->alamat;
         $nilai_tertinggi = $result['nilai_tertinggi'];
+        
 
 
         return view('exports.hasilKonsultasiPasien', compact(
-            'title', 'nama', 'umurPasien', 'alamatPasien', 'result', 'nilai_tertinggi', 'selectedGejalas'
+            'title', 'nama', 'id_pasien', 'umurPasien', 'alamatPasien', 'result', 'nilai_tertinggi', 'selectedGejalas'
         ));
     }
 

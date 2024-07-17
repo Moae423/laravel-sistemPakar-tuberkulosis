@@ -71,13 +71,13 @@
     <h2 class="dataPasien">Data Pasien</h2>
     <table class="table table-striped table-bordered rounded">
         <thead class="text-center">
-            <tr>
-            <th scope="col">Nomor</th>
-            <th scope="col">Nama Pasien</th>
-            <th scope="col">Email</th>
-            <th scope="col">Umur</th>
-            <th scope="col" class="tanggal">Tanggal</th>
-            <th scope="col">Alamat</th>
+        <tr>
+                <th scope="col">Nomor</th>
+                <th scope="col">Nama Pasien</th>
+                <th scope="col">Email</th>
+                <th scope="col">Umur</th>
+                <th scope="col" class="tanggal">Tanggal</th>
+                <th scope="col">Alamat</th>
         </tr>
         </thead>
         <tbody>
@@ -99,5 +99,35 @@
         <div class="d-flex justify-content-center w-100">
         {{ $users->links() }}
         </div>
+        <h2 class="dataPasien">Konsultasi Pasien</h2>
+            <table class="table table-striped table-bordered rounded">
+                <thead class="text-center">
+                    <tr>
+                        <th scope="col">Nomor</th>
+                        <th scope="col">Nama Pasien</th>
+                        <th scope="col">Nama Penyakit</th>
+                        <th scope="col">Result</th>
+                        <th scope="col">Tanggal</th>
+                    </tr>
+                </thead>
+                <tbody class="text-center">
+                    @php
+                        $no = 1;
+                    @endphp
+        
+                    @foreach($results as $result)
+                    <tr>
+                        <th scope="row">{{ $no++ }}</th>
+                        <td>{{ $result->nama }}</td>
+                        <td>{{ $result->nama_penyakit }}</td>
+                        <td>{{ number_format($result->result * 100) }}%</td>
+                        <td>{{ $result->created_at->format('d-m-Y H:i') }}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            <div class="d-flex justify-content-center">
+                {{ $results->links() }}
+            </div>
 </div>
 @endsection
