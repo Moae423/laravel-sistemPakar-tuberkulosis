@@ -23,22 +23,14 @@ class PdfController extends Controller
     public function downloadPdf()
     {
         $results = Result::all();
-        $pdf = App::make('dompdf.wrapper');
-        $pdf->loadHTML(view('exports.listDataKonsultasi', compact('results')));
-        // $pdf->loadview('<h1>TESTING PDF</h1>');
-        return $pdf->stream();
+        $title = 'List Data Konsultasi TB 2024';
+        return view('exports.listDataKonsultasi', compact('results', 'title'));
     }
     public function dataGejala()
     {
         $gejala = Gejala::all();
         $title = 'List Data Gejala TB 2024';
         return view('exports.ListDataGejala', compact('gejala','title'));
-
-        // $gejala = Gejala::all();
-        // $title = 'list data gejala';
-        // $pdf = App::make('dompdf.wrapper');
-        // $pdf->loadHTML(view('exports.ListDataGejala', compact('gejala','title')));
-        // return $pdf->stream();
     }
     public function dataPenyakit() 
     {

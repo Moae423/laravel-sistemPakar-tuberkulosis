@@ -81,7 +81,13 @@
         <tr>
             <td>Penanggung Jawab</td>
             <td>:</td>
-            <td>dr {{ Auth::user()->nama }}</td>
+            <td>
+                @if (Auth::user()->userType == "admin")
+                    dr. {{ Auth::user()->nama }}
+                    @else
+                    <span class="text-danger">Anda Tidak Ada Hak Disini!!</span>
+                @endif
+            </td>
         </tr>
         <tr>
             <td>Kecamatan/Kabupatan</td>
@@ -135,7 +141,13 @@
             <br>
             <br>
             <br>
-            <div class="">dr Yulia Sartika, {{ now()->format('d-m-Y') }}</div>
+            <div class="">
+                    @if (Auth::user()->userType == "admin")
+                        dr. {{ Auth::user()->nama }}, {{ now()->format('d-m-Y') }}
+                        @else
+                        <span class="text-danger">Anda Tidak Ada Hak Disini!!</span>
+                    @endif
+            </div>
         </div>
     </div>
 </div>

@@ -34,18 +34,7 @@ Route::get('/', function () {
         'title'=> 'Home',
     ]);
 });
-
-// Route::get('dashboard', [KonsultasiController::class, 'dashboard'])->name('konsultasi.dashboard')->middleware('auth');
 Route::get('/home', [HomeController::class, 'index'])->name('home.index')->middleware('auth');
-
-// Route::get('/admin', function () {
-//     return view('admin.layouts.main' ,[
-//         'title'=> 'Home',
-//     ]);
-// })->middleware('auth','admin');
-
-// LOGIN
-// Route::resource('/login',LoginController::class);
 
 // LOGIN WITH SESI
 Route::resource('/daftar', SesiController::class);
@@ -61,7 +50,7 @@ Route::get('/home', [HomeController::class, 'index'])->middleware('auth');
 Route::resource('/admin/penyakit', PenyakitController::class)->middleware('auth');
 // GEJALA
 Route::resource('/admin/gejala', GejalaController::class)->middleware('auth');
-// KONSULTASI
+// RULE
 Route::resource('/admin/rule', RuleController::class)->middleware('auth');
 // HASIL
 Route::resource('/admin/hasil', ResultController::class)->middleware('auth');
@@ -80,7 +69,6 @@ Route::middleware(['auth'])->name('konsultasi.')->group(function () {
     Route::post('konsultasi/diagnosa', [KonsultasiController::class, 'diagnosa'])->name('diagnosa');
     Route::post('konsultasi/store', [KonsultasiController::class, 'store'])->name('store');
     Route::get('/riwayatKonsultasi', [KonsultasiController::class, 'riwayatKonsultasi'])->name('riwayat');
-    // Route::post('/printpdf', [KonsultasiController::class, 'printDiagnosaPDF'])->name('printDiagnosaPDF');
     Route::post('/konsultasi/print', [KonsultasiController::class, 'printDiagnosaPDF'])->name('printDiagnosaPDF');
 
 

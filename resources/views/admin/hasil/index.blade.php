@@ -23,7 +23,7 @@
     <h2 class="text-center">Laporan Hasil Diagnosa</h2>
 
     <!-- Form Pencarian dan Sortir -->
-    <form method="GET" action="{{ route('hasil.index') }}" class="mb-4">
+    <form method="GET" action="{{ route('hasil.index') }}"  class="mb-4">
         <div class="row g-3 align-items-end text-white">
             <div class="col-md-3">
                 <label for="nama" class="form-label text-dark">Nama Pasien</label>
@@ -43,7 +43,7 @@
             </div>
             <div class="col-md-3">
                 <button type="submit" class="btn btn-primary tombolCari">Cari</button>
-                <a href="{{ route('pdf.downloadPdf') }}" class="btn btn-danger tombolCari">Download PDF</a>
+                <a href="{{ route('pdf.downloadPdf') }}" target="_blank" class="btn btn-danger tombolCari">Download PDF</a>
             </div>
         </div>
     </form>
