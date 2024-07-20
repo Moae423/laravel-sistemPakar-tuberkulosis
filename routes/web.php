@@ -11,6 +11,7 @@ use App\Http\Controllers\SesiController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MasukController;
 use App\Http\Controllers\GejalaController;
+use App\Http\Controllers\InfoPenyakit;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\ResultController;
 use App\Http\Controllers\PenyakitController;
@@ -70,7 +71,7 @@ Route::middleware(['auth'])->name('konsultasi.')->group(function () {
     Route::post('konsultasi/store', [KonsultasiController::class, 'store'])->name('store');
     Route::get('/riwayatKonsultasi', [KonsultasiController::class, 'riwayatKonsultasi'])->name('riwayat');
     Route::post('/konsultasi/print', [KonsultasiController::class, 'printDiagnosaPDF'])->name('printDiagnosaPDF');
-
-
-    
 });
+
+// INFO PENYAKIT
+Route::get('infoPenyakit', [InfoPenyakit::class, 'index'])->name('infoPenyakit.index');

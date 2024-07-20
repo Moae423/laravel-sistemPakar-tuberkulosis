@@ -162,7 +162,7 @@
             <table class="mt-3 identity">
                 <tr>
                     <td>Penanggung Jawab</td>
-                    <td>dr Yulia Sartika</td>
+                    <td>dr. Yulia Sartika</td>
                 </tr>
                 <tr>
                     <td>Kecamatan/Kabupatan</td>

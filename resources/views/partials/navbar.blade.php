@@ -15,11 +15,6 @@
           <li class="nav-item">
             <a class="nav-link fw-bolder fs-4 " aria-current="page" href="/">Beranda</a>
           </li>
-          
-          <li class="nav-item">
-            <a class="nav-link  fs-4" href="#">Pakar</a>
-          </li>
-          
           @auth
           <li class="nav-item">
             <a class="nav-link  fs-4" href="/konsultasi">Konsultasi</a>

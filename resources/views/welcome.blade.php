@@ -22,7 +22,7 @@
                             <button class="btn fw-semibold fs-4  p-3" style="background-color: #427676; color: #A1CD73">Konsultasi</button>
                         </a>
                         @endauth
-                        <a href="#">
+                        <a href="{{ route('infoPenyakit.index') }}">
                             <button class="btn fw-bolder fs-4  p-3" style="background-color: #427676; color: #A1CD73;">Info Penyakit</button>
                         </a>
                     </div>
