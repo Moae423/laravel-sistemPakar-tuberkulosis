@@ -1,5 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: url('font/JetBrainsMono-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
 
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: url('font/JetBrainsMono-Italic.ttf') format('truetype');
+    font-weight: 400;
+    font-style: italic;
+}
 * {
     font-family: "JetBrains Mono" !important;
 }
