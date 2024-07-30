@@ -69,7 +69,7 @@
                                 @foreach($result['totalBayes'] as $bayes)
                                     <tr>
                                         <td>{{ $bayes['nama_penyakit'] }}</td>
-                                        <td>{{ number_format($bayes['result'] * 100, 2) }}%</td>
+                                        <td>{{ number_format($bayes['result'], 3) }}</td>
                                         <td>{{ $bayes['solusi_penyakit'] }}</td>
                                     </tr>
                                 @endforeach

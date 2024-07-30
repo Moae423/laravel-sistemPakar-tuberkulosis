@@ -18,11 +18,11 @@ return new class extends Migration
             $table->unsignedBigInteger('id_pasien');
             $table->unsignedBigInteger('idPenyakit');
             $table->string('nama');
-            $table->float('result');
             $table->string('nama_penyakit');
+            $table->string('solusi_penyakit');
             $table->string('selected_gejalas');
             $table->float('nilai_probabilitas');
-            $table->string('solusi_penyakit');
+            $table->float('result');
             $table->timestamps();
 
 

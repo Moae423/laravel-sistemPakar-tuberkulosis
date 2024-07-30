@@ -42,9 +42,9 @@ class GejalaSeeder extends Seeder
             'kode_gejala' => 'G12'],
             ['nama_gejala' => 'Mudah lelah',
             'kode_gejala' => 'G13'],
-            ['nama_gejala' => 'Muncul benjolan di leher bagian depan',
-            'kode_gejala' => 'G14'],
             ['nama_gejala' => 'Terasa Gatal di area Lesi',
+            'kode_gejala' => 'G14'],
+            ['nama_gejala' => 'Lesi Memerah Kemudian Menghitam',
             'kode_gejala' => 'G15'],
         ];
 

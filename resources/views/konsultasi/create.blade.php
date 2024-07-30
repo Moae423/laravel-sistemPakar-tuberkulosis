@@ -13,6 +13,11 @@
           <div class="card-header border-0">
             <h1 class="card-title" style="color: #E1E48C">Form Konsultasi Pasien</h1>
           </div>
+            @if($errors->has('selectedGejalas'))
+              <div class="alert alert-danger">
+                  <strong>Error:</strong> {{ $errors->first('selectedGejalas') }}
+              </div>
+            @endif
             <div class="card-body ">
               <form action="{{ route('konsultasi.diagnosa') }}" method="POST">
                 @csrf

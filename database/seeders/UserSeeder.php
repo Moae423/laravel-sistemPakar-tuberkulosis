@@ -24,14 +24,14 @@ class UserSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         // user
-        // $u = new User;
-        // $u->nama = 'Angelina';
-        // $u->userType = 'pasien';
-        // $u->email = 'angelina@gmail.com';
-        // $u->password = bcrypt('123');
-        // $u->umur = 22;
-        // $u->alamat = 'Birugo';
-        // $u->save();
+        $u = new User;
+        $u->nama = 'Angelina';
+        $u->userType = 'pasien';
+        $u->email = 'angelina@gmail.com';
+        $u->password = bcrypt('123');
+        $u->umur = 22;
+        $u->alamat = 'Birugo';
+        $u->save();
         // admin
         $u = new User;
         $u->nama = 'Yulia Sartika';

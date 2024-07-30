@@ -27,9 +27,13 @@ class KonsultasiController extends Controller
     }
 public function diagnosa(Request $request) {
     $selectedGejalas = $request->input('selectedGejalas');
+    $messages = [
+        'selectedGejalas.required' => 'Tolong Pilih Gejala Yang Anda Alami.',
+        'selectedGejalas.min' => 'Tolong Pilih Setidaknya 4 Gejala Yang Anda Alami.',
+    ];
     $request->validate([
         'selectedGejalas' => 'required|array|min:3',
-    ]);
+    ], $messages);
     
     $result = $this->proccess($selectedGejalas);
 
@@ -38,6 +42,8 @@ public function diagnosa(Request $request) {
     $umurPasien = Auth::user()->umur;
     $alamatPasien = Auth::user()->alamat;
     $nilai_tertinggi = $result['nilai_tertinggi'];
+    
+    
 
     return view('konsultasi.show', compact('title', 'nama','nilai_tertinggi', 'umurPasien', 'alamatPasien', 'result','selectedGejalas'));
 }
