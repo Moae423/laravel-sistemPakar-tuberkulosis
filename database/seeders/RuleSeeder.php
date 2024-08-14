@@ -87,17 +87,17 @@ class RuleSeeder extends Seeder
             [
                 'idGejala' => '2', 
                 'idPenyakit' => '1', 
-                'nilai_probabilitas' => 0.58,
+                'nilai_probabilitas' => 0.68,
             ],
             [
                 'idGejala' => '3', 
                 'idPenyakit' => '1', 
-                'nilai_probabilitas' => 0.48,
+                'nilai_probabilitas' => 0.57,
             ],
             [
                 'idGejala' => '4', 
                 'idPenyakit' => '1', 
-                'nilai_probabilitas' => 0.43,
+                'nilai_probabilitas' => 0.65,
             ],
             // Kode Penyakit P02
             [

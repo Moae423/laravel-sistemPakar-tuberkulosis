@@ -85,7 +85,7 @@
                 {{-- </div> --}}
                 @if(!empty($result['totalBayes']))
                                     <p class="">Jadi dari hasil system diagnosa menunjukkan bahwa anda mengalami <span class="text-danger fw-bolder "> {{ $nilai_tertinggi['nama_penyakit'] }} </span>
-                                        dengan tingkat kemungkinan terjadinya <span  class="text-danger fw-bolder "> {{ number_format($nilai_tertinggi['result'] * 100, 2) }}%</span></p>
+                                        dengan tingkat kemungkinan terjadinya <span class="">{{ number_format($nilai_tertinggi['result'], 3)}}</span> atau <span  class="text-danger fw-bolder "> {{ number_format($nilai_tertinggi['result'] * 100, 2) }}%</span></p>
                                     </tr>
                     @else
                         <p>No related diseases found.</p>
