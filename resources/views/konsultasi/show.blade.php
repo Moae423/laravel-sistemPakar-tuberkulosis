@@ -7,12 +7,26 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        min-height: 100vh; /* Ensure it takes full viewport height */
+        min-height: 100vh;
+        padding: 20px;
     }
    
     .container {
-        width: 80%; /* Adjust as needed */
-        margin: auto; /* Center horizontally */
+        width: 100%;
+        max-width: 1200px;
+        margin: auto;
+    }
+
+    .card {
+        overflow: hidden; /* Ensure content stays inside */
+    }
+
+    .card-body {
+        overflow: auto; /* Prevent content overflow */
+    }
+
+    .table-responsive {
+        margin-bottom: 0; /* Adjusts the margin to prevent overflowing */
     }
     @media print {
         .navbar { 
@@ -26,19 +40,20 @@
         }
     }
 </style>
+
 <div class="center-container">
-    <div class="container  ">
+    <div class="container">
         <h1 class="text-center text-white mb-3">Hasil Diagnosa</h1>
         {{-- <form action="{{ route('konsultasi.riwayat') }}" method="POST">
             @csrf --}}
-            <div class="card print-area ">
+            <div class="card print-area">
                 <div class="card-header">
-                            <p class="">Nama Anda : {{ $nama }}</p>
-                            <p>Umur :{{ $umurPasien }}</p>
-                            <p>Alamat :{{ $alamatPasien }}</p>
-                            <hr>
-                {{-- </div> --}}
+                    <p class="mb-1">Nama Anda: {{ $nama }}</p>
+                    <p class="mb-1">Umur: {{ $umurPasien }}</p>
+                    <p class="mb-1">Alamat: {{ $alamatPasien }}</p>
+                    <hr>
                     <h2 class="text-center">Gejala Yang Dipilih</h2>
+                </div>
                 <div class="card-body">
                     @if(!empty($result['totalBayes']))
                         <ul>
@@ -47,7 +62,7 @@
                             @endforeach
                         </ul>
                     @else
-                        <p>No symptoms selected.</p>
+                        <p class="text-center">No symptoms selected.</p>
                     @endif
                 </div>
                 <hr>
@@ -57,8 +72,8 @@
                 </div>
                 <div class="card-body">
                     @if(!empty($result['totalBayes']))
-                        <table class="table">
-                            <thead class="text-center ">
+                        <table class="table table-responsive">
+                            <thead class="text-center">
                                 <tr>
                                     <th>Penyakit</th>
                                     <th>Probability</th>
@@ -76,19 +91,20 @@
                             </tbody>
                         </table>
                     @else
-                        <p>No related diseases found.</p>
+                        <p class="text-center">No related diseases found.</p>
                     @endif
                 </div>
                 <hr>
-                {{-- <div class="card-header"> --}}
-                    <h2 class="text-center ">Conclusion</h2>
-                {{-- </div> --}}
-                @if(!empty($result['totalBayes']))
-                                    <p class="">Jadi dari hasil system diagnosa menunjukkan bahwa anda mengalami <span class="text-danger fw-bolder "> {{ $nilai_tertinggi['nama_penyakit'] }} </span>
-                                        dengan tingkat kemungkinan terjadinya <span class="">{{ number_format($nilai_tertinggi['result'], 3)}}</span> atau <span  class="text-danger fw-bolder "> {{ number_format($nilai_tertinggi['result'] * 100, 2) }}%</span></p>
-                                    </tr>
+                <div class="card-body text-center">
+                    <h2>Conclusion</h2>
+                    @if(!empty($result['totalBayes']))
+                        <p>Jadi dari hasil sistem diagnosa menunjukkan bahwa anda mengalami 
+                           <span class="text-danger fw-bolder">{{ $nilai_tertinggi['nama_penyakit'] }}</span>
+                           dengan tingkat kemungkinan terjadinya <span>{{ number_format($nilai_tertinggi['result'], 3)}}</span> atau 
+                           <span class="text-danger fw-bolder">{{ number_format($nilai_tertinggi['result'] * 100, 2) }}%</span>
+                        </p>
                     @else
-                        <p>No related diseases found.</p>
+                        <p class="text-center">No related diseases found.</p>
                     @endif
                 </div>
                 <form method="POST" target="_blank" action="{{ route('konsultasi.printDiagnosaPDF') }}">
@@ -97,11 +113,13 @@
                         <input type="hidden" name="selectedGejalas[]" value="{{ $gejala }}">
                     @endforeach
                     <div class="text-center">
-                        <button target="_blank" class="btn  btn-info  no-print my-2" type="submit">Cetak</button>
+                        <button class="btn btn-info no-print my-2" type="submit">Cetak</button>
                     </div>
                 </form>
             </div>
+    </div>
 </div>
+
 <script>
 </script>
 @endsection
