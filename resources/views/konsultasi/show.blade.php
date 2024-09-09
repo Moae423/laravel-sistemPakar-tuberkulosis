@@ -98,13 +98,24 @@
                 <div class="card-body text-center">
                     <h2>Conclusion</h2>
                     @if(!empty($result['totalBayes']))
-                        <p>Jadi dari hasil sistem diagnosa menunjukkan bahwa anda mengalami 
-                           <span class="text-danger fw-bolder">{{ $nilai_tertinggi['nama_penyakit'] }}</span>
-                           dengan tingkat kemungkinan terjadinya <span>{{ number_format($nilai_tertinggi['result'], 3)}}</span> atau 
-                           <span class="text-danger fw-bolder">{{ number_format($nilai_tertinggi['result'] * 100, 2) }}%</span>
+                        <p>
+                            Berdasarkan hasil perhitungan sistem pakar dengan <strong>Metode Teorema Bayes</strong>, 
+                            Diagnosis menunjukkan bahwa Anda kemungkinan besar mengalami 
+                            <span class="text-danger fw-bolder">{{ $nilai_tertinggi['nama_penyakit'] }}</span>
+                            dengan tingkat kemungkinan sebesar 
+                            <span class="text-danger fw-bolder">{{ number_format($nilai_tertinggi['result'], 3)}}</span> atau 
+                            <span class="text-danger fw-bolder">{{ number_format($nilai_tertinggi['result'] * 100, 2) }}%</span>.
+                        </p>
+                        <p>
+                            Sistem pakar ini menggunakan metode probability untuk menentukan penyakit yang paling mungkin berdasarkan gejala yang Anda input. 
+                            Semakin tinggi persentase yang ditampilkan, semakin besar kemungkinan Anda mengalami penyakit tersebut.
                         </p>
                     @else
                         <p class="text-center">No related diseases found.</p>
+                        <p>
+                            Berdasarkan input gejala yang diberikan, sistem tidak menemukan penyakit yang sesuai. 
+                            Silakan periksa kembali gejala yang Anda masukkan atau hubungi tenaga medis untuk pemeriksaan lebih lanjut.
+                        </p>
                     @endif
                 </div>
                 <form method="POST" target="_blank" action="{{ route('konsultasi.printDiagnosaPDF') }}">
