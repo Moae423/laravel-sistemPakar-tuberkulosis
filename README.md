@@ -67,4 +67,4 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 Aplikasi Sistem Pakar Tuberkulosis dengan Laravel 9.5.0
 
-Inshallah Spetember is DONE!!!!
+This Project is done, this project completely fine with no bug  so far
